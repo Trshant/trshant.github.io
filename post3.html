@@ -1,0 +1,47 @@
+<p>just some code</p>
+<pre class="prettyprint">
+HomePageCtrl = function($scope, data) {
+	var old = new Date(1970,0,1);
+	var loop = []
+	var d ;
+	for( i=0;i&lt;data.length;i++){
+		console.log( old.toDateString() , data[i].date.toDateString() );
+		if( old < data[i].date ){
+			d = data[i];
+			old = data[i].date ;
+		}
+	}
+	loop.push(d);
+	console.log( d );
+	$scope.tags = loop ;
+}
+</pre><br/>
+<p>Now numbered</p>
+<pre class="prettyprint linenums">
+HomePageCtrl = function($scope, data) {
+	var old = new Date(1970,0,1);
+	var loop = []
+	var d ;
+	for( i=0;i&lt;data.length;i++){
+		console.log( old.toDateString() , data[i].date.toDateString() );
+		if( old < data[i].date ){
+			d = data[i];
+			old = data[i].date ;
+		}
+	}
+	loop.push(d);
+	console.log( d );
+	$scope.tags = loop ;
+}
+</pre><br/>
+<p>Now excerpt</p>
+<pre class="prettyprint linenums:4">
+	var d ;
+	for( i=0;i&lt;data.length;i++){
+		console.log( old.toDateString() , data[i].date.toDateString() );
+		if( old < data[i].date ){
+			d = data[i];
+			old = data[i].date ;
+		}
+	}
+</pre>

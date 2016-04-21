@@ -1,0 +1,75 @@
+<!DOCTYPE HTML>
+<html lang="en-US">
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+	<style type="text/css">
+	html, body {height: 100%;}
+	* {margin:0;padding:0;}
+	.supermain { min-height:100%; border-right: 20px solid #000; border-left: 20px solid #000; background-color: #F7F5F1 ; }
+	.main { min-height:100%; border-right: 10px solid #1DABCE; border-left: 10px solid #1DABCE; background-color: #F7F5F1 ; }
+	.header { height: 60px; padding-top: 10px; color: #918654; text-align: center; background-color: #c4c0ac }
+	.navbar {  height: 30px; text-align: left;padding-left:30px; padding-top:2px;  background-color: #918654; color: #c4c0ac ; } /**/
+	.navbar h3 { margin-top: 3px; }
+	.navbar h3 a { text-decoration: none; color: #c4c0ac ; }
+	
+	</style>
+	<script type="text/javascript">
+		goBack = function(){
+			window.history.back();
+		}
+	</script>
+</head>
+<body>
+<div class="supermain">
+	<div class="main">
+		<div class="header">
+			<div class="dp100"><h1>Trshant's Site</h1></div>
+		</div>
+		<div class="clear"></div>
+		<div class="dp100">
+			<div class="navbar">
+			<h3><a href="javscript:void(0);" onClick="goBack()">Back</a></h3>
+			</div>
+		</div>
+		<div>
+				<link href="cfd3-nv.d3.css" rel="stylesheet" type="text/css">
+				<link href="cfd3-main.css" rel="stylesheet" type="text/css">
+				<script src="cfd3-crossfilter.v1.min.js"></script>
+				<script src="cfd3-d3.v3.js"></script>
+				<script src="cfd3-nv.d3.min.js"></script>
+				<script src="cfd3-tooltip.js"></script>
+				<script src="cfd3-utils.js"></script>
+				<script src="cfd3-axis.js"></script>
+				<script src="cfd3-distribution.js"></script>
+				<script src="cfd3-scatter.js"></script>
+				<script src="cfd3-scatterChart.js"></script>
+				<div id="test1"><svg></svg>
+					<a style="margin-left:70px" href="javascript:void(0);" onclick="refresh()">Refresh</a>&nbsp;&nbsp;&nbsp;&nbsp;
+					<span id="data"></span>
+				</div>
+				<div id="test2"></div>
+				<script src="cfd3-main.js"></script>
+		</div>
+		<hr style="border-top:1px dotted Gray; margin-bottom: 15px;">
+		<div style="padding-left: 7px ; padding-right: 7px;">
+			 <div id="disqus_thread"></div>
+    <script type="text/javascript">
+        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+        var disqus_shortname = 'trshantsangularblog'; // required: replace example with your forum shortname
+
+        /* * * DON'T EDIT BELOW THIS LINE * * */
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+    
+		</div>
+	</div>
+</div>
+</body>
+</html>

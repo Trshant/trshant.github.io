@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8" />
+	<meta name="author" content="Trshant - trshant.neocities.org">
+	<meta name="description" content="An editor using localstorage.">
+	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+	<meta property="og:image" content="http://typehere.co/kevin.jpg" />
+	<meta property="og:title" content="Type Here" />
+
+
+	<link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet">
+	<script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+	<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+
+	
+	
+	<title>Type Here</title>
+	
+	<style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td { background: transparent; border: 0; font-size: 100%; margin: 0; outline: 0; padding: 0; vertical-align: baseline; }
+		ol,ul { list-style: none; }
+		blockquote,q { quotes: none; }
+		blockquote:before,blockquote:after,q:before,q:after { content: none; }
+		:focus { outline: 0; }
+		del { text-decoration: line-through; }
+		table { border-collapse: collapse; border-spacing: 0; }
+		
+		body { "Trebuchet MS", Helvetica, sans-serif ; font-size: 1.8em; padding: 0; margin: 0; }
+		
+		body, html {
+		  height: 100%;
+		  width: 100%;
+		  overflow: initial;
+		}
+		
+		body {
+			border-top: 1px solid grey;
+		}
+		div#content {
+		  float: left;
+		  width: 95%;
+		  height: 92%;
+		  font-size: 1em;
+		  resize: none;
+		  padding: 40px;
+		  padding-top: 10px;
+		  line-height: 1.3em;
+		  border: none;
+		  margin: 0;
+		}
+		
+		textarea#title {
+		  float: left;
+		  width: 90%;
+		  height: 75px;;
+		  font-size: 1.2em;
+		  resize: none;
+		  padding: 10px 10px 0px 40px;
+		  line-height: 1.5em;
+		  border: none;
+		  margin: 0;
+		  font-weight: bold;
+		}
+		
+		div.d {
+			position:absolute;
+			right: 50px;
+			z-index: 1 ;
+			right: 50px;
+			width: 200px;
+		}
+		
+		div.d div.list_doc {
+			border: 3px solid grey;
+			border-top: none;
+			font-family: "Times New Roman", Times, serif;
+			font-size: 14px;
+			font-weight: normal;
+			padding: 2px 0px 2px 8px;
+			display: none;
+			-webkit-border-bottom-right-radius: 5px;
+			-moz-border-radius-bottomright: 5px;
+			border-bottom-right-radius: 5px;
+		}
+		
+		div.content {
+		   position:absolute;
+		   z-index: -1 ;	
+		}
+		
+		div.toolbar {
+			background-color: grey;
+				border-bottom: 1px solid grey ;
+				width: 88px;
+				height: 21px;
+				padding: 0px;
+				margin: 0px;
+				padding: 0px 8px 0px 5px;
+				
+				top: -1px;
+				
+		   -webkit-border-bottom-right-radius: 5px;
+			-webkit-border-bottom-left-radius: 5px;
+			-moz-border-radius-bottomright: 5px;
+			-moz-border-radius-bottomleft: 5px;
+			border-bottom-right-radius: 5px;
+			border-bottom-left-radius: 5px;
+	    }
+	    
+		
+		i.fa {
+			float:left;
+		   font-size: 20px;	
+		   margin-left: 3px;
+		   margin-top:1px;
+		}
+		
+		i.fa.fa-file-o {
+	       font-size: 16px;
+	       margin-top: 2px;
+		}
+		
+		i.fa.fa-trash {
+	       float: none;
+	       font-size: 12px;
+		}
+		
+		i.fa.fa-save {
+		  font-size: 19px;
+		}	
+		
+		div#content blockquote {
+			margin-left: 60px;
+			font-size: 24px;
+			font-family: "Courier New", Courier, monospace;
+	        color:  #202020;
+			}
+		
+		div#content h6 {
+			width:100%;
+			
+		}
+		div#content h6 a {
+			font-size: 18px;
+			float: right;
+		}
+			
+		div#content h6 a::before {
+			content: "- ";
+		}
+	</style>	
+	
+	
+	<title>Type Here</title>
+</head>
+<body>
+	
+  <div class="d">
+	  <div class="list_doc">
+		  trssdsd<i class="fa fa-trash" title=""></i><br/>
+		  tffgfg<i class="fa fa-trash" title=""></i><br/>
+		  fgd sfjdkk<br/>
+	  </div>
+	  <div class="toolbar">
+		<i class="fa fa-file-o fa-inverse"></i>
+		<i class="fa fa-save fa-inverse"></i>
+		<i class="fa fa-align-justify fa-inverse"></i>
+		<i class="fa fa-question fa-inverse"></i>
+	  </div>
+  </div>
+
+  <textarea type="text" id="title" placeholder="Title" autofocus=""></textarea>
+  
+  <div type="text" id="content" placeholder="Contents" contenteditable="true" autofocus="true"></div>
+
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+
+<script>
+	
+selnadd = function(e){
+alert(tt.c+e.text);
+rt = localStorage[e.text];
+rt += "<blockquote>"+unescape(tt.c)+"</blockquote>";
+rt += '<h6><a href="'+decodeURIComponent(tt.u)+'">'+decodeURI(tt.t)+'</a></h6>';
+localStorage[e.text] = rt ;
+alert("The content you selected has been added to "+e.text+" page. You will be redirected to the original page when you click on the OK button");
+window.open(decodeURIComponent(tt.u),'_self');
+}
+
+parseArgs = function (query) {
+   var Params = new Object ();
+   if ( ! query ) return Params;
+   var Pairs = query.split(/;/)
+   for ( var i = 0; i < Pairs.length; i++ ) {
+      var KeyVal = Pairs[i].split('=');
+      if ( ! KeyVal.length == 2 ) continue;
+      if ( ! ( KeyVal[0] || KeyVal[1] ) ) continue;
+      var key = unescape( KeyVal[0] );
+      var val = unescape( KeyVal[1] );
+      val = val.replace(/\+/g, ' ');
+      val = val.replace(/&/g, '&amp;');
+      val = val.replace(/>/g, '&gt;');
+      val = val.replace(/</g, '&lt;');
+      Params[key] = val;
+   }
+   return Params;
+}
+
+query = document.baseURI.split(".html?")[1];
+if ( query) { 
+	tt = parseArgs(query);
+	$('#title'  ).attr('contenteditable',false) ;
+	$('#content').attr('contenteditable',false) ;
+	stri = "list of docs:<br>"
+	for (var key in localStorage){
+		if(key !="content"){
+		stri += "<a href=\"javascript:void(0);\" class=\"docname\" onclick=\"selnadd(this)\">"+key+"</a><br/>" ;
+	}}
+    $('#content').html(stri);
+    //window.open(decodeURIComponent(tt.u),'_self');
+	
+} else {
+
+
+function resizeBox() {
+    var windowWidth = $(window).width() - 85;
+    $('#content').css('width', windowWidth);
+}
+
+$(function() {
+
+  resizeBox();
+  
+  $(window).resize(resizeBox);
+
+  $('#title').val(localStorage.title);
+  $('#content').html(localStorage.content);
+
+  $('#content').live( "keyup", function() {
+	var title = $('#title').val();
+	if(title==""){title="content"}
+    var content = $('#content').html();
+    localStorage[title] = content;
+  });
+  
+$( "i.fa-align-justify" ).click(function() {
+	var stri = "";
+	for (var key in localStorage){
+		if(key !="content"){
+		stri += "<a href=\"javascript:void(0);\" class=\"docname\">"+key+"</a><i class=\"fa fa-trash\" title=\""+key+"\"></i><br/>" ;
+	}}
+	$("div.list_doc")[0].innerHTML=stri;
+    $("div.list_doc").slideToggle( "slow" );
+});
+  
+  $('i.fa-save').live( "click", function() {
+    var title = $('#title').val();
+	if(title==""){title="content"}
+    var content = $('#content').html();
+    localStorage[title] = content;
+  });
+  
+  $('i.fa-file-o').live( "click", function() {
+    $('#title').val("");
+    $('#content').html("");
+  });
+  
+  
+  
+  $('a.docname').live( "click", function() {
+	  title = this.innerHTML ;
+	  $('#title').val(title);
+      $('#content').html(localStorage[title]);
+	  
+  });
+  
+  
+  $('i.fa-trash').live( "click", function() {
+	  var stri = "";
+     localStorage.removeItem(this.title);
+     for (var key in localStorage){
+		if(key !="content"){
+		stri += "<a href=\"javascript:void(0);\" class=\"docname\">"+key+"</a><i class=\"fa fa-trash\" title=\""+key+"\"></i><br/>" ;
+	}} 
+	$("div.list_doc")[0].innerHTML  = stri;
+	$('#title').val("");
+    $('#content').html("");
+  });
+  
+  $('i.fa-question').live("click",function(){ window.open("http://trshant.neocities.org/#/blog/ezitor.html"); });
+  
+  $("div#content").click(function(){
+     $("div#content").focus();
+  });
+
+});
+
+}
+</script>
+
+</body>
+</html>

@@ -1,0 +1,632 @@
+<!DOCTYPE HTML>
+<html lang="en-US">
+<head>
+	<meta charset="UTF-8">
+	<title>Demo Showcase</title>
+	<link href='http://fonts.googleapis.com/css?family=Vollkorn' rel='stylesheet' type='text/css'>
+	<link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+	<link href='http://fonts.googleapis.com/css?family=News+Cycle:400,700' rel='stylesheet' type='text/css'>
+	<style type="text/css">
+	
+	html, body {height: 100%; z-index: -1000; background-color: #6D5D5D ;	 }
+	
+	
+	*  { margin: 0 ; padding: 0; }
+	
+	span.skype_pnh_container {display:none !important;}
+	span.skype_pnh_print_container, span[class^="skype_pnh_print_container"] {display:inline !important;} 
+	
+	h1.title {
+	  font: 100px Tahoma, Helvetica, Arial, Sans-Serif;
+	  text-align: center;
+	  color: #222;
+	  text-shadow: 0px 2px 3px #826f6f //#555;
+	  margin-top: 10px;
+	}
+	
+	.Note {
+	  font: 16px "Courier New";
+	  font-weight: bold;
+	  width: 300px;
+	  float: left;
+	  margin-left: 190px;
+	  margin-top: 15px;
+	  background-color: #222;
+	  color: #6D5D5D;
+	  border-radius: 10px;
+	  padding: 15px;
+	  text-shadow: 0px 2px 3px #000;
+	}
+	
+	.phone-button {
+	width:125px;
+    text-align:center;
+	color:#e2eaf3;
+    font-family:Verdana;
+    font-size:66px;
+    line-height: 36px;
+	
+	margin-left: 50px;
+	float:left;
+}
+.phone-button-circle {
+	width: 100%;
+	height:0;
+	padding-bottom: 100%;
+    border-radius: 50%;
+	border:10px solid #cfdcec;
+    overflow:hidden;
+    
+    background: orange; 
+    box-shadow: 0 0 3px gray;
+}
+.phone-button-circle:hover {
+	background: orange;
+}
+.phone-button p.number , .phone-button p.pic   {
+    display:block;
+	float:left;
+	width:100%;
+	padding-top:15px;
+	line-height:1em;
+	margin-top:-0.5em;
+    
+	text-align:center;
+	color:#e2eaf3;
+    font-family:Verdana;
+    font-size:12px;
+    font-weight:bold;
+    text-decoration:none;
+    text-shadow: 0px 1px 1px #555;
+}
+
+.phone-button p.pic  {
+    font-size: 42px;
+    margin-top: 3px;
+    margin-bottom: 0px;
+    padding-bottom: 0px;
+}
+	.main { min-height:100%; padding-bottom: 0px ; width: 900px; margin: 0 auto ; }
+	/*.content { z-index: -10000;	 }   */
+	.footer {
+		position: relative;
+		margin-top: -0px; /* negative value of footer height */
+		height: 0px;
+		clear:both;
+		border-right: 20px solid #000; 
+		border-left: 20px solid #000;
+	} 
+	
+	a.postspace , div.postspace
+	{
+		width:200px;
+		display: block;
+		min-height:50px;
+		background-color: Gold ;
+		//transform:rotate(4deg);
+		margin: 30px; 
+		float:left;
+		//box-shadow: 0 0 20px #555 ;
+		border-radius: 8px;
+		padding: 10px 20px 10px 20px;
+		text-decoration: none;
+		color: DimGray ;
+		font-family: 'News Cycle', sans-serif;
+		font-size:16px;
+	}
+	a.postspace h4 {text-align:center; color: Brown; border-bottom: 1px dotted DarkSlateGray; font-size:18px; text-transform:capitalize; font-family: 'Vollkorn', serif; letter-spacing:1px; }
+	a.postspace p  {text-indent:10px;}
+	a.postspace span {font-size:12px;font-style:italic;color:Crimson;border-bottom: 1px dotted Crimson;}
+
+	a.postspace:hover {
+			border-radius: 5px 5px 15px 15px;
+		}
+
+	.round-pin {
+    //display:block;
+	float:right;
+    width:50px;
+    height:50px;
+    line-height:50px;
+    border: 2px solid #f5f5f5;
+    border-radius: 50%;
+    color:#f5f5f5;
+    text-align:center;
+    text-decoration:none;
+    background: #464646;
+    box-shadow: 0 0 3px gray;
+    font-size:35px;
+    font-weight:bold;
+	margin-right: -20px;
+	margin-top: -30px;
+	background: url(gmail.jpg) ;
+	-webkit-transform:rotate(-8deg);
+    -moz-transform:rotate(-8deg);
+    -ms-transform:rotate(-8deg);
+    -o-transform:rotate(-8deg);
+    transform:rotate(-8deg);
+}
+.round-pin:hover {
+	-webkit-transform:rotate(0deg);
+    -moz-transform:rotate(0deg);
+    -ms-transform:rotate(0deg);
+    -o-transform:rotate(0deg);
+    transform:rotate(0deg);
+}	
+
+.github {
+		width:102px;
+		height:102px;
+		line-height:50px;
+		position: relative;
+		float: left;
+		border: 2px solid #f5f5f5;
+		border-radius: 50%;
+		color:white;
+		text-align:center;
+		text-decoration:none;
+		background: #464646;
+		box-shadow: 0 0 3px gray;
+		font-size:16px;
+		font-weight:bold;
+		background: url(gh.jpg) ;
+		margin-top: 27px;
+		margin-left: 38px;
+		box-shadow: 3px 5px 5px black;
+	}
+
+	.github h1 span {
+		font: 16px Monaco, MonoSpace;
+		height: 50px;
+		position: absolute;
+		left: 0;
+		top: 0;
+		color: white;
+		transform-origin: bottom center;
+		margin-top: 8px ;	
+		margin-left: 44px ;
+		padding-top: 0px ;
+		//border: 1px solid red;
+	}
+
+	.github h1 a span.char1 { transform: rotate(-35deg); }
+	.github h1 a span.char2 { transform: rotate(-20deg); }
+	.github h1 a span.char3 { transform: rotate(-05deg); }
+	.github h1 a span.char4 { transform: rotate( 10deg); }
+	.github h1 a span.char5 { transform: rotate( 25deg); }
+	.github h1 a span.char6 { transform: rotate( 40deg); }
+	
+	.linkedin_button {
+		width: 108px;
+		height: 108px;
+		font-size: 106px;
+		line-height: 126px;
+		color: white ;
+		text-align: center;
+		float: left;
+		padding-top: 0px;
+		padding-left: 2px;
+		-webkit-box-shadow:0 1px 6px #000 ;
+		-moz-box-shadow:0 1px 6px #000 ;
+		box-shadow:0 1px 6px #000 ;
+		border-radius: 6px;
+		border: 3px solid #fff ;
+		
+		background: rgb(5,171,224); /* Old browsers */
+		background: -moz-linear-gradient(top, rgba(5,171,224,1) 0%, rgba(83,203,241,1) 60%, rgba(135,224,253,1) 100%); /* FF3.6+ */
+		background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(5,171,224,1)), color-stop(60%,rgba(83,203,241,1)), color-stop(100%,rgba(135,224,253,1))); /* Chrome,Safari4+ */
+		background: -webkit-linear-gradient(top, rgba(5,171,224,1) 0%,rgba(83,203,241,1) 60%,rgba(135,224,253,1) 100%); /* Chrome10+,Safari5.1+ */
+		background: -o-linear-gradient(top, rgba(5,171,224,1) 0%,rgba(83,203,241,1) 60%,rgba(135,224,253,1) 100%); /* Opera 11.10+ */
+		background: -ms-linear-gradient(top, rgba(5,171,224,1) 0%,rgba(83,203,241,1) 60%,rgba(135,224,253,1) 100%); /* IE10+ */
+		background: linear-gradient(to bottom, rgba(5,171,224,1) 0%,rgba(83,203,241,1) 60%,rgba(135,224,253,1) 100%); /* W3C */
+		filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#05abe0', endColorstr='#87e0fd',GradientType=0 ); /* IE6-9 */
+		
+		text-shadow: rgb(0, 0, 0) -1px -1px 0px;
+		font-family: 'Vollkorn', serif; letter-spacing:1px;
+		
+	}
+	
+	.fb-button {
+		width: 40px ;
+		height: 50px ;
+		font-family: 'News Cycle', sans-serif;
+		color: white ;
+		text-weight: bold;
+		background-color: #3C599B ;
+		font-size: 80px ;
+		line-height: 60px ;
+		position: relative ;
+		float: left;
+		text-align: right;
+		margin: 30px;
+		padding: 1px;
+		padding-right: 4px;
+		padding-top: 0px;
+		padding-bottom: 0px;
+		overflow:hidden;
+		text-overflow:clip;
+		padding-bottom: -3px;
+		-webkit-box-shadow:0 1px 6px #000 ;
+		-moz-box-shadow:0 1px 6px #000 ;
+		box-shadow:0 1px 6px #000 ;
+		-webkit-transform:rotate(-2deg);
+        -moz-transform:rotate(-2deg);
+        -ms-transform:rotate(-2deg);
+        -o-transform:rotate(-2deg);
+        transform:rotate(-2deg);
+	}
+	
+	
+	.drop-shadow {
+            position:relative;
+            float:left;
+            //width:40%;
+            padding:1em;
+            margin:2em 10px 4em;
+            background:#fff;
+            -webkit-box-shadow:0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
+            -moz-box-shadow:0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
+            box-shadow:0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
+        }
+
+        .drop-shadow:before,
+        .drop-shadow:after {
+            content:"";
+            position:absolute;
+            z-index:-2;
+        }
+
+        .drop-shadow p {
+            font-size:16px;
+            font-weight:bold;
+        }
+
+        /* Lifted corners */
+
+        .lifted {
+            -moz-border-radius:4px;
+            border-radius:4px;
+        }
+
+        .lifted:before,
+        .lifted:after {
+            bottom:15px;
+            left:10px;
+            width:50%;
+            height:20%;
+            max-width:300px;
+            max-height:100px;
+            -webkit-box-shadow:0 15px 10px rgba(0, 0, 0, 0.7);
+            -moz-box-shadow:0 15px 10px rgba(0, 0, 0, 0.7);
+            box-shadow:0 15px 10px rgba(0, 0, 0, 0.7);
+            -webkit-transform:rotate(-3deg);
+            -moz-transform:rotate(-3deg);
+            -ms-transform:rotate(-3deg);
+            -o-transform:rotate(-3deg);
+            transform:rotate(-3deg);
+        }
+
+        .lifted:after {
+            right:10px;
+            left:auto;
+            -webkit-transform:rotate(3deg);
+            -moz-transform:rotate(3deg);
+            -ms-transform:rotate(3deg);
+            -o-transform:rotate(3deg);
+            transform:rotate(3deg);
+        }
+
+		 /* Curled corners */
+
+        .curled {
+            /*
+			border:1px solid #efefef;
+			*/
+            -moz-border-radius:0 0 120px 120px / 0 0 6px 6px;
+            border-radius:0 0 120px 120px / 0 0 6px 6px;
+        }
+
+        .curled:before,
+        .curled:after {
+            bottom:12px;
+            left:10px;
+            width:50%;
+            height:55%;
+            max-width:200px;
+            max-height:100px;
+            -webkit-box-shadow:0 8px 12px rgba(0, 0, 0, 0.5);
+            -moz-box-shadow:0 8px 12px rgba(0, 0, 0, 0.5);
+            box-shadow:0 8px 12px rgba(0, 0, 0, 0.5);
+            -webkit-transform:skew(-8deg) rotate(-3deg);
+            -moz-transform:skew(-8deg) rotate(-3deg);
+            -ms-transform:skew(-8deg) rotate(-3deg);
+            -o-transform:skew(-8deg) rotate(-3deg);
+            transform:skew(-8deg) rotate(-3deg);
+        }
+
+        .curled:after {
+            right:10px;
+            left:auto;
+            -webkit-transform:skew(8deg) rotate(3deg);
+            -moz-transform:skew(8deg) rotate(3deg);
+            -ms-transform:skew(8deg) rotate(3deg);
+            -o-transform:skew(8deg) rotate(3deg);
+            transform:skew(8deg) rotate(3deg);
+        }
+
+        /* Perspective */
+
+        .perspective:before {
+            left:80px;
+            bottom:5px;
+            width:50%;
+            height:35%;
+            max-width:200px;
+            max-height:50px;
+            -webkit-box-shadow:-80px 0 8px rgba(0, 0, 0, 0.4);
+            -moz-box-shadow:-80px 0 8px rgba(0, 0, 0, 0.4);
+            box-shadow:-80px 0 8px rgba(0, 0, 0, 0.4);
+            -webkit-transform:skew(50deg);
+            -moz-transform:skew(50deg);
+            -ms-transform:skew(50deg);
+            -o-transform:skew(50deg);
+            transform:skew(50deg);
+            -webkit-transform-origin:0 100%;
+            -moz-transform-origin:0 100%;
+            -ms-transform-origin:0 100%;
+            -o-transform-origin:0 100%;
+            transform-origin:0 100%;
+        }
+
+        .perspective:after {
+            display:none;
+        }
+		
+		
+		.stack { 
+			position: relative; 
+			z-index: 1; 
+			-webkit-box-sizing: border-box;
+			-moz-box-sizing: border-box;
+			box-sizing: border-box;
+		}
+
+		
+		/* Stacks creted by the use of generated content */
+		.stack:before, .stack:after { 
+			content: ""; 
+		    border-radius: 10px; 
+			width: 100%; 
+			height: 100%; 
+			position: absolute; 
+			left: 0;
+			background-color: Gold ;
+			
+			-webkit-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.4);
+			-moz-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.4);
+			box-shadow: 0 1px 4px rgba(0, 0, 0, 0.4);
+			-webkit-transition: 0.3s all ease-out;
+			-moz-transition: 0.3s all ease-out;
+			transition: 0.3s all ease-out;
+		}
+		.stack:before { top: 4px; z-index: -1; background-color: red ;
+			/*
+			-webkit-transform: rotate(2deg);
+			-moz-transform: rotate(2deg);
+			transform: rotate(2deg); */
+		} /* 1st element in stack (behind image) */	
+		.stack:after { 
+			top: 8px; 
+			z-index: -2; 
+			background-color: Green ;
+			/*
+			-webkit-transform: rotate(-5deg);
+			-moz-transform: rotate(-5deg);
+			transform: rotate(-5deg);
+			*/
+		} /* 2nd element in stack (behind image) */
+		
+		/* Rotated box */
+
+		.rotated8 {
+            -webkit-box-shadow:none;
+            -moz-box-shadow:none;
+            box-shadow:none;
+            -webkit-transform:rotate(8deg);
+            -moz-transform:rotate(8deg);
+            -ms-transform:rotate(8deg);
+            -o-transform:rotate(8deg);
+            transform:rotate(8deg);
+        }
+		
+        .rotated {
+            -webkit-box-shadow:none;
+            -moz-box-shadow:none;
+            box-shadow:none;
+            -webkit-transform:rotate(-3deg);
+            -moz-transform:rotate(-3deg);
+            -ms-transform:rotate(-3deg);
+            -o-transform:rotate(-3deg);
+            transform:rotate(-3deg);
+        }
+
+        .rotated > :first-child:before {
+            content:"";
+            position:absolute;
+            z-index:-1;
+            top:0;
+            bottom:0;
+            left:0;
+            right:0;
+            background: Gold;
+            -webkit-box-shadow:0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
+            -moz-box-shadow:0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
+            box-shadow:0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
+        }
+		
+		/* Rotato */
+
+        .rotato {
+            -webkit-box-shadow:none;
+            -moz-box-shadow:none;
+            box-shadow:none;
+            -webkit-transform:rotate(-0deg);
+            -moz-transform:rotate(0deg);
+            -ms-transform:rotate(0deg);
+            -o-transform:rotate(0deg);
+            transform:rotate(0deg);
+			
+        }
+
+        .rotato > :first-child:before {
+            content:"";
+            position:absolute;
+            z-index:-1;
+            top:0;
+            bottom:0;
+            left:0;
+            right:0;
+            background: Gold;
+            -webkit-box-shadow:0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
+            -moz-box-shadow:0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
+            box-shadow:0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
+        }
+		
+		/* Raised shadow - no pseudo-elements needed */
+
+        .raised {
+            -webkit-box-shadow: 0 15px 10px -10px rgba(0, 0, 0, 0.5), 0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
+            -moz-box-shadow: 0 15px 10px -10px rgba(0, 0, 0, 0.5), 0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
+            box-shadow: 0 15px 10px -10px rgba(0, 0, 0, 0.5), 0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
+        }
+		
+		 /* Curved shadows */
+
+        .curved:before {
+            top:10px;
+            bottom:10px;
+            left:0;
+            right:50%;
+            -webkit-box-shadow:0 0 15px rgba(0,0,0,0.6);
+            -moz-box-shadow:0 0 15px rgba(0,0,0,0.6);
+            box-shadow:0 0 15px rgba(0,0,0,0.6);
+            -moz-border-radius:10px / 100px;
+            border-radius:10px / 100px;
+			z-index: -1;
+        }
+
+        .curved-vt-2:before {
+            right:0;
+        }
+
+        .curved-hz-1:before {
+            top:50%;
+            bottom:0;
+            left:10px;
+            right:10px;
+            -moz-border-radius:100px / 10px;
+            border-radius:100px / 10px;
+        }
+
+        .curved-hz-2:before {
+			z-index: -1;
+            top:0;
+            bottom:0;
+            left:10px;
+            right:10px;
+            -moz-border-radius:100px / 10px;
+            border-radius:100px / 10px;
+        }
+		
+		a.email {
+    color: red;
+ -webkit-text-stroke: 1px #000;
+ -webkit-text-fill-color: transparent;
+   text-shadow:
+   -1px -1px 0 #000,  
+    1px -1px 0 #000,
+    -1px 1px 0 #000,
+     1px 1px 0 #000;
+}
+
+
+a.email {
+        font-family: "Myriad Pro", sans-serif;
+        font-size: 20px;
+        font-weight: normal;
+        letter-spacing: 0.05em;
+		text-decoration: none;
+    }
+
+		
+	</style>
+	<script type="text/javascript">
+	</script>
+</head>
+<body>
+	<!--div class="main"-->
+		<!--div class="content"-->
+				<h1 class="title">Trshant's Demo Showcase .</h1>
+				<div class="Note">
+				This is a showcase of projects done by me .
+				</div>
+				<div style="width:100%;height:130px;">
+				<a href="http://google.com" class="postspace drop-shadow lifted rotato">
+					<h4>Blog</h4>
+					<p>The blog is developed on Angular.js.</p>
+					<span style="">JavaScript , Angular.js</span>
+				</a>
+				<a class="postspace drop-shadow perspective rotato">
+					<h4>Table Sort</h4>
+					<p>This is coded using pure JavaScript. It can filter the data and order it according to a field.</p>
+					<span style="">JavaScript</span>
+				</a></div>
+				<div style="clear:both"></div>
+				<div style="width:100%;height:130px;">
+				<div class="phone-button"><div class="phone-button-circle"><p class="pic">&#9742;</p><p class="number">&#43;&#57;&#49;&#57;&#52;&#56;&#48;&#55;&#57;&#49;&#54;&#48;&#51;</p></div></div>
+				<a class="postspace drop-shadow curled rotato" style="margin-left: 40px;" href="http://google.com" >
+					<h4>Data Visualisation</h4>
+					<p>This example was developed using purely JavaScript.</p>
+					<span style="">crossfilter.js ,  D3.js , JavaScript</span>
+				</a>
+				<div class="postspace drop-shadow rotated8" style="padding: 20px 0px 5px 10px; margin: 0px; margin-left: 20px; margin-top: 20px; background: yellow;width: 240px"><a class="email" href="mailto://trshant@gmail.com">trshant@gmail.com</a> <div  class="round-pin"></div></div>
+				
+				<div class="github">
+					<h1><a href="http://google.com">
+					  <span class="char1">G</span>
+					  <span class="char2">I</span>
+					  <span class="char3">T</span>
+					  <span class="char4">H</span>
+					  <span class="char5">U</span>
+					  <span class="char6">B</span>
+					</a></h1>
+				</div>
+				
+				<a href="http://google.com" class="postspace drop-shadow lifted rotated">
+					<h4>Placement Portal</h4>
+					<p>This portal is actively developed and used in MIT, Manipal.</p>
+					<span style="">PHP ,  MySQL</span>
+				</a>
+				
+				</div>
+				<div style="clear:both"></div>
+				<div style="width:100%;height:130px;">
+				
+				<a class="postspace drop-shadow">Yo there dude</a>
+				
+				<a class="linkedin_button">in</a>
+				<a class="fb-button">f</a>
+				<a class="postspace drop-shadow">Yo there dude</a>
+				<a class="postspace drop-shadow">Yo there dude</a>
+				<a class="postspace drop-shadow">Yo there dude</a>
+				<a class="postspace drop-shadow">Yo there dude</a>
+				<a class="postspace drop-shadow">Yo there dude</a>
+				<a class="postspace drop-shadow">Yo there dude</a>
+				<a class="postspace drop-shadow">Yo there dude</a>
+			
+		<!--/div>
+		
+	</div-->
+
+</body>
+</html>
