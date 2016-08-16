@@ -124,7 +124,7 @@ PostDisplayCtrl = function($scope, data , $routeParams) {
 	loop.push(d);
 	$scope.tags = loop ;
 	document.title = d.title ;
-	setTimeout(function(){prettyPrint();},800);
+	setTimeout(function(){PR.prettyPrint();},800);
 }
 
 /* Services */
