@@ -143,7 +143,8 @@ angular.module('appServices', [])
 				{date: new Date(2014,08,16) , link: "ezitor.html" , title:"A new web based editor" , tags:["JavaScript", "editor", "localstorage"]},
 				{date: new Date(2015,00,02) , link: "onbeforeunload.html" , title:"Browser event to catch closing/changing pages" , tags:["JavaScript", "browser"]},
 				{date: new Date(2015,00,06) , link: "string_wrangling_in_angular.html" , title:"string wrangling in angular" , tags:["JavaScript", "angular.js"]},
-				{date: new Date(2015,02,19) , link: "MySublimeTextPersonalisation.html" , title:"My SublimeText Personalisation" , tags:["Editor", "SublimeText"]}
+				{date: new Date(2015,02,19) , link: "MySublimeTextPersonalisation.html" , title:"My SublimeText Personalisation" , tags:["Editor", "SublimeText"]},
+				{date: new Date(2016,08,16) , link: "hello_world.html" , title:"Well, Hello World" , tags:["R", "Hello"]}
 			] ;
 		}
 		
