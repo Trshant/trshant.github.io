@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>The ramblings of Trshant&#39;s mind!</title>
+    <link>https://trshant.github.io/</link>
+    <description>Recent content on The ramblings of Trshant&#39;s mind!</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sat, 23 Jun 2018 06:59:43 +0530</lastBuildDate>
+    
+	<atom:link href="https://trshant.github.io/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Hello World</title>
+      <link>https://trshant.github.io/posts/posts/welcome_file/</link>
+      <pubDate>Sat, 23 Jun 2018 06:59:43 +0530</pubDate>
+      
+      <guid>https://trshant.github.io/posts/posts/welcome_file/</guid>
+      <description>I have moved my entire blogging to github pages. I am using Hugo, a delightfully simple static file generator.
+I plan on using a small cron on the raspberry pi to post stuff to my trshant.github.io site&amp;hellip;&amp;hellip;atleast thats what i think.
+This is also a test filewhere i will be trying out newer things i want to do.
+function hello(){ console.log(&amp;quot;hello world!&amp;quot;); }   i ❤ this.
+ </description>
+    </item>
+    
+  </channel>
+</rss>
