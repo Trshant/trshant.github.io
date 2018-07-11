@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Vuejs on The ramblings of Trshant&#39;s mind!</title>
+    <link>https://trshant.github.io/tags/vuejs/</link>
+    <description>Recent content in Vuejs on The ramblings of Trshant&#39;s mind!</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 05 Jul 2018 01:21:43 +0530</lastBuildDate>
+    
+	<atom:link href="https://trshant.github.io/tags/vuejs/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>A dive into UI javascript frameworks - Part 2</title>
+      <link>https://trshant.github.io/posts/vuejs2/</link>
+      <pubDate>Thu, 05 Jul 2018 01:21:43 +0530</pubDate>
+      
+      <guid>https://trshant.github.io/posts/vuejs2/</guid>
+      <description>In this post i will be laying out an idea of how to build a front page for a blog using the components, instances laid out in my previous post, using directives to achieve our goal. But i will need to understand the idea behind this so This post will be about learning and testing things out, this will help me in taking good decisions finishing the blog code. Along the wa, i will be writing code to test my ideas.</description>
+    </item>
+    
+  </channel>
+</rss>

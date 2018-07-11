@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Posts on The ramblings of Trshant&#39;s mind!</title>
-    <link>https://trshant.github.io/posts/</link>
-    <description>Recent content in Posts on The ramblings of Trshant&#39;s mind!</description>
+    <title>Javscriptframeworks on The ramblings of Trshant&#39;s mind!</title>
+    <link>https://trshant.github.io/tags/javscriptframeworks/</link>
+    <description>Recent content in Javscriptframeworks on The ramblings of Trshant&#39;s mind!</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Thu, 05 Jul 2018 01:21:43 +0530</lastBuildDate>
     
-	<atom:link href="https://trshant.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://trshant.github.io/tags/javscriptframeworks/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
@@ -27,18 +27,6 @@
       
       <guid>https://trshant.github.io/posts/vuejs/</guid>
       <description>My motive in writing this is to understand how a client facing JavaScript framework works at a deeper level. This, i believe, will help me understand the underlying system so i can architect the system correctly. Such kind of frameworks are evolved, so the nomenclature and the way of functioning, is almost the same on a superficial level. i will not be going into any code here. i will only be writing it from a 200ft view.</description>
-    </item>
-    
-    <item>
-      <title>Hello World</title>
-      <link>https://trshant.github.io/posts/welcome_file/</link>
-      <pubDate>Sat, 23 Jun 2018 06:59:43 +0530</pubDate>
-      
-      <guid>https://trshant.github.io/posts/welcome_file/</guid>
-      <description>I have moved my entire blogging to github pages. I am using Hugo, a delightfully simple static file generator.
-I plan on using a small cron on the raspberry pi to post stuff to my trshant.github.io site&amp;hellip;&amp;hellip;atleast thats what i think.
-On let me see if this saves This is also a test filewhere i will be trying out newer things i want to do.
-function hello(){ console.log(&amp;quot;hello world!&amp;quot;); }   i ❤ this.</description>
     </item>
     
   </channel>
