@@ -29,7 +29,7 @@
     
 
     <meta property="og:title" content="A dive into UI javascript frameworks - Part 2" />
-<meta property="og:description" content="I tried learning angularjs and reactjs. but i cannot understand those frameworks on a deeper level, which make me an inneficient programmer. My aim in writing this set of posts is to have an idea what&#39;s going on under the hood. This post goes thru directives and understanding the philosophy of presentation logic that these frameowrks specialise in." />
+<meta property="og:description" content="I tried learning angularjs and reactjs. but i cannot understand those frameworks on a deeper level. My aim in writing this set of posts is to have an idea what&#39;s going on under the hood. This post goes thru directives and understanding the philosophy of presentation logic that these frameowrks specialise in." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://trshant.github.io/posts/vuejs2/" />
 
@@ -50,19 +50,19 @@
 
 
 <meta itemprop="name" content="A dive into UI javascript frameworks - Part 2">
-<meta itemprop="description" content="I tried learning angularjs and reactjs. but i cannot understand those frameworks on a deeper level, which make me an inneficient programmer. My aim in writing this set of posts is to have an idea what&#39;s going on under the hood. This post goes thru directives and understanding the philosophy of presentation logic that these frameowrks specialise in.">
+<meta itemprop="description" content="I tried learning angularjs and reactjs. but i cannot understand those frameworks on a deeper level. My aim in writing this set of posts is to have an idea what&#39;s going on under the hood. This post goes thru directives and understanding the philosophy of presentation logic that these frameowrks specialise in.">
 
 
 <meta itemprop="datePublished" content="2018-07-05T01:21:43&#43;05:30" />
 <meta itemprop="dateModified" content="2018-07-05T01:21:43&#43;05:30" />
-<meta itemprop="wordCount" content="285">
+<meta itemprop="wordCount" content="762">
 
 
 
 <meta itemprop="keywords" content="Javascript,JavscriptFrameworks,VueJS," />
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="A dive into UI javascript frameworks - Part 2"/>
-<meta name="twitter:description" content="I tried learning angularjs and reactjs. but i cannot understand those frameworks on a deeper level, which make me an inneficient programmer. My aim in writing this set of posts is to have an idea what&#39;s going on under the hood. This post goes thru directives and understanding the philosophy of presentation logic that these frameowrks specialise in."/>
+<meta name="twitter:description" content="I tried learning angularjs and reactjs. but i cannot understand those frameworks on a deeper level. My aim in writing this set of posts is to have an idea what&#39;s going on under the hood. This post goes thru directives and understanding the philosophy of presentation logic that these frameowrks specialise in."/>
 
   </head>
 
@@ -144,6 +144,44 @@ Along the wa, i will be writing code to test my ideas. So, writing a small page 
 <p>Now, if you copy that into an html file and then open it, you will be greeted with a &ldquo;Hello Vue!&rdquo; message. If you open your console log and type in app.message = &ldquo;Hello Trshant!&rdquo;, you will find that the message has changed to whatever you typed. This means that the data in the app is coupled with the {{message}} part of the html; and if we change the data using ajax, it will make the nessacery change in the presentation. <em>awesome!</em></p>
 
 <p>Moving on, i have copied this lovely todo app made in Vue and forked it -&gt; <a href="https://jsfiddle.net/trshant/oqka1f8p/1/">There you go</a>. Do please open it and go thru the code and the example itself. i will go through this and explain the functionality of every line. my motive here is to understand the need for bindings and presentation logic.</p>
+
+<p>I will be going thru the HTML and then the JS. But before we do that, we will ask ourselves the important questions - The Objective of our task.</p>
+
+<p>We want to build a small to-do app. This should have a text box and a button next to it, on the top. when you type in something and hit the button or press enter, this should populate underneath, with a checkbox to its left. we also need a delete button. When you click the checkbox, the text should be struck out.</p>
+
+<p>Since we have some clarity n what we need, we move on to the code. Do have a look:</p>
+
+<pre><code class="language-html">&lt;!-- Main Div Holding our Application Data --&gt;
+&lt;div class=&quot;container&quot; id=&quot;todo&quot;&gt;
+  &lt;!-- Panel for holding our input --&gt;
+  &lt;section class=&quot;panel&quot;&gt;
+    &lt;input type=&quot;checkbox&quot; id=&quot;mark-all&quot; v-bind:checked=&quot;areAllSelected&quot; v-on:click=&quot;selectAll&quot;&gt;
+    &lt;input type=&quot;text&quot; placeholder=&quot;What do you need to do?&quot; autofocus class=&quot;text-input&quot; v-model=&quot;newTask&quot; v-on:keyup.enter=&quot;addTask&quot;&gt;
+    &lt;button v-on:click=&quot;clearList&quot;&gt;Clear List&lt;/button&gt;
+  &lt;/section&gt;
+  &lt;!-- Unordered list for holding our todo items --&gt;
+  &lt;ul class=&quot;list&quot;&gt;
+    &lt;li v-for=&quot;task in taskList&quot; v-bind:class=&quot;{done: task.checked}&quot;&gt;
+      &lt;input type=&quot;checkbox&quot; class=&quot;checkbox&quot; v-model=&quot;task.checked&quot;&gt;
+      &lt;label for=&quot;checkbox&quot;&gt;{{ task.text }}&lt;/label&gt;
+      &lt;button class=&quot;delete&quot; v-on:click=&quot;removeTask(task)&quot;&gt;X&lt;/button&gt;
+    &lt;/li&gt;
+  &lt;/ul&gt;
+  &lt;!-- This stringifies the contents of the data object and displays it on the page --&gt;
+  &lt;pre&gt;{{ $data }}&lt;/pre&gt;
+&lt;/div&gt;
+</code></pre>
+
+<p><strong>The main input with button</strong> : look at the contents of the <code>&lt;section class=&quot;panel&quot;&gt;</code> element. So we have a checkbox (which is additional to the brief above the code), a input and a button. All this is in html..but whats the v-on and v-bind and v-model?<br />
+These are called directives. They are very very important and so, we should understand what they do. These are event listeners and provide binding with the data source or functions that we will build.<br />
+Here, we have a few directives. I will list them and provide an explanation:<br />
+  - <strong>v-bind</strong> : This binds an attribute of the element with the output of a function, which is constantly evaluated, or some data element. here we see <code>v-bind:checked=&quot;areAllSelected&quot;</code> - this binds the output of a <em>constantly evaluated function</em> areAllSelected to the <em>checked</em> property of the checkbox.<br />
+  - <strong>v-on</strong> : This is an event listener. This executes a function on the occurence of that event. <code>v-on:click=&quot;selectAll&quot;</code> - here the function selectAll is executed when the click event executes on this element. Another instance of the v-on is the <code>v-on:keyup.enter=&quot;addTask&quot;</code>. Intuitively, you can say that this is supposed to execute addTask on the event of enter button being released.<br />
+  - <strong>v-model</strong> : This binds the data to the elements value, when that value is an attribute.</p>
+
+<p>We will now go through the rest of the code - the <code>ul</code> element. We encounter something different here - the <code>v-for=&quot;task in taskList&quot;</code> bit. This is a for loop. it loops though each element ( called <em>task</em> ) in the data <em>taskList</em>.</p>
+
+<p>I think we can now go thru the Javascript and will find it self explanatory.</p>
 <ul class="pa0">
   
    <li class="list">
