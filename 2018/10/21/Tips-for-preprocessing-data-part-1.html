@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html class="no-js">
+  <head>
+	<meta charset="utf-8">
+	<title>Code Snippets for data preprocessing using Pandas - Part 1 | Trshant's blog</title>
+	<meta name="description" content="This post will be all about processing data using pandas.">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<!-- CSS -->
+	<link rel="stylesheet" href="/assets/css/main.css">
+
+	<!--Favicon-->
+	<link rel="shortcut icon" href="/assets/favicon.ico" type="image/x-icon">
+
+	<!-- Canonical -->
+	<link rel="canonical" href="/2018/10/21/Tips-for-preprocessing-data-part-1.html">
+
+	<!-- RSS -->
+	<link rel="alternate" type="application/atom+xml" title="Trshant's blog" href="/feed.xml" />
+
+	<!-- Font Awesome -->
+	<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+	<!-- Google Fonts -->
+	
+	<link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,700italic,400italic" rel="stylesheet" type="text/css">
+	
+
+	<!-- KaTeX -->
+	
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0-alpha/dist/katex.min.css" integrity="sha384-BTL0nVi8DnMrNdMQZG1Ww6yasK9ZGnUxL1ZWukXQ7fygA1py52yPp9W4wrR00VML" crossorigin="anonymous">
+	<script src="https://cdn.jsdelivr.net/npm/katex@0.10.0-alpha/dist/katex.min.js" integrity="sha384-y6SGsNt7yZECc4Pf86XmQhC4hG2wxL6Upkt9N1efhFxfh6wlxBH0mJiTE8XYclC1" crossorigin="anonymous"></script>
+	
+
+	<!-- Google Analytics -->
+	
+</head>
+
+  <body>
+    <header class="site-header">
+	<div class="branding">
+		
+		<a href="/">
+			<img class="avatar" src="https://secure.gravatar.com/avatar/b8f8be8b6147f78fc6a869ef48555388?s=100" alt=""/>
+		</a>
+		
+		<h1 class="site-title">
+			<a href="/">Trshant's blog</a>
+		</h1>
+	</div>
+	<nav class="site-nav">
+		<ul>
+			
+			
+			
+			
+			<li>
+				<a class="page-link" href="/about/">
+					About
+				</a>
+			</li>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			<li>
+				<a class="page-link" href="/tags.html">
+					Tags
+				</a>
+			</li>
+			
+			
+			<!-- Social icons from Font Awesome, if enabled  -->
+			
+
+
+<li>
+	<a href="mailto:trshant@gmail.com" title="Email">
+		<i class="fa fa-fw fa-envelope"></i>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li>
+	<a href="https://github.com/Trshant" title="Follow on GitHub">
+		<i class="fa fa-fw fa-github"></i>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li>
+	<a href="https://twitter.com/twitter" title="Follow on Twitter">
+		<i class="fa fa-fw fa-twitter"></i>
+	</a>
+</li>
+
+
+
+
+
+
+            
+            <!-- Search bar -->
+            
+		</ul>
+	</nav>
+    
+</header>
+
+    <div class="content">
+      <link rel="stylesheet" href="https://cdn.rawgit.com/knsv/mermaid/7.0.0/dist/mermaid.css">
+<article >
+  <header style="background-image: url('/')">
+    <h1 class="title">Code Snippets for data preprocessing using Pandas - Part 1</h1>
+    
+    <p class="meta">
+      October 21, 2018
+      
+    </p>
+  </header>
+  <section class="post-content"><p>This post will be all about processing data using pandas.</p>
+
+<p>Use this to read CSVs into a dataframe</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>df = pd.read_csv('train.csv')
+</code></pre></div></div>
+<p>However, in case you need to prepare a DataFrame and have been unfortunate enough to get a CSV file with no headers, then this is the way to go</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>df = pd.read_csv('file_name.csv', header = None, names = ['labels','you','want','to','give'] )
+</code></pre></div></div>
+<p>This is one very usable function to see which data is empty or null</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">missing_data_table</span><span class="p">(</span><span class="n">df</span><span class="p">):</span>
+    <span class="n">total</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">isnull</span><span class="p">()</span><span class="o">.</span><span class="nb">sum</span><span class="p">()</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">ascending</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+    <span class="n">percent</span> <span class="o">=</span> <span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">isnull</span><span class="p">()</span><span class="o">.</span><span class="nb">sum</span><span class="p">()</span><span class="o">/</span><span class="n">df</span><span class="o">.</span><span class="n">isnull</span><span class="p">()</span><span class="o">.</span><span class="n">count</span><span class="p">())</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">ascending</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+    <span class="n">missing_data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">total</span><span class="p">,</span> <span class="n">percent</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">keys</span><span class="o">=</span><span class="p">[</span><span class="s">'Total'</span><span class="p">,</span> <span class="s">'Percent'</span><span class="p">])</span>
+    <span class="k">return</span> <span class="n">missing_data</span>
+</code></pre></div></div>
+
+<p>If you see any empty data you can fill it in with</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>df['column_name'].fillna(1000, inplace=True)
+</code></pre></div></div>
+
+<p>Dropping a column is easy</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>df.drop('column_name', axis=1, inplace=True)
+</code></pre></div></div>
+
+<p>Dropping row/s if a column is blank/null</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>df.drop(df[pd.isnull(df['Embarked'])].index, inplace=True)
+</code></pre></div></div>
+
+<p>We can make columns categorical ( converting ‘male’ and ‘female’ to 0 and 1 ) without too much trouble</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>df['Sex'] = pd.Categorical(df['Sex'])
+</code></pre></div></div>
+
+<p>However this wont be seen easily till you  do this bit</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>df = pd.get_dummies(df, drop_first=True)
+</code></pre></div></div>
+
+<p>See the dataframe:</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>df.head(optional number of rows you want to see)
+</code></pre></div></div>
+
+<blockquote>
+  <p>Written with <a href="https://stackedit.io/">StackEdit</a>.
+<!--stackedit_data:
+eyJoaXN0b3J5IjpbMzAwNDkyMTkwXX0=
+--></p>
+</blockquote>
+</section>
+  
+<footer>
+  <div class="tags">
+    
+    <a class="tag" href="/tags#BigData">#BigData</a>
+    
+    <a class="tag" href="/tags#pandas">#pandas</a>
+    
+    <a class="tag" href="/tags#CodeSnippets">#CodeSnippets</a>
+    
+  </div>
+</footer>
+
+
+</article>
+
+<!-- Disqus -->
+
+
+<!-- Post navigation -->
+
+
+    </div>
+    
+<script src="/assets/js/katex_init.js"></script>
+
+
+
+<footer class="site-footer">
+	<p class="text">Powered by <a href="https://jekyllrb.com/">Jekyll</a> with <a href="https://github.com/rohanchandra/type-theme">Type Theme</a>
+</p>
+</footer>
+
+
+  </body>
+</html>

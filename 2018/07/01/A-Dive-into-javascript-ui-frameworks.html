@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html class="no-js">
+  <head>
+	<meta charset="utf-8">
+	<title>A dive into UI javascript frameworks | Trshant's blog</title>
+	<meta name="description" content="My motive in writing this is to understand how a client facing JavaScript framework works at a deeper level. This, i believe, will help me understand the und...">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<!-- CSS -->
+	<link rel="stylesheet" href="/assets/css/main.css">
+
+	<!--Favicon-->
+	<link rel="shortcut icon" href="/assets/favicon.ico" type="image/x-icon">
+
+	<!-- Canonical -->
+	<link rel="canonical" href="/2018/07/01/A-Dive-into-javascript-ui-frameworks.html">
+
+	<!-- RSS -->
+	<link rel="alternate" type="application/atom+xml" title="Trshant's blog" href="/feed.xml" />
+
+	<!-- Font Awesome -->
+	<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+	<!-- Google Fonts -->
+	
+	<link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,700italic,400italic" rel="stylesheet" type="text/css">
+	
+
+	<!-- KaTeX -->
+	
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0-alpha/dist/katex.min.css" integrity="sha384-BTL0nVi8DnMrNdMQZG1Ww6yasK9ZGnUxL1ZWukXQ7fygA1py52yPp9W4wrR00VML" crossorigin="anonymous">
+	<script src="https://cdn.jsdelivr.net/npm/katex@0.10.0-alpha/dist/katex.min.js" integrity="sha384-y6SGsNt7yZECc4Pf86XmQhC4hG2wxL6Upkt9N1efhFxfh6wlxBH0mJiTE8XYclC1" crossorigin="anonymous"></script>
+	
+
+	<!-- Google Analytics -->
+	
+</head>
+
+  <body>
+    <header class="site-header">
+	<div class="branding">
+		
+		<a href="/">
+			<img class="avatar" src="https://secure.gravatar.com/avatar/b8f8be8b6147f78fc6a869ef48555388?s=100" alt=""/>
+		</a>
+		
+		<h1 class="site-title">
+			<a href="/">Trshant's blog</a>
+		</h1>
+	</div>
+	<nav class="site-nav">
+		<ul>
+			
+			
+			
+			
+			<li>
+				<a class="page-link" href="/about/">
+					About
+				</a>
+			</li>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			<li>
+				<a class="page-link" href="/tags.html">
+					Tags
+				</a>
+			</li>
+			
+			
+			<!-- Social icons from Font Awesome, if enabled  -->
+			
+
+
+<li>
+	<a href="mailto:trshant@gmail.com" title="Email">
+		<i class="fa fa-fw fa-envelope"></i>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li>
+	<a href="https://github.com/Trshant" title="Follow on GitHub">
+		<i class="fa fa-fw fa-github"></i>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li>
+	<a href="https://twitter.com/twitter" title="Follow on Twitter">
+		<i class="fa fa-fw fa-twitter"></i>
+	</a>
+</li>
+
+
+
+
+
+
+            
+            <!-- Search bar -->
+            
+		</ul>
+	</nav>
+    
+</header>
+
+    <div class="content">
+      <link rel="stylesheet" href="https://cdn.rawgit.com/knsv/mermaid/7.0.0/dist/mermaid.css">
+<article >
+  <header style="background-image: url('/')">
+    <h1 class="title">A dive into UI javascript frameworks</h1>
+    
+    <p class="meta">
+      July 1, 2018
+      
+    </p>
+  </header>
+  <section class="post-content"><p>My motive in writing this is to understand how a client facing JavaScript framework works at a deeper level. This, i believe, will help me understand the underlying system so i can architect the system correctly. Such kind of frameworks are evolved, so the nomenclature and the way of functioning, is almost the same on a superficial level. i will not be going into any code here. i will only be writing it from a 200ft view.<br />
+Recently, i started reading through VueJS and somehow it seems to resonate with me, so i decided to read only the documentation and understand how everything comes together. Below are what i learned.</p>
+<h2 id="terms-i-should-know-about">Terms i should know about.</h2>
+<h3 id="instance">Instance</h3>
+<p>This provides a context ( or <strong>Scope</strong> ) for the application to work with. While you can have multiple instances on a page, it mostly is better to use just one since it simplifies things later.</p>
+<h3 id="component">Component</h3>
+<p>This can be thought of as a collection of visually separate elements. these can be global or local, and flexibe enough to reuse the same components for different purposes</p>
+<h3 id="directive">Directive</h3>
+<p>the logic flow of the data is managed by directives. I will deal with this in the next post where i will be looking at code.</p>
+
+<h2 id="an-example">An example</h2>
+<p>I am going to look at a blog’s front page layout and see if i can make this into a VueJS application. Visually this can be separated into components.</p>
+
+<p><img src="https://i.imgur.com/HlMWRaK.jpg" alt="Layout of components" /></p>
+
+<p>Now we can see 1 instance, 3 different components, one of which is used 2 times with different data. Just so that we get this right avoiding too much confusion about what goes where, i will concentrate on the components:</p>
+
+<p><strong>header</strong> - This is just the header, with a list of links and a banner image.<br />
+<strong>list_posts_with_description</strong> - This component gives a list of post titles, with a date and description. <br />
+<strong>list_of_post_titles</strong> - This component gives a list of post titles. it is reused twice. once to show the list using date as the grouping  and the second time using a tag as the grouping.</p>
+
+<p>In the next post, i will write the code for each of the components.</p>
+</section>
+  
+<footer>
+  <div class="tags">
+    
+    <a class="tag" href="/tags#Javascript">#Javascript</a>
+    
+    <a class="tag" href="/tags#JavscriptFrameworks">#JavscriptFrameworks</a>
+    
+  </div>
+</footer>
+
+
+</article>
+
+<!-- Disqus -->
+
+
+<!-- Post navigation -->
+
+
+    </div>
+    
+<script src="/assets/js/katex_init.js"></script>
+
+
+
+<footer class="site-footer">
+	<p class="text">Powered by <a href="https://jekyllrb.com/">Jekyll</a> with <a href="https://github.com/rohanchandra/type-theme">Type Theme</a>
+</p>
+</footer>
+
+
+  </body>
+</html>

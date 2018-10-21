@@ -1,0 +1,235 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Trshant's blog</title>
+    <atom:link href="/feed.xml" rel="self" type="application/rss+xml"/>
+    <link>https://trshant.github.io//</link>
+    <description>A website with blog posts and pages</description>
+    <pubDate>Sun, 21 Oct 2018 21:20:29 +0530</pubDate>
+    
+      <item>
+        <title>Code Snippets for data preprocessing using Pandas - Part 1</title>
+        <link>/2018/10/21/Tips-for-preprocessing-data-part-1.html</link>
+        <guid isPermaLink="true">/2018/10/21/Tips-for-preprocessing-data-part-1.html</guid>
+        <description>&lt;p&gt;This post will be all about processing data using pandas.&lt;/p&gt;
+
+&lt;p&gt;Use this to read CSVs into a dataframe&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;df = pd.read_csv('train.csv')
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;However, in case you need to prepare a DataFrame and have been unfortunate enough to get a CSV file with no headers, then this is the way to go&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;df = pd.read_csv('file_name.csv', header = None, names = ['labels','you','want','to','give'] )
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;This is one very usable function to see which data is empty or null&lt;/p&gt;
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;missing_data_table&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;df&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;total&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;df&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;isnull&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sum&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;sort_values&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ascending&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;False&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;percent&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;df&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;isnull&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sum&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;df&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;isnull&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;count&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;())&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;sort_values&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ascending&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;False&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;missing_data&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;pd&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;concat&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;([&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;total&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;percent&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;axis&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;keys&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'Total'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'Percent'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;])&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;missing_data&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;If you see any empty data you can fill it in with&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;df['column_name'].fillna(1000, inplace=True)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Dropping a column is easy&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;df.drop('column_name', axis=1, inplace=True)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Dropping row/s if a column is blank/null&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;df.drop(df[pd.isnull(df['Embarked'])].index, inplace=True)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;We can make columns categorical ( converting ‘male’ and ‘female’ to 0 and 1 ) without too much trouble&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;df['Sex'] = pd.Categorical(df['Sex'])
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;However this wont be seen easily till you  do this bit&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;df = pd.get_dummies(df, drop_first=True)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;See the dataframe:&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;df.head(optional number of rows you want to see)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;Written with &lt;a href=&quot;https://stackedit.io/&quot;&gt;StackEdit&lt;/a&gt;.
+&lt;!--stackedit_data:
+eyJoaXN0b3J5IjpbMzAwNDkyMTkwXX0=
+--&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+</description>
+        <pubDate>Sun, 21 Oct 2018 07:51:43 +0530</pubDate>
+      </item>
+    
+      <item>
+        <title>Code snippets for ML using Scikit-Learn - Part 1</title>
+        <link>/2018/10/20/tips-for-ML-part-1.html</link>
+        <guid isPermaLink="true">/2018/10/20/tips-for-ML-part-1.html</guid>
+        <description>&lt;p&gt;This is a page where i will be putting in things i learned while starting off again in ML.&lt;br /&gt;
+I am using scikit-learn to do my ml this time and am trying to go through ML in as small a timeframe as possible.
+I have been learning about linear and logistic regression.
+The correct ones to use in both the cases are &lt;code class=&quot;highlighter-rouge&quot;&gt;from sklearn.linear_model    import LinearRegression&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;from sklearn.linear_model import LogisticRegression&lt;/code&gt; which is intiutive.
+This is the bit of code that matters&lt;/p&gt;
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;linreg&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;LinearRegression&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;fit&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;X_train&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;y_train&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;linreg&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;score&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;X_test&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;y_test&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;and&lt;/p&gt;
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;logreg&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;LogisticRegression&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;solver&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'liblinear'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;multi_class&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'ovr'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;n_jobs&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;logreg&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;fit&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;X_train&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;y_train&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;Post this, we can do a predict and see how the model behaves.&lt;/p&gt;
+
+&lt;p&gt;Have a look at this repo’s 2 pages to see what i did using the above code.&lt;/p&gt;
+&lt;blockquote&gt;
+  &lt;p&gt;Written with &lt;a href=&quot;https://stackedit.io/&quot;&gt;StackEdit&lt;/a&gt;.
+&lt;!--stackedit_data:
+eyJoaXN0b3J5IjpbMTIzOTg5OTI3NiwtMTcxMzU2OTQ2NCwtMT
+E1NjE5OTk5MywtMTk2NTEzNjc4OSw2NTc5ODM4NzRdfQ==
+--&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+</description>
+        <pubDate>Sat, 20 Oct 2018 07:51:43 +0530</pubDate>
+      </item>
+    
+      <item>
+        <title>A dive into UI javascript frameworks - Part 2</title>
+        <link>/2018/07/05/A-Dive-into-ui-javascript-frameworks-part-2.html</link>
+        <guid isPermaLink="true">/2018/07/05/A-Dive-into-ui-javascript-frameworks-part-2.html</guid>
+        <description>&lt;p&gt;In this post i will be laying out an idea of how to build a front page for a blog using the components, instances laid out in my previous post, using directives to achieve our goal. 
+But i will need to understand the idea behind this so This post will be about learning and testing things out, this will help me in taking good decisions finishing the blog code. 
+Along the wa, i will be writing code to test my ideas. So, writing a small page to test my code, i begin with forking the hello world example from the &lt;a href=&quot;https://vuejs.org/v2/guide/&quot;&gt;official guide&lt;/a&gt;.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&quot;language-JavaScript&quot;&gt;&amp;lt;!DOCTYPE html&amp;gt;
+&amp;lt;html&amp;gt;
+&amp;lt;head&amp;gt;
+  &amp;lt;title&amp;gt;My first Vue app&amp;lt;/title&amp;gt;
+  &amp;lt;!-- development version, includes helpful console warnings --&amp;gt;
+  &amp;lt;script src=&quot;https://cdn.jsdelivr.net/npm/vue/dist/vue.js&quot;&amp;gt;&amp;lt;/script&amp;gt;
+&amp;lt;/head&amp;gt;
+&amp;lt;body&amp;gt;
+  &amp;lt;div id=&quot;app&quot;&amp;gt;
+    
+  &amp;lt;/div&amp;gt;
+
+  &amp;lt;script&amp;gt;
+    var app = new Vue({
+      el: '#app',
+      data: {
+        message: 'Hello Vue!'
+      }
+    })
+  &amp;lt;/script&amp;gt;
+&amp;lt;/body&amp;gt;
+&amp;lt;/html&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Now, if you copy that into an html file and then open it, you will be greeted with a “Hello Vue!” message. If you open your console log and type in app.message = “Hello Trshant!”, you will find that the message has changed to whatever you typed. This means that the data in the app is coupled with the  part of the html; and if we change the data using ajax, it will make the nessacery change in the presentation. &lt;em&gt;awesome!&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;Moving on, i have copied this lovely todo app made in Vue and forked it -&amp;gt; &lt;a href=&quot;https://jsfiddle.net/trshant/oqka1f8p/1/&quot;&gt;There you go&lt;/a&gt;. Do please open it and go thru the code and the example itself. i will go through this and explain the functionality of every line. my motive here is to understand the need for bindings and presentation logic.&lt;/p&gt;
+
+&lt;p&gt;I will be going thru the HTML and then the JS. But before we do that, we will ask ourselves the important questions - The Objective of our task.&lt;/p&gt;
+
+&lt;p&gt;We want to build a small to-do app. This should have a text box and a button next to it, on the top. when you type in something and hit the button or press enter, this should populate underneath, with a checkbox to its left. we also need a delete button. When you click the checkbox, the text should be struck out.&lt;/p&gt;
+
+&lt;p&gt;Since we have some clarity n what we need, we move on to the code. Do have a look:&lt;/p&gt;
+
+&lt;div class=&quot;language-html highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;&amp;lt;!-- Main Div Holding our Application Data --&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;div&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;container&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;id=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;todo&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+  &lt;span class=&quot;c&quot;&gt;&amp;lt;!-- Panel for holding our input --&amp;gt;&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;&amp;lt;section&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;panel&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;input&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;type=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;checkbox&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;id=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;mark-all&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;v-bind:checked=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;areAllSelected&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;v-on:click=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;selectAll&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;input&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;type=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;text&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;placeholder=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;What do you need to do?&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;autofocus&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;text-input&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;v-model=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;newTask&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;v-on:keyup&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;enter=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;addTask&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;button&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;v-on:click=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;clearList&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;Clear List&lt;span class=&quot;nt&quot;&gt;&amp;lt;/button&amp;gt;&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;&amp;lt;/section&amp;gt;&lt;/span&gt;
+  &lt;span class=&quot;c&quot;&gt;&amp;lt;!-- Unordered list for holding our todo items --&amp;gt;&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;&amp;lt;ul&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;list&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;li&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;v-for=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;task in taskList&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;v-bind:class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;{done: task.checked}&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+      &lt;span class=&quot;nt&quot;&gt;&amp;lt;input&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;type=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;checkbox&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;checkbox&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;v-model=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;task.checked&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+      &lt;span class=&quot;nt&quot;&gt;&amp;lt;label&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;for=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;checkbox&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&amp;lt;/label&amp;gt;&lt;/span&gt;
+      &lt;span class=&quot;nt&quot;&gt;&amp;lt;button&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;delete&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;v-on:click=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;removeTask(task)&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;X&lt;span class=&quot;nt&quot;&gt;&amp;lt;/button&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;/li&amp;gt;&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;&amp;lt;/ul&amp;gt;&lt;/span&gt;
+  &lt;span class=&quot;c&quot;&gt;&amp;lt;!-- This stringifies the contents of the data object and displays it on the page --&amp;gt;&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;&amp;lt;pre&amp;gt;&lt;/span&gt;{{ $data }}&lt;span class=&quot;nt&quot;&gt;&amp;lt;/pre&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;/div&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;strong&gt;The main input with button&lt;/strong&gt; : look at the contents of the &lt;code class=&quot;highlighter-rouge&quot;&gt;&amp;lt;section class=&quot;panel&quot;&amp;gt;&lt;/code&gt; element. So we have a checkbox (which is additional to the brief above the code), a input and a button. All this is in html..but whats the v-on and v-bind and v-model?&lt;br /&gt;
+These are called directives. They are very very important and so, we should understand what they do. These are event listeners and provide binding with the data source or functions that we will build.&lt;br /&gt;
+Here, we have a few directives. I will list them and provide an explanation:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;v-bind&lt;/strong&gt; : This binds an attribute of the element with the output of a function, which is constantly evaluated, or some data element. here we see &lt;code class=&quot;highlighter-rouge&quot;&gt;v-bind:checked=&quot;areAllSelected&quot;&lt;/code&gt; - this binds the output of a &lt;em&gt;constantly evaluated function&lt;/em&gt; areAllSelected to the &lt;em&gt;checked&lt;/em&gt; property of the checkbox.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;v-on&lt;/strong&gt; : This is an event listener. This executes a function on the occurence of that event. &lt;code class=&quot;highlighter-rouge&quot;&gt;v-on:click=&quot;selectAll&quot;&lt;/code&gt; - here the function selectAll is executed when the click event executes on this element. Another instance of the v-on is the &lt;code class=&quot;highlighter-rouge&quot;&gt;v-on:keyup.enter=&quot;addTask&quot;&lt;/code&gt;. Intuitively, you can say that this is supposed to execute addTask on the event of enter button being released.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;v-model&lt;/strong&gt; : This binds the data to the elements value, when that value is an attribute.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;We will now go through the rest of the code - the &lt;code class=&quot;highlighter-rouge&quot;&gt;ul&lt;/code&gt; element. We encounter something different here - the &lt;code class=&quot;highlighter-rouge&quot;&gt;v-for=&quot;task in taskList&quot;&lt;/code&gt; bit. This is a for loop. it loops though each element ( called &lt;em&gt;task&lt;/em&gt; ) in the data &lt;em&gt;taskList&lt;/em&gt;.&lt;/p&gt;
+
+&lt;p&gt;I think we can now go thru the Javascript and will find it self explanatory.&lt;/p&gt;
+</description>
+        <pubDate>Thu, 05 Jul 2018 01:21:43 +0530</pubDate>
+      </item>
+    
+      <item>
+        <title>A dive into UI javascript frameworks</title>
+        <link>/2018/07/01/A-Dive-into-javascript-ui-frameworks.html</link>
+        <guid isPermaLink="true">/2018/07/01/A-Dive-into-javascript-ui-frameworks.html</guid>
+        <description>&lt;p&gt;My motive in writing this is to understand how a client facing JavaScript framework works at a deeper level. This, i believe, will help me understand the underlying system so i can architect the system correctly. Such kind of frameworks are evolved, so the nomenclature and the way of functioning, is almost the same on a superficial level. i will not be going into any code here. i will only be writing it from a 200ft view.&lt;br /&gt;
+Recently, i started reading through VueJS and somehow it seems to resonate with me, so i decided to read only the documentation and understand how everything comes together. Below are what i learned.&lt;/p&gt;
+&lt;h2 id=&quot;terms-i-should-know-about&quot;&gt;Terms i should know about.&lt;/h2&gt;
+&lt;h3 id=&quot;instance&quot;&gt;Instance&lt;/h3&gt;
+&lt;p&gt;This provides a context ( or &lt;strong&gt;Scope&lt;/strong&gt; ) for the application to work with. While you can have multiple instances on a page, it mostly is better to use just one since it simplifies things later.&lt;/p&gt;
+&lt;h3 id=&quot;component&quot;&gt;Component&lt;/h3&gt;
+&lt;p&gt;This can be thought of as a collection of visually separate elements. these can be global or local, and flexibe enough to reuse the same components for different purposes&lt;/p&gt;
+&lt;h3 id=&quot;directive&quot;&gt;Directive&lt;/h3&gt;
+&lt;p&gt;the logic flow of the data is managed by directives. I will deal with this in the next post where i will be looking at code.&lt;/p&gt;
+
+&lt;h2 id=&quot;an-example&quot;&gt;An example&lt;/h2&gt;
+&lt;p&gt;I am going to look at a blog’s front page layout and see if i can make this into a VueJS application. Visually this can be separated into components.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://i.imgur.com/HlMWRaK.jpg&quot; alt=&quot;Layout of components&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Now we can see 1 instance, 3 different components, one of which is used 2 times with different data. Just so that we get this right avoiding too much confusion about what goes where, i will concentrate on the components:&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;header&lt;/strong&gt; - This is just the header, with a list of links and a banner image.&lt;br /&gt;
+&lt;strong&gt;list_posts_with_description&lt;/strong&gt; - This component gives a list of post titles, with a date and description. &lt;br /&gt;
+&lt;strong&gt;list_of_post_titles&lt;/strong&gt; - This component gives a list of post titles. it is reused twice. once to show the list using date as the grouping  and the second time using a tag as the grouping.&lt;/p&gt;
+
+&lt;p&gt;In the next post, i will write the code for each of the components.&lt;/p&gt;
+</description>
+        <pubDate>Sun, 01 Jul 2018 07:51:43 +0530</pubDate>
+      </item>
+    
+      <item>
+        <title>Hello World</title>
+        <link>/2018/06/23/Hello-World.html</link>
+        <guid isPermaLink="true">/2018/06/23/Hello-World.html</guid>
+        <description>&lt;p&gt;I have moved my entire blogging to github pages. I am using Hugo, a delightfully simple static file generator.&lt;/p&gt;
+
+&lt;p&gt;I plan on using a small cron on the raspberry pi to post stuff to my trshant.github.io site……atleast thats what i think.&lt;/p&gt;
+
+&lt;h2 id=&quot;on-let-me-see-if-this-saves&quot;&gt;On let me see if this saves&lt;/h2&gt;
+&lt;p&gt;This is also a test filewhere i will be trying out &lt;code class=&quot;highlighter-rouge&quot;&gt;newer&lt;/code&gt; things i want to do.&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;function hello(){
+    console.log(&quot;hello world!&quot;);
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;i ❤ this.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;script src=&quot;/js/mermaid.js&quot;&gt;&lt;/script&gt;
+&lt;div class=&quot;mermaid&quot;&gt;
+graph LR
+        A[AWS Kinesis] --&amp;gt; B[Spark Streaming Application]
+        B --&amp;gt; C[AWS S3]
+        B --&amp;gt; D[AWS Redshift]
+        C -.-&amp;gt; D
+&lt;/div&gt;
+</description>
+        <pubDate>Sat, 23 Jun 2018 06:59:43 +0530</pubDate>
+      </item>
+    
+  </channel>
+</rss>

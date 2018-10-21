@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html class="no-js">
+  <head>
+	<meta charset="utf-8">
+	<title>Search | Trshant's blog</title>
+	<meta name="description" content="A website with blog posts and pages">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<!-- CSS -->
+	<link rel="stylesheet" href="/assets/css/main.css">
+
+	<!--Favicon-->
+	<link rel="shortcut icon" href="/assets/favicon.ico" type="image/x-icon">
+
+	<!-- Canonical -->
+	<link rel="canonical" href="/search.html">
+
+	<!-- RSS -->
+	<link rel="alternate" type="application/atom+xml" title="Trshant's blog" href="/feed.xml" />
+
+	<!-- Font Awesome -->
+	<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+	<!-- Google Fonts -->
+	
+	<link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,700italic,400italic" rel="stylesheet" type="text/css">
+	
+
+	<!-- KaTeX -->
+	
+
+	<!-- Google Analytics -->
+	
+</head>
+
+  <body>
+    <header class="site-header">
+	<div class="branding">
+		
+		<a href="/">
+			<img class="avatar" src="https://secure.gravatar.com/avatar/b8f8be8b6147f78fc6a869ef48555388?s=100" alt=""/>
+		</a>
+		
+		<h1 class="site-title">
+			<a href="/">Trshant's blog</a>
+		</h1>
+	</div>
+	<nav class="site-nav">
+		<ul>
+			
+			
+			
+			
+			<li>
+				<a class="page-link" href="/about/">
+					About
+				</a>
+			</li>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			<li>
+				<a class="page-link" href="/tags.html">
+					Tags
+				</a>
+			</li>
+			
+			
+			<!-- Social icons from Font Awesome, if enabled  -->
+			
+
+
+<li>
+	<a href="mailto:trshant@gmail.com" title="Email">
+		<i class="fa fa-fw fa-envelope"></i>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li>
+	<a href="https://github.com/Trshant" title="Follow on GitHub">
+		<i class="fa fa-fw fa-github"></i>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li>
+	<a href="https://twitter.com/twitter" title="Follow on Twitter">
+		<i class="fa fa-fw fa-twitter"></i>
+	</a>
+</li>
+
+
+
+
+
+
+            
+            <!-- Search bar -->
+            
+		</ul>
+	</nav>
+    
+</header>
+
+    <div class="content">
+      <article >
+  <header style="background-image: url('/')">
+    <h1 class="title">Search</h1>
+    
+  </header>
+  <section class="post-content"><div class="search">
+    <div id="search-results"></div>
+    <p id="not-found" style="display: none">
+        No results found.
+    </p>
+</div>
+
+
+<script>
+  window.store = {
+    
+      "2018-10-21-tips-for-preprocessing-data-part-1-html": {
+        "title": "Code Snippets for data preprocessing using Pandas - Part 1",
+        "tags": "BigData, pandas, CodeSnippets",
+        "date": "October 21, 2018",
+        "author": "",
+        "category": "",
+        "content": "This post will be all about processing data using pandas.Use this to read CSVs into a dataframedf = pd.read_csv('train.csv')However, in case you need to prepare a DataFrame and have been unfortunate enough to get a CSV file with no headers, then this is the way to godf = pd.read_csv('file_name.csv', header = None, names = ['labels','you','want','to','give'] )This is one very usable function to see which data is empty or nulldef missing_data_table(df):    total = df.isnull().sum().sort_values(ascending=False)    percent = (df.isnull().sum()/df.isnull().count()).sort_values(ascending=False)    missing_data = pd.concat([total, percent], axis=1, keys=['Total', 'Percent'])    return missing_dataIf you see any empty data you can fill it in withdf['column_name'].fillna(1000, inplace=True)Dropping a column is easydf.drop('column_name', axis=1, inplace=True)Dropping row/s if a column is blank/nulldf.drop(df[pd.isnull(df['Embarked'])].index, inplace=True)We can make columns categorical ( converting ‘male’ and ‘female’ to 0 and 1 ) without too much troubledf['Sex'] = pd.Categorical(df['Sex'])However this wont be seen easily till you  do this bitdf = pd.get_dummies(df, drop_first=True)See the dataframe:df.head(optional number of rows you want to see)  Written with StackEdit.",
+        "url": "//2018/10/21/Tips-for-preprocessing-data-part-1.html"
+      }
+      ,
+    
+      "2018-10-20-tips-for-ml-part-1-html": {
+        "title": "Code snippets for ML using Scikit-Learn - Part 1",
+        "tags": "MachineLearning, AI/ML, CodeSnippets",
+        "date": "October 20, 2018",
+        "author": "",
+        "category": "",
+        "content": "This is a page where i will be putting in things i learned while starting off again in ML.I am using scikit-learn to do my ml this time and am trying to go through ML in as small a timeframe as possible.I have been learning about linear and logistic regression.The correct ones to use in both the cases are from sklearn.linear_model    import LinearRegression and from sklearn.linear_model import LogisticRegression which is intiutive.This is the bit of code that matterslinreg = LinearRegression().fit( X_train , y_train )linreg.score( X_test , y_test )andlogreg = LogisticRegression( solver='liblinear',multi_class='ovr',n_jobs=1 )logreg.fit(X_train, y_train)Post this, we can do a predict and see how the model behaves.Have a look at this repo’s 2 pages to see what i did using the above code.  Written with StackEdit.",
+        "url": "//2018/10/20/tips-for-ML-part-1.html"
+      }
+      ,
+    
+      "2018-07-05-a-dive-into-ui-javascript-frameworks-part-2-html": {
+        "title": "A dive into UI javascript frameworks - Part 2",
+        "tags": "Javascript, JavscriptFrameworks, VueJS",
+        "date": "July 5, 2018",
+        "author": "",
+        "category": "",
+        "content": "In this post i will be laying out an idea of how to build a front page for a blog using the components, instances laid out in my previous post, using directives to achieve our goal. But i will need to understand the idea behind this so This post will be about learning and testing things out, this will help me in taking good decisions finishing the blog code. Along the wa, i will be writing code to test my ideas. So, writing a small page to test my code, i begin with forking the hello world example from the official guide.&lt;!DOCTYPE html&gt;&lt;html&gt;&lt;head&gt;  &lt;title&gt;My first Vue app&lt;/title&gt;  &lt;!-- development version, includes helpful console warnings --&gt;  &lt;script src=\"https://cdn.jsdelivr.net/npm/vue/dist/vue.js\"&gt;&lt;/script&gt;&lt;/head&gt;&lt;body&gt;  &lt;div id=\"app\"&gt;      &lt;/div&gt;  &lt;script&gt;    var app = new Vue({      el: '#app',      data: {        message: 'Hello Vue!'      }    })  &lt;/script&gt;&lt;/body&gt;&lt;/html&gt;Now, if you copy that into an html file and then open it, you will be greeted with a “Hello Vue!” message. If you open your console log and type in app.message = “Hello Trshant!”, you will find that the message has changed to whatever you typed. This means that the data in the app is coupled with the  part of the html; and if we change the data using ajax, it will make the nessacery change in the presentation. awesome!Moving on, i have copied this lovely todo app made in Vue and forked it -&gt; There you go. Do please open it and go thru the code and the example itself. i will go through this and explain the functionality of every line. my motive here is to understand the need for bindings and presentation logic.I will be going thru the HTML and then the JS. But before we do that, we will ask ourselves the important questions - The Objective of our task.We want to build a small to-do app. This should have a text box and a button next to it, on the top. when you type in something and hit the button or press enter, this should populate underneath, with a checkbox to its left. we also need a delete button. When you click the checkbox, the text should be struck out.Since we have some clarity n what we need, we move on to the code. Do have a look:&lt;!-- Main Div Holding our Application Data --&gt;&lt;div class=\"container\" id=\"todo\"&gt;  &lt;!-- Panel for holding our input --&gt;  &lt;section class=\"panel\"&gt;    &lt;input type=\"checkbox\" id=\"mark-all\" v-bind:checked=\"areAllSelected\" v-on:click=\"selectAll\"&gt;    &lt;input type=\"text\" placeholder=\"What do you need to do?\" autofocus class=\"text-input\" v-model=\"newTask\" v-on:keyup.enter=\"addTask\"&gt;    &lt;button v-on:click=\"clearList\"&gt;Clear List&lt;/button&gt;  &lt;/section&gt;  &lt;!-- Unordered list for holding our todo items --&gt;  &lt;ul class=\"list\"&gt;    &lt;li v-for=\"task in taskList\" v-bind:class=\"{done: task.checked}\"&gt;      &lt;input type=\"checkbox\" class=\"checkbox\" v-model=\"task.checked\"&gt;      &lt;label for=\"checkbox\"&gt;&lt;/label&gt;      &lt;button class=\"delete\" v-on:click=\"removeTask(task)\"&gt;X&lt;/button&gt;    &lt;/li&gt;  &lt;/ul&gt;  &lt;!-- This stringifies the contents of the data object and displays it on the page --&gt;  &lt;pre&gt;{{ $data }}&lt;/pre&gt;&lt;/div&gt;The main input with button : look at the contents of the &lt;section class=\"panel\"&gt; element. So we have a checkbox (which is additional to the brief above the code), a input and a button. All this is in html..but whats the v-on and v-bind and v-model?These are called directives. They are very very important and so, we should understand what they do. These are event listeners and provide binding with the data source or functions that we will build.Here, we have a few directives. I will list them and provide an explanation:  v-bind : This binds an attribute of the element with the output of a function, which is constantly evaluated, or some data element. here we see v-bind:checked=\"areAllSelected\" - this binds the output of a constantly evaluated function areAllSelected to the checked property of the checkbox.  v-on : This is an event listener. This executes a function on the occurence of that event. v-on:click=\"selectAll\" - here the function selectAll is executed when the click event executes on this element. Another instance of the v-on is the v-on:keyup.enter=\"addTask\". Intuitively, you can say that this is supposed to execute addTask on the event of enter button being released.  v-model : This binds the data to the elements value, when that value is an attribute.We will now go through the rest of the code - the ul element. We encounter something different here - the v-for=\"task in taskList\" bit. This is a for loop. it loops though each element ( called task ) in the data taskList.I think we can now go thru the Javascript and will find it self explanatory.",
+        "url": "//2018/07/05/A-Dive-into-ui-javascript-frameworks-part-2.html"
+      }
+      ,
+    
+      "2018-07-01-a-dive-into-javascript-ui-frameworks-html": {
+        "title": "A dive into UI javascript frameworks",
+        "tags": "Javascript, JavscriptFrameworks",
+        "date": "July 1, 2018",
+        "author": "",
+        "category": "",
+        "content": "My motive in writing this is to understand how a client facing JavaScript framework works at a deeper level. This, i believe, will help me understand the underlying system so i can architect the system correctly. Such kind of frameworks are evolved, so the nomenclature and the way of functioning, is almost the same on a superficial level. i will not be going into any code here. i will only be writing it from a 200ft view.Recently, i started reading through VueJS and somehow it seems to resonate with me, so i decided to read only the documentation and understand how everything comes together. Below are what i learned.Terms i should know about.InstanceThis provides a context ( or Scope ) for the application to work with. While you can have multiple instances on a page, it mostly is better to use just one since it simplifies things later.ComponentThis can be thought of as a collection of visually separate elements. these can be global or local, and flexibe enough to reuse the same components for different purposesDirectivethe logic flow of the data is managed by directives. I will deal with this in the next post where i will be looking at code.An exampleI am going to look at a blog’s front page layout and see if i can make this into a VueJS application. Visually this can be separated into components.Now we can see 1 instance, 3 different components, one of which is used 2 times with different data. Just so that we get this right avoiding too much confusion about what goes where, i will concentrate on the components:header - This is just the header, with a list of links and a banner image.list_posts_with_description - This component gives a list of post titles, with a date and description. list_of_post_titles - This component gives a list of post titles. it is reused twice. once to show the list using date as the grouping  and the second time using a tag as the grouping.In the next post, i will write the code for each of the components.",
+        "url": "//2018/07/01/A-Dive-into-javascript-ui-frameworks.html"
+      }
+      ,
+    
+      "2018-06-23-hello-world-html": {
+        "title": "Hello World",
+        "tags": "",
+        "date": "June 23, 2018",
+        "author": "",
+        "category": "",
+        "content": "I have moved my entire blogging to github pages. I am using Hugo, a delightfully simple static file generator.I plan on using a small cron on the raspberry pi to post stuff to my trshant.github.io site……atleast thats what i think.On let me see if this savesThis is also a test filewhere i will be trying out newer things i want to do.function hello(){    console.log(\"hello world!\");}  i ❤ this.graph LR        A[AWS Kinesis] --&gt; B[Spark Streaming Application]        B --&gt; C[AWS S3]        B --&gt; D[AWS Redshift]        C -.-&gt; D",
+        "url": "//2018/06/23/Hello-World.html"
+      }
+      
+    
+  };
+</script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lunr.js/0.7.1/lunr.min.js"></script>
+<script src="/assets/js/search.js"></script>
+</section>
+</article>
+
+    </div>
+    
+
+
+<footer class="site-footer">
+	<p class="text">Powered by <a href="https://jekyllrb.com/">Jekyll</a> with <a href="https://github.com/rohanchandra/type-theme">Type Theme</a>
+</p>
+</footer>
+
+
+  </body>
+</html>

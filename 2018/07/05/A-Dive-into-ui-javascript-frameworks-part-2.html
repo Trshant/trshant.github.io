@@ -2,8 +2,8 @@
 <html class="no-js">
   <head>
 	<meta charset="utf-8">
-	<title> Trshant's blog</title>
-	<meta name="description" content="A website with blog posts and pages">
+	<title>A dive into UI javascript frameworks - Part 2 | Trshant's blog</title>
+	<meta name="description" content="In this post i will be laying out an idea of how to build a front page for a blog using the components, instances laid out in my previous post, using directi...">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 
 	<!-- CSS -->
@@ -13,7 +13,7 @@
 	<link rel="shortcut icon" href="/assets/favicon.ico" type="image/x-icon">
 
 	<!-- Canonical -->
-	<link rel="canonical" href="/">
+	<link rel="canonical" href="/2018/07/05/A-Dive-into-ui-javascript-frameworks-part-2.html">
 
 	<!-- RSS -->
 	<link rel="alternate" type="application/atom+xml" title="Trshant's blog" href="/feed.xml" />
@@ -27,6 +27,9 @@
 	
 
 	<!-- KaTeX -->
+	
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0-alpha/dist/katex.min.css" integrity="sha384-BTL0nVi8DnMrNdMQZG1Ww6yasK9ZGnUxL1ZWukXQ7fygA1py52yPp9W4wrR00VML" crossorigin="anonymous">
+	<script src="https://cdn.jsdelivr.net/npm/katex@0.10.0-alpha/dist/katex.min.js" integrity="sha384-y6SGsNt7yZECc4Pf86XmQhC4hG2wxL6Upkt9N1efhFxfh6wlxBH0mJiTE8XYclC1" crossorigin="anonymous"></script>
 	
 
 	<!-- Google Analytics -->
@@ -144,84 +147,17 @@
 </header>
 
     <div class="content">
-      <div class="home">
-  
-  <div class="call-out"
-  style="background-image: url('/')">
-    <p>Trshant's sometimes insane ramblings.</p>
-
-  </div>
-  
-
-  <div class="posts">
+      <link rel="stylesheet" href="https://cdn.rawgit.com/knsv/mermaid/7.0.0/dist/mermaid.css">
+<article >
+  <header style="background-image: url('/')">
+    <h1 class="title">A dive into UI javascript frameworks - Part 2</h1>
     
-    <div class="post-teaser">
-      <header>
-        <h1>
-          <a class="post-link" href="/2018/10/21/Tips-for-preprocessing-data-part-1.html">
-            Code Snippets for data preprocessing using Pandas - Part 1
-          </a>
-        </h1>
-        <p class="meta">
-          October 21, 2018
-        </p>
-      </header>
-      <div class="excerpt">
-        <p>This post will be all about processing data using pandas.</p>
-
-
-        <a class="button" href="/2018/10/21/Tips-for-preprocessing-data-part-1.html">
-          Continue reading
-        </a>
-      </div>
-    </div>
-    
-    <div class="post-teaser">
-      <header>
-        <h1>
-          <a class="post-link" href="/2018/10/20/tips-for-ML-part-1.html">
-            Code snippets for ML using Scikit-Learn - Part 1
-          </a>
-        </h1>
-        <p class="meta">
-          October 20, 2018
-        </p>
-      </header>
-      <div class="excerpt">
-        <p>This is a page where i will be putting in things i learned while starting off again in ML.<br />
-I am using scikit-learn to do my ml this time and am trying to go through ML in as small a timeframe as possible.
-I have been learning about linear and logistic regression.
-The correct ones to use in both the cases are <code class="highlighter-rouge">from sklearn.linear_model    import LinearRegression</code> and <code class="highlighter-rouge">from sklearn.linear_model import LogisticRegression</code> which is intiutive.
-This is the bit of code that matters</p>
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">linreg</span> <span class="o">=</span> <span class="n">LinearRegression</span><span class="p">()</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span> <span class="n">X_train</span> <span class="p">,</span> <span class="n">y_train</span> <span class="p">)</span>
-<span class="n">linreg</span><span class="o">.</span><span class="n">score</span><span class="p">(</span> <span class="n">X_test</span> <span class="p">,</span> <span class="n">y_test</span> <span class="p">)</span>
-</code></pre></div></div>
-<p>and</p>
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">logreg</span> <span class="o">=</span> <span class="n">LogisticRegression</span><span class="p">(</span> <span class="n">solver</span><span class="o">=</span><span class="s">'liblinear'</span><span class="p">,</span><span class="n">multi_class</span><span class="o">=</span><span class="s">'ovr'</span><span class="p">,</span><span class="n">n_jobs</span><span class="o">=</span><span class="mi">1</span> <span class="p">)</span>
-<span class="n">logreg</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
-</code></pre></div></div>
-<p>Post this, we can do a predict and see how the model behaves.</p>
-
-
-        <a class="button" href="/2018/10/20/tips-for-ML-part-1.html">
-          Continue reading
-        </a>
-      </div>
-    </div>
-    
-    <div class="post-teaser">
-      <header>
-        <h1>
-          <a class="post-link" href="/2018/07/05/A-Dive-into-ui-javascript-frameworks-part-2.html">
-            A dive into UI javascript frameworks - Part 2
-          </a>
-        </h1>
-        <p class="meta">
-          July 5, 2018
-        </p>
-      </header>
-      <div class="excerpt">
-        <p>In this post i will be laying out an idea of how to build a front page for a blog using the components, instances laid out in my previous post, using directives to achieve our goal. 
+    <p class="meta">
+      July 5, 2018
+      
+    </p>
+  </header>
+  <section class="post-content"><p>In this post i will be laying out an idea of how to build a front page for a blog using the components, instances laid out in my previous post, using directives to achieve our goal. 
 But i will need to understand the idea behind this so This post will be about learning and testing things out, this will help me in taking good decisions finishing the blog code. 
 Along the wa, i will be writing code to test my ideas. So, writing a small page to test my code, i begin with forking the hello world example from the <a href="https://vuejs.org/v2/guide/">official guide</a>.</p>
 
@@ -291,73 +227,33 @@ Here, we have a few directives. I will list them and provide an explanation:</p>
 <p>We will now go through the rest of the code - the <code class="highlighter-rouge">ul</code> element. We encounter something different here - the <code class="highlighter-rouge">v-for="task in taskList"</code> bit. This is a for loop. it loops though each element ( called <em>task</em> ) in the data <em>taskList</em>.</p>
 
 <p>I think we can now go thru the Javascript and will find it self explanatory.</p>
-
-        <a class="button" href="/2018/07/05/A-Dive-into-ui-javascript-frameworks-part-2.html">
-          Continue reading
-        </a>
-      </div>
-    </div>
+</section>
+  
+<footer>
+  <div class="tags">
     
-    <div class="post-teaser">
-      <header>
-        <h1>
-          <a class="post-link" href="/2018/07/01/A-Dive-into-javascript-ui-frameworks.html">
-            A dive into UI javascript frameworks
-          </a>
-        </h1>
-        <p class="meta">
-          July 1, 2018
-        </p>
-      </header>
-      <div class="excerpt">
-        <p>My motive in writing this is to understand how a client facing JavaScript framework works at a deeper level. This, i believe, will help me understand the underlying system so i can architect the system correctly. Such kind of frameworks are evolved, so the nomenclature and the way of functioning, is almost the same on a superficial level. i will not be going into any code here. i will only be writing it from a 200ft view.<br />
-Recently, i started reading through VueJS and somehow it seems to resonate with me, so i decided to read only the documentation and understand how everything comes together. Below are what i learned.</p>
-<h2 id="terms-i-should-know-about">Terms i should know about.</h2>
-<h3 id="instance">Instance</h3>
-<p>This provides a context ( or <strong>Scope</strong> ) for the application to work with. While you can have multiple instances on a page, it mostly is better to use just one since it simplifies things later.</p>
-<h3 id="component">Component</h3>
-<p>This can be thought of as a collection of visually separate elements. these can be global or local, and flexibe enough to reuse the same components for different purposes</p>
-<h3 id="directive">Directive</h3>
-<p>the logic flow of the data is managed by directives. I will deal with this in the next post where i will be looking at code.</p>
-
-<h2 id="an-example">An example</h2>
-<p>I am going to look at a blog’s front page layout and see if i can make this into a VueJS application. Visually this can be separated into components.</p>
-
-
-        <a class="button" href="/2018/07/01/A-Dive-into-javascript-ui-frameworks.html">
-          Continue reading
-        </a>
-      </div>
-    </div>
+    <a class="tag" href="/tags#Javascript">#Javascript</a>
     
-    <div class="post-teaser">
-      <header>
-        <h1>
-          <a class="post-link" href="/2018/06/23/Hello-World.html">
-            Hello World
-          </a>
-        </h1>
-        <p class="meta">
-          June 23, 2018
-        </p>
-      </header>
-      <div class="excerpt">
-        <p>I have moved my entire blogging to github pages. I am using Hugo, a delightfully simple static file generator.</p>
-
-
-        <a class="button" href="/2018/06/23/Hello-World.html">
-          Continue reading
-        </a>
-      </div>
-    </div>
+    <a class="tag" href="/tags#JavscriptFrameworks">#JavscriptFrameworks</a>
+    
+    <a class="tag" href="/tags#VueJS">#VueJS</a>
     
   </div>
+</footer>
 
-  
-</div>
+
+</article>
+
+<!-- Disqus -->
+
+
+<!-- Post navigation -->
+
 
     </div>
     
+<script src="/assets/js/katex_init.js"></script>
+
 
 
 <footer class="site-footer">
