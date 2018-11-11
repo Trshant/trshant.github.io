@@ -2,8 +2,8 @@
 <html class="no-js">
   <head>
 	<meta charset="utf-8">
-	<title>Hello World | Trshant's blog</title>
-	<meta name="description" content="I have moved my entire blogging to github pages. I am using Hugo, a delightfully simple static file generator.">
+	<title>Scope and Context in JavaScript | Trshant's blog</title>
+	<meta name="description" content="While there are many, many articles on the topic online 1, I just wanted to add my $0.02 to it.scope is the visibility of the variable. Think of it being in ...">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 
 	<!-- CSS -->
@@ -13,7 +13,7 @@
 	<link rel="shortcut icon" href="/assets/favicon.ico" type="image/x-icon">
 
 	<!-- Canonical -->
-	<link rel="canonical" href="/2018/06/23/Hello-World.html">
+	<link rel="canonical" href="/2018/11/05/Contexts-in-JavaScript.html">
 
 	<!-- RSS -->
 	<link rel="alternate" type="application/atom+xml" title="Trshant's blog" href="/feed.xml" />
@@ -152,42 +152,51 @@
       <link rel="stylesheet" href="https://cdn.rawgit.com/knsv/mermaid/7.0.0/dist/mermaid.css">
 <article >
   <header style="background-image: url('/')">
-    <h1 class="title">Hello World</h1>
+    <h1 class="title">Scope and Context in JavaScript</h1>
     
     <p class="meta">
-      June 23, 2018
+      November 5, 2018
       
     </p>
   </header>
-  <section class="post-content"><p>I have moved my entire blogging to github pages. I am using Hugo, a delightfully simple static file generator.</p>
+  <section class="post-content"><p>While there are many, many articles on the topic online <sup id="fnref:1"><a href="#fn:1" class="footnote">1</a></sup>, I just wanted to add my $0.02 to it.<br />
+<strong>scope</strong> is the visibility of the variable. Think of it being in the “line of sight”, where line of sight is on the same level or below.<br />
+<strong>context</strong> means the dependence of the variable on being in an environment. This is used for methods in objects mainly, since the context can change for every instance of the object.</p>
 
-<p>I plan on using a small cron on the raspberry pi to post stuff to my trshant.github.io site……atleast thats what i think.</p>
+<p>However, we can change the context for any method by using the call or apply function. Do go through  <sup id="fnref:2"><a href="#fn:2" class="footnote">2</a></sup> - its fun and will give you intuition as to scope and contexts .</p>
 
-<h2 id="on-let-me-see-if-this-saves">On let me see if this saves</h2>
-<p>This is also a test filewhere i will be trying out <code class="highlighter-rouge">newer</code> things i want to do.</p>
+<p>Also, i would like to mention that <sup id="fnref:3"><a href="#fn:3" class="footnote">3</a></sup> and <sup id="fnref:4"><a href="#fn:4" class="footnote">4</a></sup> helped a lot in making this post look kind of academic.</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>function hello(){
-    console.log("hello world!");
-}
-</code></pre></div></div>
-
-<blockquote>
-  <p>i ❤ this.</p>
-</blockquote>
-
-<script src="/js/mermaid.js"></script>
-<div class="mermaid">
-graph LR
-        A[AWS Kinesis] --&gt; B[Spark Streaming Application]
-        B --&gt; C[AWS S3]
-        B --&gt; D[AWS Redshift]
-        C -.-&gt; D
-</div>
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTUyODI3NTI1MV19
+eyJoaXN0b3J5IjpbLTE2ODMxNjcyNTEsLTIwMzYwMDc0NzksLT
+IwMjAyMjU4MDBdfQ==
 -->
+<div class="footnotes">
+  <ol>
+    <li id="fn:1">
+      <p>just one of the many! <a href="https://blog.kevinchisholm.com/javascript/difference-between-scope-and-context/">What is the Difference Between Scope and Context in JavaScript?</a> <a href="#fnref:1" class="reversefootnote">&#8617;</a></p>
+    </li>
+    <li id="fn:2">
+      <p><a href="https://johnresig.com/apps/learn/">John Resig’s Learning Advanced JavaScript </a> <a href="#fnref:2" class="reversefootnote">&#8617;</a></p>
+    </li>
+    <li id="fn:3">
+      <p><a href="https://www.chriskrycho.com/2015/academic-markdown-and-citations.html">Academic markdown and citations</a>. <a href="#fnref:3" class="reversefootnote">&#8617;</a></p>
+    </li>
+    <li id="fn:4">
+      <p><a href="https://www.markdownguide.org/cheat-sheet/">Markdown cheatsheet</a> <a href="#fnref:4" class="reversefootnote">&#8617;</a></p>
+    </li>
+  </ol>
+</div>
 </section>
   
+<footer>
+  <div class="tags">
+    
+    <a class="tag" href="/tags#JavaScript">#JavaScript</a>
+    
+  </div>
+</footer>
+
 
 </article>
 

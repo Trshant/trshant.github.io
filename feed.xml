@@ -5,7 +5,43 @@
     <atom:link href="/feed.xml" rel="self" type="application/rss+xml"/>
     <link>https://trshant.github.io//</link>
     <description>A website with blog posts and pages</description>
-    <pubDate>Sun, 21 Oct 2018 21:20:29 +0530</pubDate>
+    <pubDate>Sun, 11 Nov 2018 06:53:47 +0530</pubDate>
+    
+      <item>
+        <title>Scope and Context in JavaScript</title>
+        <link>/2018/11/05/Contexts-in-JavaScript.html</link>
+        <guid isPermaLink="true">/2018/11/05/Contexts-in-JavaScript.html</guid>
+        <description>&lt;p&gt;While there are many, many articles on the topic online &lt;sup id=&quot;fnref:1&quot;&gt;&lt;a href=&quot;#fn:1&quot; class=&quot;footnote&quot;&gt;1&lt;/a&gt;&lt;/sup&gt;, I just wanted to add my $0.02 to it.&lt;br /&gt;
+&lt;strong&gt;scope&lt;/strong&gt; is the visibility of the variable. Think of it being in the “line of sight”, where line of sight is on the same level or below.&lt;br /&gt;
+&lt;strong&gt;context&lt;/strong&gt; means the dependence of the variable on being in an environment. This is used for methods in objects mainly, since the context can change for every instance of the object.&lt;/p&gt;
+
+&lt;p&gt;However, we can change the context for any method by using the call or apply function. Do go through  &lt;sup id=&quot;fnref:2&quot;&gt;&lt;a href=&quot;#fn:2&quot; class=&quot;footnote&quot;&gt;2&lt;/a&gt;&lt;/sup&gt; - its fun and will give you intuition as to scope and contexts .&lt;/p&gt;
+
+&lt;p&gt;Also, i would like to mention that &lt;sup id=&quot;fnref:3&quot;&gt;&lt;a href=&quot;#fn:3&quot; class=&quot;footnote&quot;&gt;3&lt;/a&gt;&lt;/sup&gt; and &lt;sup id=&quot;fnref:4&quot;&gt;&lt;a href=&quot;#fn:4&quot; class=&quot;footnote&quot;&gt;4&lt;/a&gt;&lt;/sup&gt; helped a lot in making this post look kind of academic.&lt;/p&gt;
+
+&lt;!--stackedit_data:
+eyJoaXN0b3J5IjpbLTE2ODMxNjcyNTEsLTIwMzYwMDc0NzksLT
+IwMjAyMjU4MDBdfQ==
+--&gt;
+&lt;div class=&quot;footnotes&quot;&gt;
+  &lt;ol&gt;
+    &lt;li id=&quot;fn:1&quot;&gt;
+      &lt;p&gt;just one of the many! &lt;a href=&quot;https://blog.kevinchisholm.com/javascript/difference-between-scope-and-context/&quot;&gt;What is the Difference Between Scope and Context in JavaScript?&lt;/a&gt; &lt;a href=&quot;#fnref:1&quot; class=&quot;reversefootnote&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+    &lt;/li&gt;
+    &lt;li id=&quot;fn:2&quot;&gt;
+      &lt;p&gt;&lt;a href=&quot;https://johnresig.com/apps/learn/&quot;&gt;John Resig’s Learning Advanced JavaScript &lt;/a&gt; &lt;a href=&quot;#fnref:2&quot; class=&quot;reversefootnote&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+    &lt;/li&gt;
+    &lt;li id=&quot;fn:3&quot;&gt;
+      &lt;p&gt;&lt;a href=&quot;https://www.chriskrycho.com/2015/academic-markdown-and-citations.html&quot;&gt;Academic markdown and citations&lt;/a&gt;. &lt;a href=&quot;#fnref:3&quot; class=&quot;reversefootnote&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+    &lt;/li&gt;
+    &lt;li id=&quot;fn:4&quot;&gt;
+      &lt;p&gt;&lt;a href=&quot;https://www.markdownguide.org/cheat-sheet/&quot;&gt;Markdown cheatsheet&lt;/a&gt; &lt;a href=&quot;#fnref:4&quot; class=&quot;reversefootnote&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+    &lt;/li&gt;
+  &lt;/ol&gt;
+&lt;/div&gt;
+</description>
+        <pubDate>Mon, 05 Nov 2018 19:00:00 +0530</pubDate>
+      </item>
     
       <item>
         <title>Code Snippets for data preprocessing using Pandas - Part 1</title>
@@ -54,7 +90,7 @@
 &lt;blockquote&gt;
   &lt;p&gt;Written with &lt;a href=&quot;https://stackedit.io/&quot;&gt;StackEdit&lt;/a&gt;.
 &lt;!--stackedit_data:
-eyJoaXN0b3J5IjpbMzAwNDkyMTkwXX0=
+eyJoaXN0b3J5IjpbMTc5MDQ0Mzk2OV19
 --&gt;&lt;/p&gt;
 &lt;/blockquote&gt;
 </description>
@@ -83,8 +119,7 @@ This is the bit of code that matters&lt;/p&gt;
 &lt;blockquote&gt;
   &lt;p&gt;Written with &lt;a href=&quot;https://stackedit.io/&quot;&gt;StackEdit&lt;/a&gt;.
 &lt;!--stackedit_data:
-eyJoaXN0b3J5IjpbMTIzOTg5OTI3NiwtMTcxMzU2OTQ2NCwtMT
-E1NjE5OTk5MywtMTk2NTEzNjc4OSw2NTc5ODM4NzRdfQ==
+eyJoaXN0b3J5IjpbMTA2NTY5Mjk4NF19
 --&gt;&lt;/p&gt;
 &lt;/blockquote&gt;
 </description>
@@ -95,9 +130,9 @@ E1NjE5OTk5MywtMTk2NTEzNjc4OSw2NTc5ODM4NzRdfQ==
         <title>A dive into UI javascript frameworks - Part 2</title>
         <link>/2018/07/05/A-Dive-into-ui-javascript-frameworks-part-2.html</link>
         <guid isPermaLink="true">/2018/07/05/A-Dive-into-ui-javascript-frameworks-part-2.html</guid>
-        <description>&lt;p&gt;In this post i will be laying out an idea of how to build a front page for a blog using the components, instances laid out in my previous post, using directives to achieve our goal. 
-But i will need to understand the idea behind this so This post will be about learning and testing things out, this will help me in taking good decisions finishing the blog code. 
-Along the wa, i will be writing code to test my ideas. So, writing a small page to test my code, i begin with forking the hello world example from the &lt;a href=&quot;https://vuejs.org/v2/guide/&quot;&gt;official guide&lt;/a&gt;.&lt;/p&gt;
+        <description>&lt;p&gt;In this post I will be laying out an idea of how to build a front page for a blog using the components, instances laid out in my previous post, using directives to achieve our goal. 
+But I will need to understand the idea behind this so This post will be about learning and be testing things out, this will help me in taking good decisions finishing the blog code. 
+Along the way, I will be writing code to test my ideas. So, writing a small page to test my code, I begin with forking the hello world example from the &lt;a href=&quot;https://vuejs.org/v2/guide/&quot;&gt;official guide&lt;/a&gt;.&lt;/p&gt;
 
 &lt;pre&gt;&lt;code class=&quot;language-JavaScript&quot;&gt;&amp;lt;!DOCTYPE html&amp;gt;
 &amp;lt;html&amp;gt;
@@ -122,15 +157,15 @@ Along the wa, i will be writing code to test my ideas. So, writing a small page 
 &amp;lt;/body&amp;gt;
 &amp;lt;/html&amp;gt;
 &lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Now, if you copy that into an html file and then open it, you will be greeted with a “Hello Vue!” message. If you open your console log and type in app.message = “Hello Trshant!”, you will find that the message has changed to whatever you typed. This means that the data in the app is coupled with the  part of the html; and if we change the data using ajax, it will make the nessacery change in the presentation. &lt;em&gt;awesome!&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;Now, if you copy that into an HTML file and then open it, you will be greeted with a “Hello Vue!” message. If you open your console log and type in app.message = “Hello Trshant!”, you will find that the message has changed to whatever you typed. This means that the data in the app is coupled with the  part of the HTML; and if we change the data using ajax, it will make the necessary change in the presentation. &lt;em&gt;awesome!&lt;/em&gt;&lt;/p&gt;
 
-&lt;p&gt;Moving on, i have copied this lovely todo app made in Vue and forked it -&amp;gt; &lt;a href=&quot;https://jsfiddle.net/trshant/oqka1f8p/1/&quot;&gt;There you go&lt;/a&gt;. Do please open it and go thru the code and the example itself. i will go through this and explain the functionality of every line. my motive here is to understand the need for bindings and presentation logic.&lt;/p&gt;
+&lt;p&gt;Moving on, I have copied this lovely todo app made in Vue and forked it -&amp;gt; &lt;a href=&quot;https://jsfiddle.net/trshant/oqka1f8p/1/&quot;&gt;There you go&lt;/a&gt;. Do please open it and go thru the code and the example itself. I will go through this and explain the functionality of every line. my motive here is to understand the need for bindings and presentation logic.&lt;/p&gt;
 
-&lt;p&gt;I will be going thru the HTML and then the JS. But before we do that, we will ask ourselves the important questions - The Objective of our task.&lt;/p&gt;
+&lt;p&gt;I will be going thru the HTML and then the JS. But before we do that, we will ask ourselves the important questions - The Objective/Brief of our task.&lt;/p&gt;
 
 &lt;p&gt;We want to build a small to-do app. This should have a text box and a button next to it, on the top. when you type in something and hit the button or press enter, this should populate underneath, with a checkbox to its left. we also need a delete button. When you click the checkbox, the text should be struck out.&lt;/p&gt;
 
-&lt;p&gt;Since we have some clarity n what we need, we move on to the code. Do have a look:&lt;/p&gt;
+&lt;p&gt;Since we have some clarity on what we need, we move on to the code. Do have a look:&lt;/p&gt;
 
 &lt;div class=&quot;language-html highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;&amp;lt;!-- Main Div Holding our Application Data --&amp;gt;&lt;/span&gt;
 &lt;span class=&quot;nt&quot;&gt;&amp;lt;div&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;container&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;id=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;todo&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
@@ -149,22 +184,25 @@ Along the wa, i will be writing code to test my ideas. So, writing a small page 
     &lt;span class=&quot;nt&quot;&gt;&amp;lt;/li&amp;gt;&lt;/span&gt;
   &lt;span class=&quot;nt&quot;&gt;&amp;lt;/ul&amp;gt;&lt;/span&gt;
   &lt;span class=&quot;c&quot;&gt;&amp;lt;!-- This stringifies the contents of the data object and displays it on the page --&amp;gt;&lt;/span&gt;
-  &lt;span class=&quot;nt&quot;&gt;&amp;lt;pre&amp;gt;&lt;/span&gt;{{ $data }}&lt;span class=&quot;nt&quot;&gt;&amp;lt;/pre&amp;gt;&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;&amp;lt;pre&amp;gt;&amp;lt;/pre&amp;gt;&lt;/span&gt;
 &lt;span class=&quot;nt&quot;&gt;&amp;lt;/div&amp;gt;&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;&lt;strong&gt;The main input with button&lt;/strong&gt; : look at the contents of the &lt;code class=&quot;highlighter-rouge&quot;&gt;&amp;lt;section class=&quot;panel&quot;&amp;gt;&lt;/code&gt; element. So we have a checkbox (which is additional to the brief above the code), a input and a button. All this is in html..but whats the v-on and v-bind and v-model?&lt;br /&gt;
+&lt;p&gt;&lt;strong&gt;The main input with button&lt;/strong&gt; : look at the contents of the &lt;code class=&quot;highlighter-rouge&quot;&gt;&amp;lt;section class=&quot;panel&quot;&amp;gt;&lt;/code&gt; element. So we have a checkbox (which is not in the brief above the code), an input and a button. All this is in HTML..but whats the v-on and v-bind and v-model?&lt;br /&gt;
 These are called directives. They are very very important and so, we should understand what they do. These are event listeners and provide binding with the data source or functions that we will build.&lt;br /&gt;
 Here, we have a few directives. I will list them and provide an explanation:&lt;/p&gt;
 &lt;ul&gt;
-  &lt;li&gt;&lt;strong&gt;v-bind&lt;/strong&gt; : This binds an attribute of the element with the output of a function, which is constantly evaluated, or some data element. here we see &lt;code class=&quot;highlighter-rouge&quot;&gt;v-bind:checked=&quot;areAllSelected&quot;&lt;/code&gt; - this binds the output of a &lt;em&gt;constantly evaluated function&lt;/em&gt; areAllSelected to the &lt;em&gt;checked&lt;/em&gt; property of the checkbox.&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;v-on&lt;/strong&gt; : This is an event listener. This executes a function on the occurence of that event. &lt;code class=&quot;highlighter-rouge&quot;&gt;v-on:click=&quot;selectAll&quot;&lt;/code&gt; - here the function selectAll is executed when the click event executes on this element. Another instance of the v-on is the &lt;code class=&quot;highlighter-rouge&quot;&gt;v-on:keyup.enter=&quot;addTask&quot;&lt;/code&gt;. Intuitively, you can say that this is supposed to execute addTask on the event of enter button being released.&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;v-model&lt;/strong&gt; : This binds the data to the elements value, when that value is an attribute.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;v-bind&lt;/strong&gt;: This binds an attribute of the element with the output of a function, which is constantly evaluated, or some data element. here we see &lt;code class=&quot;highlighter-rouge&quot;&gt;v-bind:checked=&quot;areAllSelected&quot;&lt;/code&gt; - this binds the output of a &lt;em&gt;constantly evaluated function&lt;/em&gt; areAllSelected to the &lt;em&gt;checked&lt;/em&gt; property of the checkbox.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;v-on&lt;/strong&gt;: This is an event listener. This executes a function on the occurrence of that event. &lt;code class=&quot;highlighter-rouge&quot;&gt;v-on:click=&quot;selectAll&quot;&lt;/code&gt; - here the function selectAll is executed when the click event executes on this element. Another instance of the v-on is the &lt;code class=&quot;highlighter-rouge&quot;&gt;v-on:keyup.enter=&quot;addTask&quot;&lt;/code&gt;. Intuitively, you can say that this is supposed to execute addTask on the event of the enter button is released.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;v-model&lt;/strong&gt;: This binds the data to the element value when that value is an attribute.&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;We will now go through the rest of the code - the &lt;code class=&quot;highlighter-rouge&quot;&gt;ul&lt;/code&gt; element. We encounter something different here - the &lt;code class=&quot;highlighter-rouge&quot;&gt;v-for=&quot;task in taskList&quot;&lt;/code&gt; bit. This is a for loop. it loops though each element ( called &lt;em&gt;task&lt;/em&gt; ) in the data &lt;em&gt;taskList&lt;/em&gt;.&lt;/p&gt;
+&lt;p&gt;We will now go through the rest of the code - the &lt;code class=&quot;highlighter-rouge&quot;&gt;ul&lt;/code&gt; element. We encounter something different here - the &lt;code class=&quot;highlighter-rouge&quot;&gt;v-for=&quot;task in taskList&quot;&lt;/code&gt; bit. This is a ‘for’ loop. it loops through each element ( called &lt;em&gt;task&lt;/em&gt; ) in the data &lt;em&gt;taskList&lt;/em&gt;.&lt;/p&gt;
 
-&lt;p&gt;I think we can now go thru the Javascript and will find it self explanatory.&lt;/p&gt;
+&lt;p&gt;I think we can now go thru the Javascript and will find it self-explanatory. 
+&lt;!--stackedit_data:
+eyJoaXN0b3J5IjpbLTIwMzIzMzIyNzVdfQ==
+--&gt;&lt;/p&gt;
 </description>
         <pubDate>Thu, 05 Jul 2018 01:21:43 +0530</pubDate>
       </item>
@@ -194,7 +232,10 @@ Recently, i started reading through VueJS and somehow it seems to resonate with 
 &lt;strong&gt;list_posts_with_description&lt;/strong&gt; - This component gives a list of post titles, with a date and description. &lt;br /&gt;
 &lt;strong&gt;list_of_post_titles&lt;/strong&gt; - This component gives a list of post titles. it is reused twice. once to show the list using date as the grouping  and the second time using a tag as the grouping.&lt;/p&gt;
 
-&lt;p&gt;In the next post, i will write the code for each of the components.&lt;/p&gt;
+&lt;p&gt;In the next post, i will write the code for each of the components.
+&lt;!--stackedit_data:
+eyJoaXN0b3J5IjpbMTEzNjIyOTEwNV19
+--&gt;&lt;/p&gt;
 </description>
         <pubDate>Sun, 01 Jul 2018 07:51:43 +0530</pubDate>
       </item>
@@ -227,6 +268,9 @@ graph LR
         B --&amp;gt; D[AWS Redshift]
         C -.-&amp;gt; D
 &lt;/div&gt;
+&lt;!--stackedit_data:
+eyJoaXN0b3J5IjpbLTUyODI3NTI1MV19
+--&gt;
 </description>
         <pubDate>Sat, 23 Jun 2018 06:59:43 +0530</pubDate>
       </item>
