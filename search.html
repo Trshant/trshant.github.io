@@ -162,6 +162,17 @@
 <script>
   window.store = {
     
+      "2018-11-15-noun-and-verb-based-programming-html": {
+        "title": "Noun and verb based programming",
+        "tags": "programming, softwareEngineering",
+        "date": "November 15, 2018",
+        "author": "",
+        "category": "",
+        "content": "Today i came to know of a new thing and quite frankly, it blew my mind.Thinking in terms of verbs and nouns: This fantabulous idea was spoken to me by my mentor this evening. its also there on the web1.so what does this mean?consider this requirement: we need to add a additional phone number to a user.so here we have verbs:  addnouns:  user  additional phone numberso we can add a new variable ‘additional phone number’ to a ‘user’ class and a new method to change this variable ‘add’. This is definitely something to understand how to design your classes and methods to interact with other classes. another important use would be to  change contexts while programming. see above. the program here is written with reference to the user, i.e., noun based, and keeping the verb as the context, we program the nouns around it. but we can also write atomic functions where the noun is the context and the verb is passed to it. This is a functional programming paradigm and can ease the software design process there too.Also, do read the footnote link1. It explains a lot more than my post does.            (https://wbsimms.com/programming-nouns-verbs/) &#8617; &#8617;2      ",
+        "url": "//2018/11/15/Noun-and-Verb-based-programming.html"
+      }
+      ,
+    
       "2018-11-05-contexts-in-javascript-html": {
         "title": "Scope and Context in JavaScript",
         "tags": "JavaScript",
@@ -192,6 +203,17 @@
         "category": "",
         "content": "This is a page where i will be putting in things i learned while starting off again in ML.I am using scikit-learn to do my ml this time and am trying to go through ML in as small a timeframe as possible.I have been learning about linear and logistic regression.The correct ones to use in both the cases are from sklearn.linear_model    import LinearRegression and from sklearn.linear_model import LogisticRegression which is intiutive.This is the bit of code that matterslinreg = LinearRegression().fit( X_train , y_train )linreg.score( X_test , y_test )andlogreg = LogisticRegression( solver='liblinear',multi_class='ovr',n_jobs=1 )logreg.fit(X_train, y_train)Post this, we can do a predict and see how the model behaves.Have a look at this repo’s 2 pages to see what i did using the above code.  Written with StackEdit.",
         "url": "//2018/10/20/tips-for-ML-part-1.html"
+      }
+      ,
+    
+      "2018-08-15-mapreduce-for-mongodb-html": {
+        "title": "Mapreduce using MongoDB",
+        "tags": "",
+        "date": "August 15, 2018",
+        "author": "",
+        "category": "",
+        "content": "Today i shall write of map reduce, specially for mongodb.This is really great to use to do some massive computations using some primitive building blocks.Map reduce comprises of 2 steps:  Map  ReduceWhat do these terms mean, though? why is it so popular? is this worth the pain? For answering these questions and raising a few more, please read on.The process of mapReduce is from functional programming, where any function does not have side effects, an unintended consequence of . Map is a process where, essentially, we process each data element ( calling it a key ) and put up our findings against it ( And call it a value ). We then perform the reduce operation on it, running a operation of aggregation on this emitted value, so that we can get the required result.Since this is a tutorial for using mapreduce for mongodb, we will start with creating a database to use on this.References:  Mapreduce for the family  Can your programming language do this?  MapReduce, a really simple intro  Wikipedia article on mapreduce  MapReduce example in mongodb docsWritten with StackEdit.",
+        "url": "//2018/08/15/mapreduce-for-mongodb.html"
       }
       ,
     

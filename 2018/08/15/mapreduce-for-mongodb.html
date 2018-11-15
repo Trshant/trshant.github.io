@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html class="no-js">
+  <head>
+	<meta charset="utf-8">
+	<title>Mapreduce using MongoDB | Trshant's blog</title>
+	<meta name="description" content="Today i shall write of map reduce, specially for mongodb.This is really great to use to do some massive computations using some primitive building blocks.Map...">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<!-- CSS -->
+	<link rel="stylesheet" href="/assets/css/main.css">
+
+	<!--Favicon-->
+	<link rel="shortcut icon" href="/assets/favicon.ico" type="image/x-icon">
+
+	<!-- Canonical -->
+	<link rel="canonical" href="/2018/08/15/mapreduce-for-mongodb.html">
+
+	<!-- RSS -->
+	<link rel="alternate" type="application/atom+xml" title="Trshant's blog" href="/feed.xml" />
+
+	<!-- Font Awesome -->
+	<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+	<!-- Google Fonts -->
+	
+	<link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,700italic,400italic" rel="stylesheet" type="text/css">
+	
+
+	<!-- KaTeX -->
+	
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0-alpha/dist/katex.min.css" integrity="sha384-BTL0nVi8DnMrNdMQZG1Ww6yasK9ZGnUxL1ZWukXQ7fygA1py52yPp9W4wrR00VML" crossorigin="anonymous">
+	<script src="https://cdn.jsdelivr.net/npm/katex@0.10.0-alpha/dist/katex.min.js" integrity="sha384-y6SGsNt7yZECc4Pf86XmQhC4hG2wxL6Upkt9N1efhFxfh6wlxBH0mJiTE8XYclC1" crossorigin="anonymous"></script>
+	
+
+	<!-- Google Analytics -->
+	
+</head>
+
+  <body>
+    <header class="site-header">
+	<div class="branding">
+		
+		<a href="/">
+			<img class="avatar" src="https://secure.gravatar.com/avatar/b8f8be8b6147f78fc6a869ef48555388?s=100" alt=""/>
+		</a>
+		
+		<h1 class="site-title">
+			<a href="/">Trshant's blog</a>
+		</h1>
+	</div>
+	<nav class="site-nav">
+		<ul>
+			
+			
+			
+			
+			<li>
+				<a class="page-link" href="/about/">
+					About
+				</a>
+			</li>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			<li>
+				<a class="page-link" href="/tags.html">
+					Tags
+				</a>
+			</li>
+			
+			
+			
+			
+			<!-- Social icons from Font Awesome, if enabled  -->
+			
+
+
+<li>
+	<a href="mailto:trshant@gmail.com" title="Email">
+		<i class="fa fa-fw fa-envelope"></i>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li>
+	<a href="https://github.com/Trshant" title="Follow on GitHub">
+		<i class="fa fa-fw fa-github"></i>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li>
+	<a href="https://twitter.com/twitter" title="Follow on Twitter">
+		<i class="fa fa-fw fa-twitter"></i>
+	</a>
+</li>
+
+
+
+
+
+
+            
+            <!-- Search bar -->
+            
+		</ul>
+	</nav>
+    
+</header>
+
+    <div class="content">
+      <link rel="stylesheet" href="https://cdn.rawgit.com/knsv/mermaid/7.0.0/dist/mermaid.css">
+<article >
+  <header style="background-image: url('/')">
+    <h1 class="title">Mapreduce using MongoDB</h1>
+    
+    <p class="meta">
+      August 15, 2018
+      
+    </p>
+  </header>
+  <section class="post-content"><p>Today i shall write of map reduce, specially for mongodb.
+This is really great to use to do some massive computations using some primitive building blocks.
+Map reduce comprises of 2 steps:</p>
+<ol>
+  <li>Map</li>
+  <li>Reduce</li>
+</ol>
+
+<p>What do these terms mean, though? why is it so popular? is this worth the pain? For answering these questions and raising a few more, please read on.
+The process of mapReduce is from functional programming, where any function does not have side effects, an unintended consequence of . 
+<strong>Map</strong> is a process where, essentially, we process each data element ( calling it a <strong>key</strong> ) and put up our findings against it ( And call it a <strong>value</strong> ). 
+We then perform the <strong>reduce</strong> operation on it, running a operation of aggregation on this emitted value, so that we can get the required result.</p>
+
+<p>Since this is a tutorial for using mapreduce for mongodb, we will start with creating a database to use on this.</p>
+
+<p>References:</p>
+<ol>
+  <li><a href="https://webofdata.wordpress.com/2012/11/05/mapreduce-for-kids/">Mapreduce for the family</a></li>
+  <li><a href="https://www.joelonsoftware.com/2006/08/01/can-your-programming-language-do-this/">Can your programming language do this?</a></li>
+  <li><a href="http://ksat.me/map-reduce-a-really-simple-introduction-kloudo/">MapReduce, a really simple intro</a></li>
+  <li><a href="https://en.wikipedia.org/wiki/MapReduce">Wikipedia article on mapreduce</a></li>
+  <li><a href="https://docs.mongodb.com/manual/tutorial/map-reduce-examples/#calculate-order-and-total-quantity-with-average-quantity-per-item">MapReduce example in mongodb docs</a></li>
+</ol>
+
+<p>Written with <a href="https://stackedit.io/">StackEdit</a>.
+<!--stackedit_data:
+eyJoaXN0b3J5IjpbLTQwMDQ0MTg0OF19
+--></p>
+</section>
+  
+
+</article>
+
+<!-- Disqus -->
+
+
+<!-- Post navigation -->
+
+
+    </div>
+    
+<script src="/assets/js/katex_init.js"></script>
+
+
+
+<footer class="site-footer">
+	<p class="text">Powered by <a href="https://jekyllrb.com/">Jekyll</a> with <a href="https://github.com/rohanchandra/type-theme">Type Theme</a>
+</p>
+</footer>
+
+
+  </body>
+</html>

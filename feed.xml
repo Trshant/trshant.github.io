@@ -5,7 +5,47 @@
     <atom:link href="/feed.xml" rel="self" type="application/rss+xml"/>
     <link>https://trshant.github.io//</link>
     <description>A website with blog posts and pages</description>
-    <pubDate>Sun, 11 Nov 2018 06:53:47 +0530</pubDate>
+    <pubDate>Fri, 16 Nov 2018 04:51:19 +0530</pubDate>
+    
+      <item>
+        <title>Noun and verb based programming</title>
+        <link>/2018/11/15/Noun-and-Verb-based-programming.html</link>
+        <guid isPermaLink="true">/2018/11/15/Noun-and-Verb-based-programming.html</guid>
+        <description>&lt;p&gt;Today i came to know of a new thing and quite frankly, it blew my mind.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Thinking in terms of verbs and nouns&lt;/strong&gt;: This fantabulous idea was spoken to me by my mentor this evening. its also there on the web&lt;sup id=&quot;fnref:vnp&quot;&gt;&lt;a href=&quot;#fn:vnp&quot; class=&quot;footnote&quot;&gt;1&lt;/a&gt;&lt;/sup&gt;.&lt;/p&gt;
+
+&lt;p&gt;so what does this mean?
+consider this requirement: &lt;em&gt;we need to add a additional phone number to a user.&lt;/em&gt;
+so here we have verbs:&lt;/p&gt;
+&lt;ol&gt;
+  &lt;li&gt;add&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;nouns:&lt;/p&gt;
+&lt;ol&gt;
+  &lt;li&gt;user&lt;/li&gt;
+  &lt;li&gt;additional phone number&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;so we can add a new variable ‘additional phone number’ to a ‘user’ class and a new method to change this variable ‘add’. This is definitely something to understand how to design your classes and methods to interact with other classes. 
+another important use would be to  change contexts while programming. see above. the program here is written with reference to the user, i.e., noun based, and keeping the verb as the context, we program the nouns around it. but we can also write atomic functions where the noun is the context and the verb is passed to it. This is a functional programming paradigm and can ease the software design process there too.&lt;/p&gt;
+
+&lt;p&gt;Also, do read the footnote link&lt;sup id=&quot;fnref:vnp:1&quot;&gt;&lt;a href=&quot;#fn:vnp&quot; class=&quot;footnote&quot;&gt;1&lt;/a&gt;&lt;/sup&gt;. It explains a lot more than my post does.&lt;/p&gt;
+
+&lt;!--stackedit_data:
+eyJoaXN0b3J5IjpbLTE3NzgxOTMzODYsMTAwNjg4MDAzMF19
+--&gt;
+&lt;div class=&quot;footnotes&quot;&gt;
+  &lt;ol&gt;
+    &lt;li id=&quot;fn:vnp&quot;&gt;
+      &lt;p&gt;(https://wbsimms.com/programming-nouns-verbs/) &lt;a href=&quot;#fnref:vnp&quot; class=&quot;reversefootnote&quot;&gt;&amp;#8617;&lt;/a&gt; &lt;a href=&quot;#fnref:vnp:1&quot; class=&quot;reversefootnote&quot;&gt;&amp;#8617;&lt;sup&gt;2&lt;/sup&gt;&lt;/a&gt;&lt;/p&gt;
+    &lt;/li&gt;
+  &lt;/ol&gt;
+&lt;/div&gt;
+</description>
+        <pubDate>Thu, 15 Nov 2018 19:00:00 +0530</pubDate>
+      </item>
     
       <item>
         <title>Scope and Context in JavaScript</title>
@@ -124,6 +164,42 @@ eyJoaXN0b3J5IjpbMTA2NTY5Mjk4NF19
 &lt;/blockquote&gt;
 </description>
         <pubDate>Sat, 20 Oct 2018 07:51:43 +0530</pubDate>
+      </item>
+    
+      <item>
+        <title>Mapreduce using MongoDB</title>
+        <link>/2018/08/15/mapreduce-for-mongodb.html</link>
+        <guid isPermaLink="true">/2018/08/15/mapreduce-for-mongodb.html</guid>
+        <description>&lt;p&gt;Today i shall write of map reduce, specially for mongodb.
+This is really great to use to do some massive computations using some primitive building blocks.
+Map reduce comprises of 2 steps:&lt;/p&gt;
+&lt;ol&gt;
+  &lt;li&gt;Map&lt;/li&gt;
+  &lt;li&gt;Reduce&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;What do these terms mean, though? why is it so popular? is this worth the pain? For answering these questions and raising a few more, please read on.
+The process of mapReduce is from functional programming, where any function does not have side effects, an unintended consequence of . 
+&lt;strong&gt;Map&lt;/strong&gt; is a process where, essentially, we process each data element ( calling it a &lt;strong&gt;key&lt;/strong&gt; ) and put up our findings against it ( And call it a &lt;strong&gt;value&lt;/strong&gt; ). 
+We then perform the &lt;strong&gt;reduce&lt;/strong&gt; operation on it, running a operation of aggregation on this emitted value, so that we can get the required result.&lt;/p&gt;
+
+&lt;p&gt;Since this is a tutorial for using mapreduce for mongodb, we will start with creating a database to use on this.&lt;/p&gt;
+
+&lt;p&gt;References:&lt;/p&gt;
+&lt;ol&gt;
+  &lt;li&gt;&lt;a href=&quot;https://webofdata.wordpress.com/2012/11/05/mapreduce-for-kids/&quot;&gt;Mapreduce for the family&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.joelonsoftware.com/2006/08/01/can-your-programming-language-do-this/&quot;&gt;Can your programming language do this?&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://ksat.me/map-reduce-a-really-simple-introduction-kloudo/&quot;&gt;MapReduce, a really simple intro&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://en.wikipedia.org/wiki/MapReduce&quot;&gt;Wikipedia article on mapreduce&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://docs.mongodb.com/manual/tutorial/map-reduce-examples/#calculate-order-and-total-quantity-with-average-quantity-per-item&quot;&gt;MapReduce example in mongodb docs&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;Written with &lt;a href=&quot;https://stackedit.io/&quot;&gt;StackEdit&lt;/a&gt;.
+&lt;!--stackedit_data:
+eyJoaXN0b3J5IjpbLTQwMDQ0MTg0OF19
+--&gt;&lt;/p&gt;
+</description>
+        <pubDate>Wed, 15 Aug 2018 06:59:43 +0530</pubDate>
       </item>
     
       <item>
