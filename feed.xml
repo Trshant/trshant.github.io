@@ -5,7 +5,7 @@
     <atom:link href="/feed.xml" rel="self" type="application/rss+xml"/>
     <link>https://trshant.github.io//</link>
     <description>A website with blog posts and pages</description>
-    <pubDate>Fri, 16 Nov 2018 04:51:19 +0530</pubDate>
+    <pubDate>Tue, 20 Nov 2018 09:40:11 +0530</pubDate>
     
       <item>
         <title>Noun and verb based programming</title>
@@ -45,6 +45,83 @@ eyJoaXN0b3J5IjpbLTE3NzgxOTMzODYsMTAwNjg4MDAzMF19
 &lt;/div&gt;
 </description>
         <pubDate>Thu, 15 Nov 2018 19:00:00 +0530</pubDate>
+      </item>
+    
+      <item>
+        <title>Starting off with AWS - static site setup</title>
+        <link>/2018/11/08/Starting-AWS.html</link>
+        <guid isPermaLink="true">/2018/11/08/Starting-AWS.html</guid>
+        <description>&lt;p&gt;Do read through AWS in simple english&lt;sup id=&quot;fnref:awsSimpleLanguage&quot;&gt;&lt;a href=&quot;#fn:awsSimpleLanguage&quot; class=&quot;footnote&quot;&gt;1&lt;/a&gt;&lt;/sup&gt; to figure out what we are going to do here. What we are trying to accomplish is simply to host a static site.
+This involves us:&lt;/p&gt;
+&lt;ol&gt;
+  &lt;li&gt;Setting up the server (called EC2 in AWS language).&lt;/li&gt;
+  &lt;li&gt;Making sure that the outer world has access to our server (setting up the group permisions).&lt;/li&gt;
+  &lt;li&gt;Ensuring FTP access is enabled (so that we can upload files to the server)( changing the group permissions to ensure everything is allowed inside ).&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;So first we log in to the AWS console&lt;sup id=&quot;fnref:awsConsole&quot;&gt;&lt;a href=&quot;#fn:awsConsole&quot; class=&quot;footnote&quot;&gt;2&lt;/a&gt;&lt;/sup&gt;. Do put in your card details to complete the registration process.&lt;/p&gt;
+
+&lt;p&gt;Move to the EC2 page&lt;sup id=&quot;fnref:awsEc2&quot;&gt;&lt;a href=&quot;#fn:awsEc2&quot; class=&quot;footnote&quot;&gt;3&lt;/a&gt;&lt;/sup&gt; . Click on the &lt;code class=&quot;highlighter-rouge&quot;&gt;Launch Instance&lt;/code&gt; under the ‘Create Instance’. Then follow the steps below:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Select a suitable instance ( the first one listed, Amazon AMI, is perfect for all our needs ), click on the next button.&lt;/li&gt;
+  &lt;li&gt;Select the correct instance type (t2 micro is perfect for this).&lt;/li&gt;
+  &lt;li&gt;The other 3 panels, Configure instance, Add Storage and Add Tags, can be skipped, but I suggest reading everything once, just in case you need it further when you are on your own.&lt;/li&gt;
+  &lt;li&gt;The Configure Security Group step is needed to enable traffic to the server. The default is add a new group. keep that selected. When adding the rules, select the type as ‘All’, source as ‘0.0.0.0/0’ and go to the next step.&lt;/li&gt;
+  &lt;li&gt;‘Review and Launch’. This gives you a summary of the selected options over the last 6 steps. and then…&lt;/li&gt;
+  &lt;li&gt;Launch it!&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Now the server is up and running. We need to SSH into it to install the packages and then start the server.&lt;/p&gt;
+
+&lt;p&gt;Get a key pair&lt;sup id=&quot;fnref:awsKeyPair&quot;&gt;&lt;a href=&quot;#fn:awsKeyPair&quot; class=&quot;footnote&quot;&gt;4&lt;/a&gt;&lt;/sup&gt;. Save the resulting .pem file safely. Use this to log into your server by SSH:&lt;/p&gt;
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; ssh &lt;span class=&quot;nt&quot;&gt;-i&lt;/span&gt; linkToPEMFile ec2-user@PublicDnsIp
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Once in, Follow the instructions on this page&lt;sup id=&quot;fnref:awsInstallLamp&quot;&gt;&lt;a href=&quot;#fn:awsInstallLamp&quot; class=&quot;footnote&quot;&gt;5&lt;/a&gt;&lt;/sup&gt; to install the important packages for a LAMP server.&lt;/p&gt;
+
+&lt;p&gt;Then, type in &lt;code class=&quot;highlighter-rouge&quot;&gt;sudo service httpd start&lt;/code&gt; This should result in an &lt;code class=&quot;highlighter-rouge&quot;&gt;OK&lt;/code&gt;. Then we can see the page using the Public DNS (IPv4) address. 
+Now your server is online and ready to display pages.&lt;/p&gt;
+
+&lt;p&gt;Next up, we will use FTP to upload files to the server. This page will tell you exactly how to go about it&lt;sup id=&quot;fnref:awsStckOverflowFtp&quot;&gt;&lt;a href=&quot;#fn:awsStckOverflowFtp&quot; class=&quot;footnote&quot;&gt;6&lt;/a&gt;&lt;/sup&gt;. However the key thing here is the PEM file, this called the key pair, read up on this here&lt;sup id=&quot;fnref:awsKeyPair:1&quot;&gt;&lt;a href=&quot;#fn:awsKeyPair&quot; class=&quot;footnote&quot;&gt;4&lt;/a&gt;&lt;/sup&gt;.  Also, remember that adding additional users is as simple&lt;sup id=&quot;fnref:awsEc2Users&quot;&gt;&lt;a href=&quot;#fn:awsEc2Users&quot; class=&quot;footnote&quot;&gt;7&lt;/a&gt;&lt;/sup&gt; as on a normal linux box.&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;Written with &lt;a href=&quot;https://stackedit.io/&quot;&gt;StackEdit&lt;/a&gt;.
+&lt;!--stackedit_data:
+eyJoaXN0b3J5IjpbLTExNDUzNDc5MTksMTkwOTMwOTM0NSwzND
+Q5MzA2NzQsMTMyMjAwMTU2OCwtNTIxNzM1OCwtNzc2NTAxMzY1
+LDExNTA0MTI5NjksMTU5MTcwMzczMiwtMTY3NzQ5NjEwOCwtMz
+I0MjE5OTk4LDQ0NDQ1NzM0Myw1MTA5NDQwMTAsMTg4NDU1NTk2
+MCw3MzA5OTgxMTZdfQ==
+--&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;div class=&quot;footnotes&quot;&gt;
+  &lt;ol&gt;
+    &lt;li id=&quot;fn:awsSimpleLanguage&quot;&gt;
+      &lt;p&gt;&lt;a href=&quot;https://www.expeditedssl.com/aws-in-plain-english/?&quot;&gt;https://www.expeditedssl.com/aws-in-plain-english/?&lt;/a&gt; &lt;a href=&quot;#fnref:awsSimpleLanguage&quot; class=&quot;reversefootnote&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+    &lt;/li&gt;
+    &lt;li id=&quot;fn:awsConsole&quot;&gt;
+      &lt;p&gt;&lt;a href=&quot;https://console.aws.amazon.com&quot;&gt;https://console.aws.amazon.com&lt;/a&gt; &lt;a href=&quot;#fnref:awsConsole&quot; class=&quot;reversefootnote&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+    &lt;/li&gt;
+    &lt;li id=&quot;fn:awsEc2&quot;&gt;
+      &lt;p&gt;&lt;a href=&quot;https://console.aws.amazon.com/ec2&quot;&gt;https://console.aws.amazon.com/ec2&lt;/a&gt; &lt;a href=&quot;#fnref:awsEc2&quot; class=&quot;reversefootnote&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+    &lt;/li&gt;
+    &lt;li id=&quot;fn:awsKeyPair&quot;&gt;
+      &lt;p&gt;&lt;a href=&quot;https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-key-pairs.html#having-ec2-create-your-key-pair&quot;&gt;https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-key-pairs.html#having-ec2-create-your-key-pair&lt;/a&gt; &lt;a href=&quot;#fnref:awsKeyPair&quot; class=&quot;reversefootnote&quot;&gt;&amp;#8617;&lt;/a&gt; &lt;a href=&quot;#fnref:awsKeyPair:1&quot; class=&quot;reversefootnote&quot;&gt;&amp;#8617;&lt;sup&gt;2&lt;/sup&gt;&lt;/a&gt;&lt;/p&gt;
+    &lt;/li&gt;
+    &lt;li id=&quot;fn:awsInstallLamp&quot;&gt;
+      &lt;p&gt;&lt;a href=&quot;https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/install-LAMP.html&quot;&gt;https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/install-LAMP.html&lt;/a&gt; &lt;a href=&quot;#fnref:awsInstallLamp&quot; class=&quot;reversefootnote&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+    &lt;/li&gt;
+    &lt;li id=&quot;fn:awsStckOverflowFtp&quot;&gt;
+      &lt;p&gt;&lt;a href=&quot;https://stackoverflow.com/a/49053891&quot;&gt;https://stackoverflow.com/a/49053891&lt;/a&gt; &lt;a href=&quot;#fnref:awsStckOverflowFtp&quot; class=&quot;reversefootnote&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+    &lt;/li&gt;
+    &lt;li id=&quot;fn:awsEc2Users&quot;&gt;
+      &lt;p&gt;&lt;a href=&quot;https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/managing-users.html&quot;&gt;https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/managing-users.html&lt;/a&gt; &lt;a href=&quot;#fnref:awsEc2Users&quot; class=&quot;reversefootnote&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+    &lt;/li&gt;
+  &lt;/ol&gt;
+&lt;/div&gt;
+</description>
+        <pubDate>Thu, 08 Nov 2018 07:51:43 +0530</pubDate>
       </item>
     
       <item>

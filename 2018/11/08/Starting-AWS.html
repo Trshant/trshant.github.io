@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html class="no-js">
+  <head>
+	<meta charset="utf-8">
+	<title>Starting off with AWS - static site setup | Trshant's blog</title>
+	<meta name="description" content="Do read through AWS in simple english1 to figure out what we are going to do here. What we are trying to accomplish is simply to host a static site.This invo...">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<!-- CSS -->
+	<link rel="stylesheet" href="/assets/css/main.css">
+
+	<!--Favicon-->
+	<link rel="shortcut icon" href="/assets/favicon.ico" type="image/x-icon">
+
+	<!-- Canonical -->
+	<link rel="canonical" href="/2018/11/08/Starting-AWS.html">
+
+	<!-- RSS -->
+	<link rel="alternate" type="application/atom+xml" title="Trshant's blog" href="/feed.xml" />
+
+	<!-- Font Awesome -->
+	<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+	<!-- Google Fonts -->
+	
+	<link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,700italic,400italic" rel="stylesheet" type="text/css">
+	
+
+	<!-- KaTeX -->
+	
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0-alpha/dist/katex.min.css" integrity="sha384-BTL0nVi8DnMrNdMQZG1Ww6yasK9ZGnUxL1ZWukXQ7fygA1py52yPp9W4wrR00VML" crossorigin="anonymous">
+	<script src="https://cdn.jsdelivr.net/npm/katex@0.10.0-alpha/dist/katex.min.js" integrity="sha384-y6SGsNt7yZECc4Pf86XmQhC4hG2wxL6Upkt9N1efhFxfh6wlxBH0mJiTE8XYclC1" crossorigin="anonymous"></script>
+	
+
+	<!-- Google Analytics -->
+	
+</head>
+
+  <body>
+    <header class="site-header">
+	<div class="branding">
+		
+		<a href="/">
+			<img class="avatar" src="https://secure.gravatar.com/avatar/b8f8be8b6147f78fc6a869ef48555388?s=100" alt=""/>
+		</a>
+		
+		<h1 class="site-title">
+			<a href="/">Trshant's blog</a>
+		</h1>
+	</div>
+	<nav class="site-nav">
+		<ul>
+			
+			
+			
+			
+			<li>
+				<a class="page-link" href="/about/">
+					About
+				</a>
+			</li>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			<li>
+				<a class="page-link" href="/tags.html">
+					Tags
+				</a>
+			</li>
+			
+			
+			
+			
+			<!-- Social icons from Font Awesome, if enabled  -->
+			
+
+
+<li>
+	<a href="mailto:trshant@gmail.com" title="Email">
+		<i class="fa fa-fw fa-envelope"></i>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li>
+	<a href="https://github.com/Trshant" title="Follow on GitHub">
+		<i class="fa fa-fw fa-github"></i>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li>
+	<a href="https://twitter.com/twitter" title="Follow on Twitter">
+		<i class="fa fa-fw fa-twitter"></i>
+	</a>
+</li>
+
+
+
+
+
+
+            
+            <!-- Search bar -->
+            
+		</ul>
+	</nav>
+    
+</header>
+
+    <div class="content">
+      <link rel="stylesheet" href="https://cdn.rawgit.com/knsv/mermaid/7.0.0/dist/mermaid.css">
+<article >
+  <header style="background-image: url('/')">
+    <h1 class="title">Starting off with AWS - static site setup</h1>
+    
+    <p class="meta">
+      November 8, 2018
+      
+    </p>
+  </header>
+  <section class="post-content"><p>Do read through AWS in simple english<sup id="fnref:awsSimpleLanguage"><a href="#fn:awsSimpleLanguage" class="footnote">1</a></sup> to figure out what we are going to do here. What we are trying to accomplish is simply to host a static site.
+This involves us:</p>
+<ol>
+  <li>Setting up the server (called EC2 in AWS language).</li>
+  <li>Making sure that the outer world has access to our server (setting up the group permisions).</li>
+  <li>Ensuring FTP access is enabled (so that we can upload files to the server)( changing the group permissions to ensure everything is allowed inside ).</li>
+</ol>
+
+<p>So first we log in to the AWS console<sup id="fnref:awsConsole"><a href="#fn:awsConsole" class="footnote">2</a></sup>. Do put in your card details to complete the registration process.</p>
+
+<p>Move to the EC2 page<sup id="fnref:awsEc2"><a href="#fn:awsEc2" class="footnote">3</a></sup> . Click on the <code class="highlighter-rouge">Launch Instance</code> under the ‘Create Instance’. Then follow the steps below:</p>
+
+<ul>
+  <li>Select a suitable instance ( the first one listed, Amazon AMI, is perfect for all our needs ), click on the next button.</li>
+  <li>Select the correct instance type (t2 micro is perfect for this).</li>
+  <li>The other 3 panels, Configure instance, Add Storage and Add Tags, can be skipped, but I suggest reading everything once, just in case you need it further when you are on your own.</li>
+  <li>The Configure Security Group step is needed to enable traffic to the server. The default is add a new group. keep that selected. When adding the rules, select the type as ‘All’, source as ‘0.0.0.0/0’ and go to the next step.</li>
+  <li>‘Review and Launch’. This gives you a summary of the selected options over the last 6 steps. and then…</li>
+  <li>Launch it!</li>
+</ul>
+
+<p>Now the server is up and running. We need to SSH into it to install the packages and then start the server.</p>
+
+<p>Get a key pair<sup id="fnref:awsKeyPair"><a href="#fn:awsKeyPair" class="footnote">4</a></sup>. Save the resulting .pem file safely. Use this to log into your server by SSH:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code> ssh <span class="nt">-i</span> linkToPEMFile ec2-user@PublicDnsIp
+</code></pre></div></div>
+
+<p>Once in, Follow the instructions on this page<sup id="fnref:awsInstallLamp"><a href="#fn:awsInstallLamp" class="footnote">5</a></sup> to install the important packages for a LAMP server.</p>
+
+<p>Then, type in <code class="highlighter-rouge">sudo service httpd start</code> This should result in an <code class="highlighter-rouge">OK</code>. Then we can see the page using the Public DNS (IPv4) address. 
+Now your server is online and ready to display pages.</p>
+
+<p>Next up, we will use FTP to upload files to the server. This page will tell you exactly how to go about it<sup id="fnref:awsStckOverflowFtp"><a href="#fn:awsStckOverflowFtp" class="footnote">6</a></sup>. However the key thing here is the PEM file, this called the key pair, read up on this here<sup id="fnref:awsKeyPair:1"><a href="#fn:awsKeyPair" class="footnote">4</a></sup>.  Also, remember that adding additional users is as simple<sup id="fnref:awsEc2Users"><a href="#fn:awsEc2Users" class="footnote">7</a></sup> as on a normal linux box.</p>
+
+<blockquote>
+  <p>Written with <a href="https://stackedit.io/">StackEdit</a>.
+<!--stackedit_data:
+eyJoaXN0b3J5IjpbLTExNDUzNDc5MTksMTkwOTMwOTM0NSwzND
+Q5MzA2NzQsMTMyMjAwMTU2OCwtNTIxNzM1OCwtNzc2NTAxMzY1
+LDExNTA0MTI5NjksMTU5MTcwMzczMiwtMTY3NzQ5NjEwOCwtMz
+I0MjE5OTk4LDQ0NDQ1NzM0Myw1MTA5NDQwMTAsMTg4NDU1NTk2
+MCw3MzA5OTgxMTZdfQ==
+--></p>
+</blockquote>
+<div class="footnotes">
+  <ol>
+    <li id="fn:awsSimpleLanguage">
+      <p><a href="https://www.expeditedssl.com/aws-in-plain-english/?">https://www.expeditedssl.com/aws-in-plain-english/?</a> <a href="#fnref:awsSimpleLanguage" class="reversefootnote">&#8617;</a></p>
+    </li>
+    <li id="fn:awsConsole">
+      <p><a href="https://console.aws.amazon.com">https://console.aws.amazon.com</a> <a href="#fnref:awsConsole" class="reversefootnote">&#8617;</a></p>
+    </li>
+    <li id="fn:awsEc2">
+      <p><a href="https://console.aws.amazon.com/ec2">https://console.aws.amazon.com/ec2</a> <a href="#fnref:awsEc2" class="reversefootnote">&#8617;</a></p>
+    </li>
+    <li id="fn:awsKeyPair">
+      <p><a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-key-pairs.html#having-ec2-create-your-key-pair">https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-key-pairs.html#having-ec2-create-your-key-pair</a> <a href="#fnref:awsKeyPair" class="reversefootnote">&#8617;</a> <a href="#fnref:awsKeyPair:1" class="reversefootnote">&#8617;<sup>2</sup></a></p>
+    </li>
+    <li id="fn:awsInstallLamp">
+      <p><a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/install-LAMP.html">https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/install-LAMP.html</a> <a href="#fnref:awsInstallLamp" class="reversefootnote">&#8617;</a></p>
+    </li>
+    <li id="fn:awsStckOverflowFtp">
+      <p><a href="https://stackoverflow.com/a/49053891">https://stackoverflow.com/a/49053891</a> <a href="#fnref:awsStckOverflowFtp" class="reversefootnote">&#8617;</a></p>
+    </li>
+    <li id="fn:awsEc2Users">
+      <p><a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/managing-users.html">https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/managing-users.html</a> <a href="#fnref:awsEc2Users" class="reversefootnote">&#8617;</a></p>
+    </li>
+  </ol>
+</div>
+</section>
+  
+<footer>
+  <div class="tags">
+    
+    <a class="tag" href="/tags#AWS">#AWS</a>
+    
+    <a class="tag" href="/tags#starting">#starting</a>
+    
+    <a class="tag" href="/tags#development">#development</a>
+    
+  </div>
+</footer>
+
+
+</article>
+
+<!-- Disqus -->
+
+
+<!-- Post navigation -->
+
+
+    </div>
+    
+<script src="/assets/js/katex_init.js"></script>
+
+
+
+<footer class="site-footer">
+	<p class="text">Powered by <a href="https://jekyllrb.com/">Jekyll</a> with <a href="https://github.com/rohanchandra/type-theme">Type Theme</a>
+</p>
+</footer>
+
+
+  </body>
+</html>
