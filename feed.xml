@@ -5,7 +5,35 @@
     <atom:link href="/feed.xml" rel="self" type="application/rss+xml"/>
     <link>https://trshant.github.io//</link>
     <description>A website with blog posts and pages</description>
-    <pubDate>Tue, 20 Nov 2018 09:40:11 +0530</pubDate>
+    <pubDate>Sun, 27 Jan 2019 20:36:06 +0530</pubDate>
+    
+      <item>
+        <title>Rebase</title>
+        <link>/2018/12/07/rebase.html</link>
+        <guid isPermaLink="true">/2018/12/07/rebase.html</guid>
+        <description>&lt;blockquote&gt;
+  &lt;p&gt;“If you are working on a branch for some time, you may find that changes to master get merged in the meantime, if that happens please do &lt;strong&gt;NOT&lt;/strong&gt; merge master into your branch! Instead rebase your branch onto the current head of master”&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;This bit ( in different word ) is written in repos sometimes where there has been some very heavy rewrites. very heavy, like that have changed the file/folder structure or the underlying frameowork. So what does rebase do?
+This simply changes the history to what you want it to be. This is a way to change the history and base the branch you are working on, on the branch you want the work on yours, without checout out the code.
+This is also a way to disregard the code changes till now.&lt;/p&gt;
+
+&lt;p&gt;Read the 2 links in the references. They have a lot of information on &lt;strong&gt;rebase&lt;/strong&gt;.
+&lt;strong&gt;References&lt;/strong&gt;:
+&lt;a href=&quot;https://git-scm.com/book/en/v2/Git-Branching-Rebasing&quot;&gt;https://git-scm.com/book/en/v2/Git-Branching-Rebasing&lt;/a&gt;
+&lt;a href=&quot;https://www.atlassian.com/git/tutorials/merging-vs-rebasing&quot;&gt;https://www.atlassian.com/git/tutorials/merging-vs-rebasing&lt;/a&gt;&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;Written with &lt;a href=&quot;https://stackedit.io/&quot;&gt;StackEdit&lt;/a&gt;.
+&lt;!--stackedit_data:
+eyJoaXN0b3J5IjpbMTg1NTk3MDUzMSw5NzgyNDk3MSwtMzYyMT
+I0OTI5XX0=
+--&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+</description>
+        <pubDate>Fri, 07 Dec 2018 18:30:00 +0530</pubDate>
+      </item>
     
       <item>
         <title>Noun and verb based programming</title>
@@ -31,10 +59,13 @@ so here we have verbs:&lt;/p&gt;
 &lt;p&gt;so we can add a new variable ‘additional phone number’ to a ‘user’ class and a new method to change this variable ‘add’. This is definitely something to understand how to design your classes and methods to interact with other classes. 
 another important use would be to  change contexts while programming. see above. the program here is written with reference to the user, i.e., noun based, and keeping the verb as the context, we program the nouns around it. but we can also write atomic functions where the noun is the context and the verb is passed to it. This is a functional programming paradigm and can ease the software design process there too.&lt;/p&gt;
 
-&lt;p&gt;Also, do read the footnote link&lt;sup id=&quot;fnref:vnp:1&quot;&gt;&lt;a href=&quot;#fn:vnp&quot; class=&quot;footnote&quot;&gt;1&lt;/a&gt;&lt;/sup&gt;. It explains a lot more than my post does.&lt;/p&gt;
+&lt;p&gt;Do read the footnote link&lt;sup id=&quot;fnref:vnp:1&quot;&gt;&lt;a href=&quot;#fn:vnp&quot; class=&quot;footnote&quot;&gt;1&lt;/a&gt;&lt;/sup&gt;. It explains a lot more than my post does.&lt;/p&gt;
+
+&lt;p&gt;Also, if you are in the mood for some more reading and nostalgia, jead over to the &lt;a href=&quot;https://steve-yegge.blogspot.com/2006/03/execution-in-kingdom-of-nouns.html&quot;&gt;Execution in the kingdom of nouns&lt;/a&gt;.&lt;/p&gt;
 
 &lt;!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE3NzgxOTMzODYsMTAwNjg4MDAzMF19
+eyJoaXN0b3J5IjpbOTE5NjA0NzE4LC0xNzc4MTkzMzg2LDEwMD
+Y4ODAwMzBdfQ==
 --&gt;
 &lt;div class=&quot;footnotes&quot;&gt;
   &lt;ol&gt;

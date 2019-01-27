@@ -2,8 +2,8 @@
 <html class="no-js">
   <head>
 	<meta charset="utf-8">
-	<title>Noun and verb based programming | Trshant's blog</title>
-	<meta name="description" content="Today i came to know of a new thing and quite frankly, it blew my mind.">
+	<title>Rebase | Trshant's blog</title>
+	<meta name="description" content="  “If you are working on a branch for some time, you may find that changes to master get merged in the meantime, if that happens please do NOT merge master i...">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 
 	<!-- CSS -->
@@ -13,7 +13,7 @@
 	<link rel="shortcut icon" href="/assets/favicon.ico" type="image/x-icon">
 
 	<!-- Canonical -->
-	<link rel="canonical" href="/2018/11/15/Noun-and-Verb-based-programming.html">
+	<link rel="canonical" href="/2018/12/07/rebase.html">
 
 	<!-- RSS -->
 	<link rel="alternate" type="application/atom+xml" title="Trshant's blog" href="/feed.xml" />
@@ -152,48 +152,33 @@
       <link rel="stylesheet" href="https://cdn.rawgit.com/knsv/mermaid/7.0.0/dist/mermaid.css">
 <article >
   <header style="background-image: url('/')">
-    <h1 class="title">Noun and verb based programming</h1>
+    <h1 class="title">Rebase</h1>
     
     <p class="meta">
-      November 15, 2018
+      December 7, 2018
       
     </p>
   </header>
-  <section class="post-content"><p>Today i came to know of a new thing and quite frankly, it blew my mind.</p>
+  <section class="post-content"><blockquote>
+  <p>“If you are working on a branch for some time, you may find that changes to master get merged in the meantime, if that happens please do <strong>NOT</strong> merge master into your branch! Instead rebase your branch onto the current head of master”</p>
+</blockquote>
 
-<p><strong>Thinking in terms of verbs and nouns</strong>: This fantabulous idea was spoken to me by my mentor this evening. its also there on the web<sup id="fnref:vnp"><a href="#fn:vnp" class="footnote">1</a></sup>.</p>
+<p>This bit ( in different word ) is written in repos sometimes where there has been some very heavy rewrites. very heavy, like that have changed the file/folder structure or the underlying frameowork. So what does rebase do?
+This simply changes the history to what you want it to be. This is a way to change the history and base the branch you are working on, on the branch you want the work on yours, without checout out the code.
+This is also a way to disregard the code changes till now.</p>
 
-<p>so what does this mean?
-consider this requirement: <em>we need to add a additional phone number to a user.</em>
-so here we have verbs:</p>
-<ol>
-  <li>add</li>
-</ol>
+<p>Read the 2 links in the references. They have a lot of information on <strong>rebase</strong>.
+<strong>References</strong>:
+<a href="https://git-scm.com/book/en/v2/Git-Branching-Rebasing">https://git-scm.com/book/en/v2/Git-Branching-Rebasing</a>
+<a href="https://www.atlassian.com/git/tutorials/merging-vs-rebasing">https://www.atlassian.com/git/tutorials/merging-vs-rebasing</a></p>
 
-<p>nouns:</p>
-<ol>
-  <li>user</li>
-  <li>additional phone number</li>
-</ol>
-
-<p>so we can add a new variable ‘additional phone number’ to a ‘user’ class and a new method to change this variable ‘add’. This is definitely something to understand how to design your classes and methods to interact with other classes. 
-another important use would be to  change contexts while programming. see above. the program here is written with reference to the user, i.e., noun based, and keeping the verb as the context, we program the nouns around it. but we can also write atomic functions where the noun is the context and the verb is passed to it. This is a functional programming paradigm and can ease the software design process there too.</p>
-
-<p>Do read the footnote link<sup id="fnref:vnp:1"><a href="#fn:vnp" class="footnote">1</a></sup>. It explains a lot more than my post does.</p>
-
-<p>Also, if you are in the mood for some more reading and nostalgia, jead over to the <a href="https://steve-yegge.blogspot.com/2006/03/execution-in-kingdom-of-nouns.html">Execution in the kingdom of nouns</a>.</p>
-
+<blockquote>
+  <p>Written with <a href="https://stackedit.io/">StackEdit</a>.
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbOTE5NjA0NzE4LC0xNzc4MTkzMzg2LDEwMD
-Y4ODAwMzBdfQ==
--->
-<div class="footnotes">
-  <ol>
-    <li id="fn:vnp">
-      <p>(https://wbsimms.com/programming-nouns-verbs/) <a href="#fnref:vnp" class="reversefootnote">&#8617;</a> <a href="#fnref:vnp:1" class="reversefootnote">&#8617;<sup>2</sup></a></p>
-    </li>
-  </ol>
-</div>
+eyJoaXN0b3J5IjpbMTg1NTk3MDUzMSw5NzgyNDk3MSwtMzYyMT
+I0OTI5XX0=
+--></p>
+</blockquote>
 </section>
   
 <footer>
@@ -201,7 +186,7 @@ Y4ODAwMzBdfQ==
     
     <a class="tag" href="/tags#programming">#programming</a>
     
-    <a class="tag" href="/tags#softwareEngineering">#softwareEngineering</a>
+    <a class="tag" href="/tags#git">#git</a>
     
   </div>
 </footer>
