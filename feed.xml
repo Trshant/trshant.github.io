@@ -5,7 +5,32 @@
     <atom:link href="/feed.xml" rel="self" type="application/rss+xml"/>
     <link>https://trshant.github.io//</link>
     <description>A website with blog posts and pages</description>
-    <pubDate>Sun, 27 Jan 2019 20:49:19 +0530</pubDate>
+    <pubDate>Sun, 27 Jan 2019 21:22:18 +0530</pubDate>
+    
+      <item>
+        <title>Noun and verb based programming</title>
+        <link>/2019/01/27/A-note-on-docker.html</link>
+        <guid isPermaLink="true">/2019/01/27/A-note-on-docker.html</guid>
+        <description>&lt;p&gt;Docker is a buzzword right now.&lt;br /&gt;
+It is a lightweight virtualisation system, which does not add to your system and maintains developer sanity.&lt;br /&gt;
+Since its not a full blown VM, git handles things beautifully. your configured dev environment can be moved to the production system, setting only the environment variable in place for the respective production/test/dev systems. And you get to save some HDD space, which is also quite expensive.&lt;br /&gt;
+Basically, you are leaving nothing to chance. And using kubernetes, you can maintain all your containers.&lt;br /&gt;
+Before we go into the article, we both need to know what I will only be explaining a few key concepts in the docker world. Once we understand these, we can go forward to learning about them.&lt;br /&gt;
+The main terms to understand here are:&lt;br /&gt;
+&lt;strong&gt;1. files&lt;/strong&gt; : These are the files you need dockerised.&lt;br /&gt;
+&lt;strong&gt;2. images&lt;/strong&gt; : These are the systems you want to encapsulate the files in.  &lt;br /&gt;
+&lt;strong&gt;3. container&lt;/strong&gt; : These are what we build using the images and files.&lt;br /&gt;
+Simple enough, I suppose!&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;Written with &lt;a href=&quot;https://stackedit.io/&quot;&gt;StackEdit&lt;/a&gt;.
+&lt;!--stackedit_data:
+eyJoaXN0b3J5IjpbLTc2Nzk5NjQxOCwtMTM0NjQyNTg4OV19
+--&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+</description>
+        <pubDate>Sun, 27 Jan 2019 19:00:00 +0530</pubDate>
+      </item>
     
       <item>
         <title>Rebase</title>
