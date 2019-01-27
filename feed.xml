@@ -5,10 +5,10 @@
     <atom:link href="/feed.xml" rel="self" type="application/rss+xml"/>
     <link>https://trshant.github.io//</link>
     <description>A website with blog posts and pages</description>
-    <pubDate>Sun, 27 Jan 2019 21:24:28 +0530</pubDate>
+    <pubDate>Sun, 27 Jan 2019 21:26:24 +0530</pubDate>
     
       <item>
-        <title>Noun and verb based programming</title>
+        <title>A note on Docker.</title>
         <link>/2019/01/27/A-note-on-docker.html</link>
         <guid isPermaLink="true">/2019/01/27/A-note-on-docker.html</guid>
         <description>&lt;p&gt;Docker is a buzzword right now.&lt;br /&gt;
@@ -25,7 +25,8 @@ Simple enough, I suppose!&lt;/p&gt;
 &lt;blockquote&gt;
   &lt;p&gt;Written with &lt;a href=&quot;https://stackedit.io/&quot;&gt;StackEdit&lt;/a&gt;.
 &lt;!--stackedit_data:
-eyJoaXN0b3J5IjpbLTc2Nzk5NjQxOCwtMTM0NjQyNTg4OV19
+eyJoaXN0b3J5IjpbMTUzMjU3MjQxMiwtNzY3OTk2NDE4LC0xMz
+Q2NDI1ODg5XX0=
 --&gt;&lt;/p&gt;
 &lt;/blockquote&gt;
 </description>
