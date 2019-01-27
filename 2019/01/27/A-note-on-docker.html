@@ -2,8 +2,8 @@
 <html class="no-js">
   <head>
 	<meta charset="utf-8">
-	<title>Rebase | Trshant's blog</title>
-	<meta name="description" content="  “If you are working on a branch for some time, you may find that changes to master get merged in the meantime, if that happens please do NOT merge master i...">
+	<title>A note on Docker. | Trshant's blog</title>
+	<meta name="description" content="Docker is a buzzword right now.It is a lightweight virtualisation system, which does not add to your system and maintains developer sanity.Since its not a fu...">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 
 	<!-- CSS -->
@@ -13,7 +13,7 @@
 	<link rel="shortcut icon" href="/assets/favicon.ico" type="image/x-icon">
 
 	<!-- Canonical -->
-	<link rel="canonical" href="/2018/12/07/rebase.html">
+	<link rel="canonical" href="/2019/01/27/A-note-on-docker.html">
 
 	<!-- RSS -->
 	<link rel="alternate" type="application/atom+xml" title="Trshant's blog" href="/feed.xml" />
@@ -154,31 +154,29 @@
       <link rel="stylesheet" href="https://cdn.rawgit.com/knsv/mermaid/7.0.0/dist/mermaid.css">
 <article >
   <header style="background-image: url('/')">
-    <h1 class="title">Rebase</h1>
+    <h1 class="title">A note on Docker.</h1>
     
     <p class="meta">
-      December 7, 2018
+      January 27, 2019
       
     </p>
   </header>
-  <section class="post-content"><blockquote>
-  <p>“If you are working on a branch for some time, you may find that changes to master get merged in the meantime, if that happens please do <strong>NOT</strong> merge master into your branch! Instead rebase your branch onto the current head of master”</p>
-</blockquote>
-
-<p>This bit ( in different word ) is written in repos sometimes where there has been some very heavy rewrites. very heavy, like that have changed the file/folder structure or the underlying frameowork. So what does rebase do?
-This simply changes the history to what you want it to be. This is a way to change the history and base the branch you are working on, on the branch you want the work on yours, without checout out the code.
-This is also a way to disregard the code changes till now.</p>
-
-<p>Read the 2 links in the references. They have a lot of information on <strong>rebase</strong>.
-<strong>References</strong>:
-<a href="https://git-scm.com/book/en/v2/Git-Branching-Rebasing">https://git-scm.com/book/en/v2/Git-Branching-Rebasing</a>
-<a href="https://www.atlassian.com/git/tutorials/merging-vs-rebasing">https://www.atlassian.com/git/tutorials/merging-vs-rebasing</a></p>
+  <section class="post-content"><p>Docker is a buzzword right now.<br />
+It is a lightweight virtualisation system, which does not add to your system and maintains developer sanity.<br />
+Since its not a full blown VM, git handles things beautifully. your configured dev environment can be moved to the production system, setting only the environment variable in place for the respective production/test/dev systems. And you get to save some HDD space, which is also quite expensive.<br />
+Basically, you are leaving nothing to chance. And using kubernetes, you can maintain all your containers.<br />
+Before we go into the article, we both need to know what I will only be explaining a few key concepts in the docker world. Once we understand these, we can go forward to learning about them.<br />
+The main terms to understand here are:<br />
+<strong>1. files</strong> : These are the files you need dockerised.<br />
+<strong>2. images</strong> : These are the systems you want to encapsulate the files in.  <br />
+<strong>3. container</strong> : These are what we build using the images and files.<br />
+Simple enough, I suppose!</p>
 
 <blockquote>
   <p>Written with <a href="https://stackedit.io/">StackEdit</a>.
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTg1NTk3MDUzMSw5NzgyNDk3MSwtMzYyMT
-I0OTI5XX0=
+eyJoaXN0b3J5IjpbMTUzMjU3MjQxMiwtNzY3OTk2NDE4LC0xMz
+Q2NDI1ODg5XX0=
 --></p>
 </blockquote>
 </section>
@@ -188,7 +186,9 @@ I0OTI5XX0=
     
     <a class="tag" href="/tags#programming">#programming</a>
     
-    <a class="tag" href="/tags#git">#git</a>
+    <a class="tag" href="/tags#softwareEngineering">#softwareEngineering</a>
+    
+    <a class="tag" href="/tags#docker">#docker</a>
     
   </div>
 </footer>
