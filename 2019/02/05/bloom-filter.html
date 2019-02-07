@@ -1,4 +1,167 @@
-<p>A bloom filter is a data structure which allows the server to sync data with a client with low data consumption. Another usecase is to find out uniqueness of the data. <a href="https://www.geeksforgeeks.org/bloom-filters-introduction-and-python-implementation/">Geekforgeeks</a> have a pretty good explanation of bloom filters.</p>
+<!DOCTYPE html>
+<html class="no-js">
+  <head>
+	<meta charset="utf-8">
+	<title>Implementing A Bloom Filter | Trshant's blog</title>
+	<meta name="description" content="A bloom filter is a data structure which allows the server to sync data with a client with low data consumption. Another usecase is to find out uniqueness of...">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<!-- CSS -->
+	<link rel="stylesheet" href="/assets/css/main.css">
+
+	<!--Favicon-->
+	<link rel="shortcut icon" href="/assets/favicon.ico" type="image/x-icon">
+
+	<!-- Canonical -->
+	<link rel="canonical" href="/2019/02/05/bloom-filter.html">
+
+	<!-- RSS -->
+	<link rel="alternate" type="application/atom+xml" title="Trshant's blog" href="/feed.xml" />
+
+	<!-- Font Awesome -->
+	<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+	<!-- Google Fonts -->
+	
+	<link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,700italic,400italic" rel="stylesheet" type="text/css">
+	
+
+	<!-- KaTeX -->
+	
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0-alpha/dist/katex.min.css" integrity="sha384-BTL0nVi8DnMrNdMQZG1Ww6yasK9ZGnUxL1ZWukXQ7fygA1py52yPp9W4wrR00VML" crossorigin="anonymous">
+	<script src="https://cdn.jsdelivr.net/npm/katex@0.10.0-alpha/dist/katex.min.js" integrity="sha384-y6SGsNt7yZECc4Pf86XmQhC4hG2wxL6Upkt9N1efhFxfh6wlxBH0mJiTE8XYclC1" crossorigin="anonymous"></script>
+	
+
+	<!-- Google Analytics -->
+	
+</head>
+
+  <body>
+    <header class="site-header">
+	<div class="branding">
+		
+		<a href="/">
+			<img class="avatar" src="https://secure.gravatar.com/avatar/b8f8be8b6147f78fc6a869ef48555388?s=100" alt=""/>
+		</a>
+		
+		<h1 class="site-title">
+			<a href="/">Trshant's blog</a>
+		</h1>
+	</div>
+	<nav class="site-nav">
+		<ul>
+			
+			
+			
+			
+			<li>
+				<a class="page-link" href="/about/">
+					About
+				</a>
+			</li>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			<li>
+				<a class="page-link" href="/tags.html">
+					Tags
+				</a>
+			</li>
+			
+			
+			
+			
+			
+			
+			<!-- Social icons from Font Awesome, if enabled  -->
+			
+
+
+<li>
+	<a href="mailto:trshant@gmail.com" title="Email">
+		<i class="fa fa-fw fa-envelope"></i>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li>
+	<a href="https://github.com/Trshant" title="Follow on GitHub">
+		<i class="fa fa-fw fa-github"></i>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li>
+	<a href="https://twitter.com/twitter" title="Follow on Twitter">
+		<i class="fa fa-fw fa-twitter"></i>
+	</a>
+</li>
+
+
+
+
+
+
+            
+            <!-- Search bar -->
+            
+		</ul>
+	</nav>
+    
+</header>
+
+    <div class="content">
+      <link rel="stylesheet" href="https://cdn.rawgit.com/knsv/mermaid/7.0.0/dist/mermaid.css">
+<article >
+  <header style="background-image: url('/')">
+    <h1 class="title">Implementing A Bloom Filter</h1>
+    
+    <p class="meta">
+      February 5, 2019
+      
+    </p>
+  </header>
+  <section class="post-content"><p>A bloom filter is a data structure which allows the server to sync data with a client with low data consumption. Another usecase is to find out uniqueness of the data. <a href="https://www.geeksforgeeks.org/bloom-filters-introduction-and-python-implementation/">Geekforgeeks</a> have a pretty good explanation of bloom filters.</p>
 
 <p>My post is for syncing the data from the server to client. I am assuming that the data on the client is already updating the server as and when the data is entered. The problem statement is not the unavailability or low availability of internet. It is to minimise the syncing operation involved.</p>
 
@@ -75,7 +238,7 @@
 	<span class="p">}</span>
 <span class="p">}</span>
 </code></pre></div></div>
-<p>I am going to use this class later.</p>
+<p>I am going to use this class in a later post.</p>
 
 <p>As we can see, it is quite useful for checking uniqueness and availability of the data, depending on the answer expected is positive or negative.</p>
 
@@ -83,14 +246,23 @@
 <p>As we are concerned with syncing data between the server and client.</p>
 
 <p>Here is how the interaction between the client/server will take place:</p>
-<pre><code class="language-mermaid">sequenceDiagram
-Client -&gt;&gt; Server: Hi! here's my master hash (CMH) with the last time synced
 
-Note over Server,Client: 1. Check each data point against &lt;br/&gt;individual hashes.&lt;br/&gt;2. Collect all the ones where the bits&lt;br/&gt; dont match.&lt;br/&gt;3. Send the Collected data points &lt;br/&gt;back to the client with its own&lt;br/&gt; master hash (SMH).
+<style>
+.mermaid {
+	width: 100%;
+}
+</style>
 
-Server -&gt;&gt; Client: There you go....
-Client -&gt;&gt; Client : Updates Itself
-</code></pre>
+<script src="/js/mermaid.js"></script>
+<div class="mermaid">
+sequenceDiagram
+	Client-&gt;&gt;Server: Hi! here's my master hash (CMH) with the last time synced
+
+	Note over Server,Client: 1. Check each data point against <br />individual hashes.<br />2. Collect all the ones where the bits<br /> dont match.<br />3. Send the Collected data points <br />back to the client with its own<br /> master hash (SMH).
+
+	Server-&gt;&gt;Client: There you go....
+	Client-&gt;&gt;Client: Updates Itself
+</div>
 
 <p>However, the server itself consists of 2 parts. the web server and the database server. In the code examples above we saw that we can use the murmurhash to update the hash probably in a field in the same table. Along with this, we need to continuously update the master hash with each insert or update, periodically refreshing the masterhash.</p>
 <pre><code class="language-SQL">SELECT * FROM table_name HAVING hash_field_value &amp; CMH &lt;&gt; hash_field_value
@@ -108,3 +280,52 @@ Client -&gt;&gt; Client : Updates Itself
 eyJoaXN0b3J5IjpbMTkwODQ0NzYzNF19
 --></p>
 </blockquote>
+</section>
+  
+<footer>
+  <div class="tags">
+    
+    <a class="tag" href="/tags#Algorithm">#Algorithm</a>
+    
+    <a class="tag" href="/tags#BloomFilter">#BloomFilter</a>
+    
+  </div>
+</footer>
+
+
+</article>
+
+<!-- Disqus -->
+
+<div class="comments">
+  <div id="disqus_thread"></div>
+<script type="text/javascript">
+	var disqus_shortname = 'trshant-ghubio';
+	(function() {
+		var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+		dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+		(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+	})();
+</script>
+<noscript>Please enable JavaScript to view comments.</noscript>
+
+</div>
+
+
+<!-- Post navigation -->
+
+
+    </div>
+    
+<script src="/assets/js/katex_init.js"></script>
+
+
+
+<footer class="site-footer">
+	<p class="text">Powered by <a href="https://jekyllrb.com/">Jekyll</a> with <a href="https://github.com/rohanchandra/type-theme">Type Theme</a>
+</p>
+</footer>
+
+
+  </body>
+</html>

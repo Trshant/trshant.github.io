@@ -5,7 +5,7 @@
     <atom:link href="/feed.xml" rel="self" type="application/rss+xml"/>
     <link>https://trshant.github.io//</link>
     <description>A website with blog posts and pages</description>
-    <pubDate>Thu, 07 Feb 2019 20:51:47 +0530</pubDate>
+    <pubDate>Thu, 07 Feb 2019 21:21:24 +0530</pubDate>
     
       <item>
         <title>Implementing A Bloom Filter</title>
@@ -88,7 +88,7 @@
 	&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
 &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;p&gt;I am going to use this class later.&lt;/p&gt;
+&lt;p&gt;I am going to use this class in a later post.&lt;/p&gt;
 
 &lt;p&gt;As we can see, it is quite useful for checking uniqueness and availability of the data, depending on the answer expected is positive or negative.&lt;/p&gt;
 
@@ -96,14 +96,23 @@
 &lt;p&gt;As we are concerned with syncing data between the server and client.&lt;/p&gt;
 
 &lt;p&gt;Here is how the interaction between the client/server will take place:&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&quot;language-mermaid&quot;&gt;sequenceDiagram
-Client -&amp;gt;&amp;gt; Server: Hi! here's my master hash (CMH) with the last time synced
 
-Note over Server,Client: 1. Check each data point against &amp;lt;br/&amp;gt;individual hashes.&amp;lt;br/&amp;gt;2. Collect all the ones where the bits&amp;lt;br/&amp;gt; dont match.&amp;lt;br/&amp;gt;3. Send the Collected data points &amp;lt;br/&amp;gt;back to the client with its own&amp;lt;br/&amp;gt; master hash (SMH).
+&lt;style&gt;
+.mermaid {
+	width: 100%;
+}
+&lt;/style&gt;
 
-Server -&amp;gt;&amp;gt; Client: There you go....
-Client -&amp;gt;&amp;gt; Client : Updates Itself
-&lt;/code&gt;&lt;/pre&gt;
+&lt;script src=&quot;/js/mermaid.js&quot;&gt;&lt;/script&gt;
+&lt;div class=&quot;mermaid&quot;&gt;
+sequenceDiagram
+	Client-&amp;gt;&amp;gt;Server: Hi! here's my master hash (CMH) with the last time synced
+
+	Note over Server,Client: 1. Check each data point against &lt;br /&gt;individual hashes.&lt;br /&gt;2. Collect all the ones where the bits&lt;br /&gt; dont match.&lt;br /&gt;3. Send the Collected data points &lt;br /&gt;back to the client with its own&lt;br /&gt; master hash (SMH).
+
+	Server-&amp;gt;&amp;gt;Client: There you go....
+	Client-&amp;gt;&amp;gt;Client: Updates Itself
+&lt;/div&gt;
 
 &lt;p&gt;However, the server itself consists of 2 parts. the web server and the database server. In the code examples above we saw that we can use the murmurhash to update the hash probably in a field in the same table. Along with this, we need to continuously update the master hash with each insert or update, periodically refreshing the masterhash.&lt;/p&gt;
 &lt;pre&gt;&lt;code class=&quot;language-SQL&quot;&gt;SELECT * FROM table_name HAVING hash_field_value &amp;amp; CMH &amp;lt;&amp;gt; hash_field_value
