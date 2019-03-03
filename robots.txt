@@ -1,1 +1,1 @@
-Sitemap: /sitemap.xml
+Sitemap: https://trshant.dev/trshant.dev/sitemap.xml
