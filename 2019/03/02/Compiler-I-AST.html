@@ -1,10 +1,10 @@
 <!DOCTYPE html><html lang="en">
   <head><meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"><title>Code Snippets for data preprocessing using Pandas - Part 1 - Trshant's Blog</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"><title>Building a compiler-part1 AST - Trshant's Blog</title>
 
-<meta name="description" content="This post will be all about processing data using pandas.Use this to read CSVs into a dataframedf = pd.read_csv('train.csv')However, in case you need to prep...">
-<link rel="canonical" href="http://localhost:4000/2018/10/21/Tips-for-preprocessing-data-part-1.html"><link rel="alternate" type="application/rss+xml" title="Trshant's Blog" href="/feed.xml"><!-- start favicons snippet, use https://realfavicongenerator.net/ --><link rel="apple-touch-icon" sizes="180x180" href="/assets/apple-touch-icon.png"><link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32x32.png"><link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon-16x16.png"><link rel="manifest" href="/assets/site.webmanifest"><link rel="mask-icon" href="/assets/safari-pinned-tab.svg" color="#fc4d50"><link rel="shortcut icon" href="/assets/favicon.ico">
+<meta name="description" content="Building blocks of a compiler:Copied from https://www.programcreek.com/2011/02/how-compiler-works/  A compiler is a computer program that transforms source c...">
+<link rel="canonical" href="http://localhost:4000/2019/03/02/Compiler-I-AST.html"><link rel="alternate" type="application/rss+xml" title="Trshant's Blog" href="/feed.xml"><!-- start favicons snippet, use https://realfavicongenerator.net/ --><link rel="apple-touch-icon" sizes="180x180" href="/assets/apple-touch-icon.png"><link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32x32.png"><link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon-16x16.png"><link rel="manifest" href="/assets/site.webmanifest"><link rel="mask-icon" href="/assets/safari-pinned-tab.svg" color="#fc4d50"><link rel="shortcut icon" href="/assets/favicon.ico">
 
 <meta name="msapplication-TileColor" content="#ffc40d"><meta name="msapplication-config" content="/assets/browserconfig.xml">
 
@@ -278,70 +278,135 @@
 
               <div class="col-main cell cell--auto"><!-- start custom main top snippet -->
 
-<!-- end custom main top snippet --><article itemscope itemtype="http://schema.org/Article"><div class="article__header"><header><h1>Code Snippets for data preprocessing using Pandas - Part 1</h1></header><span class="split-space">&nbsp;</span>
+<!-- end custom main top snippet --><article itemscope itemtype="http://schema.org/Article"><div class="article__header"><header><h1>Building a compiler-part1 AST</h1></header><span class="split-space">&nbsp;</span>
           <a class="edit-on-github"
             title="Edit on Github"
-            href="https://github.com/user_name/repo_name/tree/master/_posts/2018-10-21-Tips-for-preprocessing-data-part-1.md">
-            <i class="far fa-edit"></i></a></div><meta itemprop="headline" content="Code Snippets for data preprocessing using Pandas - Part 1"><div class="article__info clearfix"><ul class="left-col menu"><li>
+            href="https://github.com/user_name/repo_name/tree/master/_posts/2019-03-03-Compiler-I-AST.md">
+            <i class="far fa-edit"></i></a></div><meta itemprop="headline" content="Building a compiler-part1 AST"><div class="article__info clearfix"><ul class="left-col menu"><li>
               <a class="button button--secondary button--pill button--sm"
-                href="/archive.html?tag=BigData">BigData</a>
+                href="/archive.html?tag=CompSci">CompSci</a>
             </li><li>
               <a class="button button--secondary button--pill button--sm"
-                href="/archive.html?tag=pandas">pandas</a>
+                href="/archive.html?tag=compilerTheory">compilerTheory</a>
             </li><li>
               <a class="button button--secondary button--pill button--sm"
-                href="/archive.html?tag=CodeSnippets">CodeSnippets</a>
-            </li></ul><ul class="right-col menu"><li><i class="far fa-calendar-alt"></i> <span>Oct 21, 2018</span>
-            </li></ul></div><meta itemprop="author" content="Trshant"/><meta itemprop="datePublished" content="2018-10-21T07:51:43+05:30">
-    <meta itemprop="keywords" content="BigData,pandas,CodeSnippets"><div class="js-article-content"><div class="layout--article"><!-- start custom article top snippet -->
+                href="/archive.html?tag=AST">AST</a>
+            </li></ul><ul class="right-col menu"><li><i class="far fa-calendar-alt"></i> <span>Mar 02, 2019</span>
+            </li></ul></div><meta itemprop="author" content="Trshant"/><meta itemprop="datePublished" content="2019-03-02T19:00:00+05:30">
+    <meta itemprop="keywords" content="CompSci,compilerTheory,AST"><div class="js-article-content"><div class="layout--article"><!-- start custom article top snippet -->
 
-<!-- end custom article top snippet --><div class="article__content" itemprop="articleBody"><p>This post will be all about processing data using pandas.</p>
+<!-- end custom article top snippet --><div class="article__content" itemprop="articleBody"><p><strong>Building blocks of a compiler</strong>:
+Copied from <a href="https://www.programcreek.com/2011/02/how-compiler-works/">https://www.programcreek.com/2011/02/how-compiler-works/</a></p>
+<blockquote>
+  <p>A compiler is a computer program that transforms source code written in a high-level programming language into a lower level language.</p>
+</blockquote>
 
-<p>Use this to read CSVs into a dataframe</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>df = pd.read_csv('train.csv')
-</code></pre></div></div>
-<p>However, in case you need to prepare a DataFrame and have been unfortunate enough to get a CSV file with no headers, then this is the way to go</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>df = pd.read_csv('file_name.csv', header = None, names = ['labels','you','want','to','give'] )
-</code></pre></div></div>
-<p>This is one very usable function to see which data is empty or null</p>
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">missing_data_table</span><span class="p">(</span><span class="n">df</span><span class="p">):</span>
-    <span class="n">total</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">isnull</span><span class="p">()</span><span class="o">.</span><span class="nb">sum</span><span class="p">()</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">ascending</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
-    <span class="n">percent</span> <span class="o">=</span> <span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">isnull</span><span class="p">()</span><span class="o">.</span><span class="nb">sum</span><span class="p">()</span><span class="o">/</span><span class="n">df</span><span class="o">.</span><span class="n">isnull</span><span class="p">()</span><span class="o">.</span><span class="n">count</span><span class="p">())</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">ascending</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
-    <span class="n">missing_data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">total</span><span class="p">,</span> <span class="n">percent</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">keys</span><span class="o">=</span><span class="p">[</span><span class="s">'Total'</span><span class="p">,</span> <span class="s">'Percent'</span><span class="p">])</span>
-    <span class="k">return</span> <span class="n">missing_data</span>
-</code></pre></div></div>
+<p>Here is what happens in a compiler</p>
 
-<p>If you see any empty data you can fill it in with</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>df['column_name'].fillna(1000, inplace=True)
-</code></pre></div></div>
+<pre><code class="language-mermaid">graph TD
+classDef className fill:#f9f,stroke:#333,stroke-width:4px;
+class I,O className;
+I["Input File"]
 
-<p>Dropping a column is easy</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>df.drop('column_name', axis=1, inplace=True)
-</code></pre></div></div>
+I--&gt;A["Lexical Analysis"]
+subgraph Compiler start
+subgraph Arriving at AST
+A--&gt;B["Syntax Analysis"]
+end
+B--&gt;C["Semantic Analysis"]
+C--&gt;D["IR Generation"]
+D--&gt;E["IR Optimization"]
+E--&gt;F["Code Generation"]
+F--&gt;G["Optimization"]
+end
+G--&gt;O["Executable"]
+</code></pre>
+<p>This post covers Lexical Analyser and Syntax analyser.</p>
 
-<p>Dropping row/s if a column is blank/null</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>df.drop(df[pd.isnull(df['Embarked'])].index, inplace=True)
-</code></pre></div></div>
+<p>Below diagram is based on <a href="https://medium.com/basecs/leveling-up-ones-parsing-game-with-asts-d7a6fc2400ff">Vaidehi Joshi’s</a> awesome post on ASTs:
+As she has, we will be using the same example for our input <code class="highlighter-rouge">" 5+(1*12) "</code>. This will form a  continuity if you decide to visit her blogpost.</p>
 
-<p>We can make columns categorical ( converting ‘male’ and ‘female’ to 0 and 1 ) without too much trouble</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>df['Sex'] = pd.Categorical(df['Sex'])
-</code></pre></div></div>
+<p><strong>Lexical Analysis</strong>
+The lexical analyzer breaks the input file or sentence into a series of tokens, by removing or adding any whitespace or comments in the source code. So it should have these stages:</p>
 
-<p>However this wont be seen easily till you  do this bit</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>df = pd.get_dummies(df, drop_first=True)
-</code></pre></div></div>
+<pre><code class="language-mermaid">sequenceDiagram
 
-<p>See the dataframe:</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>df.head(optional number of rows you want to see)
-</code></pre></div></div>
+participant C  as Code   
+participant S  as Scanner
+participant T  as Tokeniser
+participant SA as Syntax Analyser  
+
+C -&gt;&gt; S  : String
+Note over C: " 5+(1*12) "
+Note over S: Strip text &lt;br/&gt;"5+(1*12)"
+S -&gt;&gt; T  : lexemes  
+Note over T: Convert to Tokens&lt;br/&gt;["5","+","(","1","*","12",")"]
+T -&gt;&gt; SA : Tokenised    
+</code></pre>
+
+<p><strong>Syntax Analysis</strong>
+At its very basic, a Syntax analyser converts tokens to a parse tree by looking at a set of rules. This is a simplification so that we can understand the basic functionlity of this stage of a compiler.
+There are 2 stages to this:</p>
+<ol>
+  <li>Getting a parse tree out.</li>
+  <li>Optimising the parse tree.</li>
+</ol>
+
+<p>Again, do have a look at <a href="https://medium.com/basecs/grammatically-rooting-oneself-with-parse-trees-ec9daeda7dad">Vaidehi Joshi’s</a> fantastic post on parse trees. Its extremely well written.</p>
+
+<pre><code class="language-mermaid">sequenceDiagram
+participant T as Lexical Analyser   
+participant SA1 as CST
+participant SA2 as AST 
+
+T -&gt;&gt; SA1 : Tokenised   
+Note over T:["5","+","(","1","*","12",")"]
+Note over SA1: Create Parse Tree&lt;br/&gt;See CST figure below.
+SA1  -&gt;&gt; SA2 : CST
+Note over SA2: Optimise Parse Tree&lt;br/&gt;See AST figure below.
+SA2  -&gt;&gt; Synaptic Analyser: AST 
+</code></pre>
+
+<ul>
+  <li><strong>CST : Concrete Syntax tree</strong> - So This stage comes up with a parse tree. How does it do that? It looks at the expression and sees which rule it will agree with. This “see which rule it will agree with” bit will depend on which kind of token parsing is being used.
+    <pre><code class="language-mermaid">  graph TD
+      A1["Exp"]
+      A1--&gt;A[5]
+      A1--&gt;B["+"]
+      A1--&gt;A2[Exp]
+      A2--&gt;C["("]
+      A2--&gt;A3["Exp"]
+      A2--&gt;G[")"]
+      A3--&gt;D[1]
+      A3--&gt;E["*"]
+      A3--&gt;F[12]
+</code></pre>
+    <p>We can see that the expression we started out with was divided into parts and further into more parts. This above tree tells us how it was divided.</p>
+  </li>
+  <li><strong>AST : Abstract Syntax tree</strong> As we can see, the parse tree is fabulous and true to the rules of the language. But its too verbose (too many nodes!). We try and solve that problem with Abstract Syntax tree where we throw out what is not needed and keep the core of the program. The main aim of this part is to reduce the cruft and keep the core of the code as below.
+    <pre><code class="language-mermaid">  graph TD
+      B["+"]
+      B--&gt;A[5]
+          B--&gt;E(*)
+          E--&gt;D(1)
+          E--&gt;F(12)
+</code></pre>
+  </li>
+</ul>
+
+<p>To understand and see these in action, Do try out <a href="https://astexplorer.net/">https://astexplorer.net/</a>. This site is amazing and will make you see in action building of an AST with code.  Read <a href="https://blog.buildo.io/a-tour-of-abstract-syntax-trees-906c0574a067">this</a> to figure out the why’s and what’s.</p>
+
+<p>Many thanks to the creators of  <a href="https://mermaidjs.github.io">https://mermaidjs.github.io</a> for the sequence diagram. It is truly a pleasure to work with.</p>
+
+<p>The next post in this series will be the implementation of this in Typescript.</p>
 
 <blockquote>
   <p>Written with <a href="https://stackedit.io/">StackEdit</a>.
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTc5MDQ0Mzk2OV19
+eyJoaXN0b3J5IjpbLTM2NjM3MDQyMSwxNTgwNzYzMTQ4XX0=
 --></p>
 </blockquote>
-</div><section class="article__sharing d-print-none"></section><div class="d-print-none"><footer class="article__footer"><meta itemprop="dateModified" content="2018-10-21T07:51:43+05:30"><!-- start custom article footer snippet -->
+</div><section class="article__sharing d-print-none"></section><div class="d-print-none"><footer class="article__footer"><meta itemprop="dateModified" content="2019-03-02T19:00:00+05:30"><!-- start custom article footer snippet -->
 
 <!-- end custom article footer snippet --><div class="article__subscribe"><div class="subscribe"><i class="fas fa-rss"></i> <a type="application/rss+xml" href="/feed.xml">Subscribe</a></div></div><div class="article__license"><div class="license">
     <p>This work is licensed under a <a itemprop="license" rel="license" href="https://creativecommons.org/licenses/by-nc/4.0/">Attribution-NonCommercial 4.0 International</a> license.
@@ -349,7 +414,7 @@ eyJoaXN0b3J5IjpbMTc5MDQ0Mzk2OV19
         <img alt="Attribution-NonCommercial 4.0 International" src="https://i.creativecommons.org/l/by-nc/4.0/88x31.png" />
       </a>
     </p>
-  </div></div></footer><div class="article__section-navigator clearfix"><div class="previous"><span>PREVIOUS</span><a href="/2018/10/20/tips-for-ML-part-1.html">Code snippets for ML using Scikit-Learn - Part 1</a></div><div class="next"><span>NEXT</span><a href="/2018/11/05/Contexts-in-JavaScript.html">Scope and Context in JavaScript</a></div></div></div>
+  </div></div></footer><div class="article__section-navigator clearfix"><div class="previous"><span>PREVIOUS</span><a href="/2019/02/05/bloom-filter.html">Implementing A Bloom Filter</a></div></div></div>
 
 </div>
 
