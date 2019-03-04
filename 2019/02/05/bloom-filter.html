@@ -410,18 +410,23 @@ The strategy for the maintaining the masterhash could be:</p>
 <pre><code class="language-SQL">SELECT * FROM table_name HAVING hash_field_value &amp; CMH &lt;&gt; hash_field_value
 </code></pre>
 
-<p>The above SQL will return only those rows from the tablename which are not there or updated in the client system.</p>
+<p>The above SQL will return only those rows from the tablename which</p>
+<ol>
+  <li>Are not present in the client system</li>
+  <li>Updated rows in the server which have yet  been synced with the client system.</li>
+</ol>
+
+<p>The syncing happens recursively till both the systems have the same Masterhash. I will be elaborating on that in a future post.</p>
 
 <hr />
-
 <p>Some reading:
 <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Bitwise_Operators">https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Bitwise_Operators</a></p>
 
 <blockquote>
   <p>Written with <a href="https://stackedit.io/">StackEdit</a>.
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTIwMzAxNjAwNzQsMjExNjU3NTAyMCwxOT
-A4NDQ3NjM0XX0=
+eyJoaXN0b3J5IjpbLTc0MDY4NDgxOCwtMTMzMzQ4MTY3LC0yMD
+MwMTYwMDc0LDIxMTY1NzUwMjAsMTkwODQ0NzYzNF19
 --></p>
 </blockquote>
 </div><section class="article__sharing d-print-none"></section><div class="d-print-none"><footer class="article__footer"><meta itemprop="dateModified" content="2019-02-05T07:51:43+05:30"><!-- start custom article footer snippet -->
