@@ -1,10 +1,10 @@
 <!DOCTYPE html><html lang="en">
   <head><meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"><title>Building a compiler-part1 AST - Trshant's Ramblings</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"><title>Getting a LAMP dev setup using docker - Trshant's Ramblings</title>
 
-<meta name="description" content="Building blocks of a compiler:Copied from https://www.programcreek.com/2011/02/how-compiler-works/  A compiler is a computer program that transforms source c...">
-<link rel="canonical" href="https://trshant.dev/2019/03/02/Compiler-I-AST.html"><link rel="alternate" type="application/rss+xml" title="Trshant's Ramblings" href="/feed.xml"><!-- start favicons snippet, use https://realfavicongenerator.net/ --><link rel="apple-touch-icon" sizes="180x180" href="/assets/apple-touch-icon.png"><link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32x32.png"><link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon-16x16.png"><link rel="manifest" href="/assets/site.webmanifest"><link rel="mask-icon" href="/assets/safari-pinned-tab.svg" color="#fc4d50"><link rel="shortcut icon" href="/assets/favicon.ico">
+<meta name="description" content="Following A note on docker, I decided to get a LAMP setup up using the only docker. However, I procrastinated for almost 3 months before the urge became too ...">
+<link rel="canonical" href="https://trshant.dev/2019/04/24/Docker-setup-LAMP.html"><link rel="alternate" type="application/rss+xml" title="Trshant's Ramblings" href="/feed.xml"><!-- start favicons snippet, use https://realfavicongenerator.net/ --><link rel="apple-touch-icon" sizes="180x180" href="/assets/apple-touch-icon.png"><link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32x32.png"><link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon-16x16.png"><link rel="manifest" href="/assets/site.webmanifest"><link rel="mask-icon" href="/assets/safari-pinned-tab.svg" color="#fc4d50"><link rel="shortcut icon" href="/assets/favicon.ico">
 
 <meta name="msapplication-TileColor" content="#ffc40d"><meta name="msapplication-config" content="/assets/browserconfig.xml">
 
@@ -256,157 +256,98 @@
 </script></head>
   <body>
     <div class="root" data-is-touch="false">
-      <div class="layout--page js-page-root"><div class="page__main js-page-main page__viewport has-aside cell cell--auto">
+      <div class="layout--page js-page-root">
+<div class="page__main js-page-main page__viewport has-aside cell cell--auto">
 
-      <div class="page__main-inner"><div class="page__header d-print-none"><header class="header"><div class="main">
+      <div class="page__main-inner">
+<div class="page__header d-print-none">
+<header class="header"><div class="main">
       <div class="header__title">
-        <div class="header__brand"><svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-	 width="24px" height="24px" viewBox="0 0 24 24">
+        <div class="header__brand">
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="24px" height="24px" viewbox="0 0 24 24">
 <style type="text/css">
 	.st0{fill:#515151;}
 </style>
 <path class="st0" d="M1.7,22.3c5.7-5.7,11.3-5.7,17,0c3.3-3.3,3.5-5.3,0.8-6c2.7,0.7,3.5-1.1,2.3-5.6s-3.3-5.2-6.3-2.1
-	c3-3,2.3-5.2-2.1-6.3S7,1.8,7.7,4.6C7,1.8,5,2.1,1.7,5.3C7.3,11,7.3,16.7,1.7,22.3"/>
+	c3-3,2.3-5.2-2.1-6.3S7,1.8,7.7,4.6C7,1.8,5,2.1,1.7,5.3C7.3,11,7.3,16.7,1.7,22.3"></path>
 </svg><a title="Read the blog!
-" href="/">Trshant's Ramblings</a></div><button class="button button--secondary button--circle search-button js-search-toggle"><i class="fas fa-search"></i></button></div><nav class="navigation">
-        <ul><li class="navigation__item"><a href="/archive.html">Archive</a></li><li class="navigation__item"><a href="/about.html">About</a></li><li><button class="button button--secondary button--circle search-button js-search-toggle"><i class="fas fa-search"></i></button></li></ul>
-      </nav></div>
+" href="/">Trshant's Ramblings</a>
+</div>
+<button class="button button--secondary button--circle search-button js-search-toggle"><i class="fas fa-search"></i></button>
+</div>
+<nav class="navigation">
+        <ul>
+<li class="navigation__item"><a href="/archive.html">Archive</a></li>
+<li class="navigation__item"><a href="/about.html">About</a></li>
+<li><button class="button button--secondary button--circle search-button js-search-toggle"><i class="fas fa-search"></i></button></li>
+</ul>
+      </nav>
+</div>
   </header>
-</div><div class="page__content"><div class ="main"><div class="grid grid--reverse">
+</div>
+<div class="page__content"><div class="main"><div class="grid grid--reverse">
 
               <div class="col-aside d-print-none js-col-aside"><aside class="page__aside js-page-aside"><div class="toc-aside js-toc-root"></div></aside></div>
 
-              <div class="col-main cell cell--auto"><!-- start custom main top snippet -->
+              <div class="col-main cell cell--auto">
+<!-- start custom main top snippet -->
 
-<!-- end custom main top snippet --><article itemscope itemtype="http://schema.org/Article"><div class="article__header"><header><h1>Building a compiler-part1 AST</h1></header><span class="split-space">&nbsp;</span>
-          <a class="edit-on-github"
-            title="Edit on Github"
-            href="https://github.com/trshant/trshant.github.io/tree/master/_posts/2019-03-03-Compiler-I-AST.md">
-            <i class="far fa-edit"></i></a></div><meta itemprop="headline" content="Building a compiler-part1 AST"><div class="article__info clearfix"><ul class="left-col menu"><li>
-              <a class="button button--secondary button--pill button--sm"
-                href="/archive.html?tag=CompSci">CompSci</a>
-            </li><li>
-              <a class="button button--secondary button--pill button--sm"
-                href="/archive.html?tag=compilerTheory">compilerTheory</a>
-            </li><li>
-              <a class="button button--secondary button--pill button--sm"
-                href="/archive.html?tag=AST">AST</a>
-            </li></ul><ul class="right-col menu"><li><i class="far fa-calendar-alt"></i> <span>Mar 02, 2019</span>
-            </li></ul></div><meta itemprop="author" content="Trshant Bhat"/><meta itemprop="datePublished" content="2019-03-02T14:30:00+01:00">
-    <meta itemprop="keywords" content="CompSci,compilerTheory,AST"><div class="js-article-content"><div class="layout--article"><!-- start custom article top snippet -->
-
-<!-- end custom article top snippet --><div class="article__content" itemprop="articleBody"><p><strong>Building blocks of a compiler</strong>:
-Copied from <a href="https://www.programcreek.com/2011/02/how-compiler-works/">https://www.programcreek.com/2011/02/how-compiler-works/</a></p>
-<blockquote>
-  <p>A compiler is a computer program that transforms source code written in a high-level programming language into a lower level language.</p>
-</blockquote>
-
-<p>Here is what happens in a compiler</p>
-
-<pre><code class="language-mermaid">graph TD
-classDef className fill:#f9f,stroke:#333,stroke-width:4px;
-class I,O className;
-I["Input File"]
-
-I--&gt;A["Lexical Analysis"]
-subgraph Compiler start
-subgraph Arriving at AST
-A--&gt;B["Syntax Analysis"]
-end
-B--&gt;C["Semantic Analysis"]
-C--&gt;D["IR Generation"]
-D--&gt;E["IR Optimization"]
-E--&gt;F["Code Generation"]
-F--&gt;G["Optimization"]
-end
-G--&gt;O["Executable"]
-</code></pre>
-<p>This post covers Lexical Analyser and Syntax analyser.</p>
-
-<p>Below diagram is based on <a href="https://medium.com/basecs/leveling-up-ones-parsing-game-with-asts-d7a6fc2400ff">Vaidehi Joshi’s</a> awesome post on ASTs:
-As she has, we will be using the same example for our input <code class="highlighter-rouge">" 5+(1*12) "</code>. This will form a  continuity if you decide to visit her blogpost.</p>
-
-<p><strong>Lexical Analysis</strong>
-The lexical analyzer breaks the input file or sentence into a series of tokens, by removing or adding any whitespace or comments in the source code. So it should have these stages:</p>
-
-<pre><code class="language-mermaid">sequenceDiagram
-
-participant C  as Code   
-participant S  as Scanner
-participant T  as Tokeniser
-participant SA as Syntax Analyser  
-
-C -&gt;&gt; S  : String
-Note over C: " 5+(1*12) "
-Note over S: Strip text &lt;br/&gt;"5+(1*12)"
-S -&gt;&gt; T  : lexemes  
-Note over T: Convert to Tokens&lt;br/&gt;["5","+","(","1","*","12",")"]
-T -&gt;&gt; SA : Tokenised    
-</code></pre>
-
-<p><strong>Syntax Analysis</strong>
-At its very basic, a Syntax analyser converts tokens to a parse tree by looking at a set of rules. This is a simplification so that we can understand the basic functionlity of this stage of a compiler.
-There are 2 stages to this:</p>
-<ol>
-  <li>Getting a parse tree out.</li>
-  <li>Optimising the parse tree.</li>
-</ol>
-
-<p>Again, do have a look at <a href="https://medium.com/basecs/grammatically-rooting-oneself-with-parse-trees-ec9daeda7dad">Vaidehi Joshi’s</a> fantastic post on parse trees. Its extremely well written.</p>
-
-<pre><code class="language-mermaid">sequenceDiagram
-participant T as Lexical Analyser   
-participant SA1 as CST
-participant SA2 as AST 
-
-T -&gt;&gt; SA1 : Tokenised   
-Note over T:["5","+","(","1","*","12",")"]
-Note over SA1: Create Parse Tree&lt;br/&gt;See CST figure below.
-SA1  -&gt;&gt; SA2 : CST
-Note over SA2: Optimise Parse Tree&lt;br/&gt;See AST figure below.
-SA2  -&gt;&gt; Synaptic Analyser: AST 
-</code></pre>
-
-<ul>
-  <li><strong>CST : Concrete Syntax tree</strong> - So This stage comes up with a parse tree. How does it do that? It looks at the expression and sees which rule it will agree with. This “see which rule it will agree with” bit will depend on which kind of token parsing is being used.
-    <pre><code class="language-mermaid">  graph TD
-      A1["Exp"]
-      A1--&gt;A[5]
-      A1--&gt;B["+"]
-      A1--&gt;A2[Exp]
-      A2--&gt;C["("]
-      A2--&gt;A3["Exp"]
-      A2--&gt;G[")"]
-      A3--&gt;D[1]
-      A3--&gt;E["*"]
-      A3--&gt;F[12]
-</code></pre>
-    <p>We can see that the expression we started out with was divided into parts and further into more parts. This above tree tells us how it was divided.</p>
-  </li>
-  <li><strong>AST : Abstract Syntax tree</strong> As we can see, the parse tree is fabulous and true to the rules of the language. But its too verbose (too many nodes!). We try and solve that problem with Abstract Syntax tree where we throw out what is not needed and keep the core of the program. The main aim of this part is to reduce the cruft and keep the core of the code as below.
-    <pre><code class="language-mermaid">  graph TD
-      B["+"]
-      B--&gt;A[5]
-          B--&gt;E(*)
-          E--&gt;D(1)
-          E--&gt;F(12)
-</code></pre>
-  </li>
+<!-- end custom main top snippet --><article itemscope itemtype="http://schema.org/Article"><div class="article__header">
+<header><h1>Getting a LAMP dev setup using docker</h1></header><span class="split-space"> </span>
+          <a class="edit-on-github" title="Edit on Github" href="https://github.com/trshant/trshant.github.io/tree/master/_posts/2019-04-25-Docker-setup-LAMP.md">
+            <i class="far fa-edit"></i></a>
+</div>
+<meta itemprop="headline" content="Getting a LAMP dev setup using docker">
+<div class="article__info clearfix">
+<ul class="left-col menu">
+<li>
+              <a class="button button--secondary button--pill button--sm" href="/archive.html?tag=programming">programming</a>
+            </li>
+<li>
+              <a class="button button--secondary button--pill button--sm" href="/archive.html?tag=softwareEngineering">softwareEngineering</a>
+            </li>
+<li>
+              <a class="button button--secondary button--pill button--sm" href="/archive.html?tag=docker">docker</a>
+            </li>
+<li>
+              <a class="button button--secondary button--pill button--sm" href="/archive.html?tag=LAMP">LAMP</a>
+            </li>
 </ul>
+<ul class="right-col menu"><li>
+<i class="far fa-calendar-alt"></i> <span>Apr 24, 2019</span>
+            </li></ul>
+</div>
+<meta itemprop="author" content="Trshant Bhat">
+<meta itemprop="datePublished" content="2019-04-24T20:31:43+02:00">
+    <meta itemprop="keywords" content="programming,softwareEngineering,docker,LAMP">
+<div class="js-article-content">
+<div class="layout--article">
+<!-- start custom article top snippet -->
 
-<p>To understand and see these in action, Do try out <a href="https://astexplorer.net/">https://astexplorer.net/</a>. This site is amazing and will make you see in action building of an AST with code.  Read <a href="https://blog.buildo.io/a-tour-of-abstract-syntax-trees-906c0574a067">this</a> to figure out the why’s and what’s.</p>
+<!-- end custom article top snippet --><div class="article__content" itemprop="articleBody">
+<p>Following <a href="https://trshant.dev/2019/01/27/A-note-on-docker.html">A note on docker</a>, I decided to get a LAMP setup up using the only docker. However, I procrastinated for almost 3 months before the urge became too much to fight and I gave in and wanted to fight the good fight <img class="emoji" title=":stuck_out_tongue:" alt=":stuck_out_tongue:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f61b.png" height="20" width="20"> 
+Anyway, this post took almost 5 days to get done. so let us get to it.</p>
 
-<p>Many thanks to the creators of  <a href="https://mermaidjs.github.io">https://mermaidjs.github.io</a> for the sequence diagram. It is truly a pleasure to work with.</p>
+<p>First, I downloaded Docker and Docker-compose. I followed the official setup and finally got everything working. Docker-compose took a day to get installed properly, but it was mostly a badly installed python distribution that was causing the issue.</p>
 
-<p>The next post in this series will be the implementation of this in Typescript.</p>
+<p>Once that was done, I created a folder and put in 2 files in it. Dockerfile and docker-compose.yml. it is linked in the link to the gist and you will be done. However, coming up with the exact file took a fair bit of time - in my case, almost 3 days.</p>
+
+<p>A friend told me that I should use the base images given in the docker hub and work on those to get what I want. So I made the <a href="%5Bhttps://gist.github.com/Trshant/e06bebd178915a7a025339c4bd5e5d94#file-dockerfile%5D(https://gist.github.com/Trshant/e06bebd178915a7a025339c4bd5e5d94#file-dockerfile)">Dockerfile</a> to get a base PHP/Apache image and wrote the remaining parts to install all the other extensions, so I would get a fully fledged system I could use anytime.</p>
+
+<p>Post that I read up on Docker-compose and realized I better get started with writing a YAML file to detail out all the details. This has been carefully <a href="https://gist.github.com/Trshant/e06bebd178915a7a025339c4bd5e5d94#file-docker-compose-yml">commented</a>) and I hope that the comments are good enough explanation.</p>
+
+<p>Then all I needed to do was go over to that directory and do a <code class="highlighter-rouge">sudo docker-compose build</code> and post that <code class="highlighter-rouge">sudo docker-compose up</code>.</p>
+
+<p>Cheers! <img class="emoji" title=":beers:" alt=":beers:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f37b.png" height="20" width="20"></p>
 
 <blockquote>
   <p>Written with <a href="https://stackedit.io/">StackEdit</a>.
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTM2NjM3MDQyMSwxNTgwNzYzMTQ4XX0=
+eyJoaXN0b3J5IjpbLTcyMjY3NTQxOV19
 --></p>
 </blockquote>
-</div><section class="article__sharing d-print-none"><!-- AddToAny BEGIN -->
+</div>
+<section class="article__sharing d-print-none"><!-- AddToAny BEGIN -->
 <div class="a2a_kit a2a_kit_size_32 a2a_default_style">
 <a class="a2a_dd" href="https://www.addtoany.com/share"></a>
 <a class="a2a_button_facebook"></a>
@@ -415,15 +356,28 @@ eyJoaXN0b3J5IjpbLTM2NjM3MDQyMSwxNTgwNzYzMTQ4XX0=
 <a class="a2a_button_linkedin"></a>
 </div>
 <script async src="https://static.addtoany.com/menu/page.js"></script>
-<!-- AddToAny END --></section><div class="d-print-none"><footer class="article__footer"><meta itemprop="dateModified" content="2019-03-02T14:30:00+01:00"><!-- start custom article footer snippet -->
+<!-- AddToAny END --></section><div class="d-print-none">
+<footer class="article__footer"><meta itemprop="dateModified" content="2019-04-24T20:31:43+02:00">
+<!-- start custom article footer snippet -->
 
-<!-- end custom article footer snippet --><div class="article__subscribe"><div class="subscribe"><i class="fas fa-rss"></i> <a type="application/rss+xml" href="/feed.xml">Subscribe</a></div></div><div class="article__license"><div class="license">
+<!-- end custom article footer snippet --><div class="article__subscribe"><div class="subscribe">
+<i class="fas fa-rss"></i> <a type="application/rss+xml" href="/feed.xml">Subscribe</a>
+</div></div>
+<div class="article__license"><div class="license">
     <p>This work is licensed under a <a itemprop="license" rel="license" href="https://creativecommons.org/licenses/by-nc/4.0/">Attribution-NonCommercial 4.0 International</a> license.
       <a rel="license" href="https://creativecommons.org/licenses/by-nc/4.0/">
-        <img alt="Attribution-NonCommercial 4.0 International" src="https://i.creativecommons.org/l/by-nc/4.0/88x31.png" />
+        <img alt="Attribution-NonCommercial 4.0 International" src="https://i.creativecommons.org/l/by-nc/4.0/88x31.png">
       </a>
     </p>
-  </div></div></footer><div class="article__section-navigator clearfix"><div class="previous"><span>PREVIOUS</span><a href="/2019/02/05/bloom-filter.html">Implementing A Bloom Filter</a></div><div class="next"><span>NEXT</span><a href="/2019/03/07/prefix-tree.html">Implementing a prefix tree in typescript</a></div></div></div>
+  </div></div></footer><div class="article__section-navigator clearfix">
+<div class="previous">
+<span>PREVIOUS</span><a href="/2019/03/07/prefix-tree.html">Implementing a prefix tree in typescript</a>
+</div>
+<div class="next">
+<span>NEXT</span><a href="/2019/05/18/opinion-on-web-assembly.html">Web Assembly and my opinion on it</a>
+</div>
+</div>
+</div>
 
 </div>
 
@@ -451,54 +405,75 @@ eyJoaXN0b3J5IjpbLTM2NjM3MDQyMSwxNTgwNzYzMTQ4XX0=
     });
   });
 })();
-</script></div><section class="page__comments d-print-none"></section></article><!-- start custom main bottom snippet -->
+</script>
+</div>
+<section class="page__comments d-print-none"></section></article><!-- start custom main bottom snippet -->
 
-<!-- end custom main bottom snippet --></div>
-            </div></div></div><div class="page__footer d-print-none">
+<!-- end custom main bottom snippet -->
+</div>
+            </div></div></div>
+<div class="page__footer d-print-none">
 <footer class="footer py-4 js-page-footer">
-  <div class="main"><div itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Trshant Bhat"><meta itemprop="url" content="https://trshant.dev/"><meta itemprop="description" content="I am trying to get better at programming"><div class="footer__author-links"><div class="author-links">
-  <ul class="menu menu--nowrap menu--inline"><link itemprop="url" href="https://trshant.dev/"><li title="Send me Email.">
+  <div class="main">
+<div itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Trshant Bhat">
+<meta itemprop="url" content="https://trshant.dev/">
+<meta itemprop="description" content="I am trying to get better at programming">
+<div class="footer__author-links">
+<div class="author-links">
+  <ul class="menu menu--nowrap menu--inline">
+<link itemprop="url" href="https://trshant.dev/">
+<li title="Send me Email.">
       <a class="button button--circle mail-button" itemprop="email" href="mailto:mail@trshant.dev" target="_blank">
         <i class="fas fa-envelope"></i>
-      </a><li title="Follow me on Linkedin.">
+      </a>
+</li>
+<li title="Follow me on Linkedin.">
         <a class="button button--circle linkedin-button" itemprop="sameAs" href="https://www.linkedin.com/in/trshant" target="_blank">
-          <div class="icon"><svg fill="#000000" width="24px" height="24px" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg">
-  <path d="M260.096 155.648c0 27.307008-9.899008 50.516992-29.696 69.632-19.796992 19.115008-45.396992 28.672-76.8 28.672-30.036992 0-54.612992-9.556992-73.728-28.672-19.115008-19.115008-28.672-42.324992-28.672-69.632 0-28.672 9.556992-52.224 28.672-70.656 19.115008-18.432 44.372992-27.648 75.776-27.648 31.403008 0 56.32 9.216 74.752 27.648 18.432 18.432 28.331008 41.984 29.696 70.656 0 0 0 0 0 0m-202.752 808.96c0 0 0-632.832 0-632.832 0 0 196.608 0 196.608 0 0 0 0 632.832 0 632.832 0 0-196.608 0-196.608 0 0 0 0 0 0 0m313.344-430.08c0-58.708992-1.364992-126.292992-4.096-202.752 0 0 169.984 0 169.984 0 0 0 10.24 88.064 10.24 88.064 0 0 4.096 0 4.096 0 40.96-68.267008 105.812992-102.4 194.56-102.4 68.267008 0 123.220992 22.868992 164.864 68.608 41.643008 45.739008 62.464 113.664 62.464 203.776 0 0 0 374.784 0 374.784 0 0-196.608 0-196.608 0 0 0 0-350.208 0-350.208 0-91.476992-33.451008-137.216-100.352-137.216-47.787008 0-81.236992 24.576-100.352 73.728-4.096 8.192-6.144 24.576-6.144 49.152 0 0 0 364.544 0 364.544 0 0-198.656 0-198.656 0 0 0 0-430.08 0-430.08 0 0 0 0 0 0" />
+          <div class="icon"><svg fill="#000000" width="24px" height="24px" viewbox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg">
+  <path d="M260.096 155.648c0 27.307008-9.899008 50.516992-29.696 69.632-19.796992 19.115008-45.396992 28.672-76.8 28.672-30.036992 0-54.612992-9.556992-73.728-28.672-19.115008-19.115008-28.672-42.324992-28.672-69.632 0-28.672 9.556992-52.224 28.672-70.656 19.115008-18.432 44.372992-27.648 75.776-27.648 31.403008 0 56.32 9.216 74.752 27.648 18.432 18.432 28.331008 41.984 29.696 70.656 0 0 0 0 0 0m-202.752 808.96c0 0 0-632.832 0-632.832 0 0 196.608 0 196.608 0 0 0 0 632.832 0 632.832 0 0-196.608 0-196.608 0 0 0 0 0 0 0m313.344-430.08c0-58.708992-1.364992-126.292992-4.096-202.752 0 0 169.984 0 169.984 0 0 0 10.24 88.064 10.24 88.064 0 0 4.096 0 4.096 0 40.96-68.267008 105.812992-102.4 194.56-102.4 68.267008 0 123.220992 22.868992 164.864 68.608 41.643008 45.739008 62.464 113.664 62.464 203.776 0 0 0 374.784 0 374.784 0 0-196.608 0-196.608 0 0 0 0-350.208 0-350.208 0-91.476992-33.451008-137.216-100.352-137.216-47.787008 0-81.236992 24.576-100.352 73.728-4.096 8.192-6.144 24.576-6.144 49.152 0 0 0 364.544 0 364.544 0 0-198.656 0-198.656 0 0 0 0-430.08 0-430.08 0 0 0 0 0 0"></path>
 </svg></div>
         </a>
-      </li><li title="Follow me on Github.">
+      </li>
+<li title="Follow me on Github.">
         <a class="button button--circle github-button" itemprop="sameAs" href="https://github.com/trshant" target="_blank">
-          <div class="icon"><svg fill="#000000" width="24px" height="24px" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg">
-  <path class="svgpath" data-index="path_0" fill="#272636" d="M0 525.2c0 223.6 143.3 413.7 343 483.5 26.9 6.8 22.8-12.4 22.8-25.4l0-88.7c-155.3 18.2-161.5-84.6-172-101.7-21.1-36-70.8-45.2-56-62.3 35.4-18.2 71.4 4.6 113.1 66.3 30.2 44.7 89.1 37.2 119 29.7 6.5-26.9 20.5-50.9 39.7-69.6C248.8 728.2 181.7 630 181.7 513.2c0-56.6 18.7-108.7 55.3-150.7-23.3-69.3 2.2-128.5 5.6-137.3 66.5-6 135.5 47.6 140.9 51.8 37.8-10.2 80.9-15.6 129.1-15.6 48.5 0 91.8 5.6 129.8 15.9 12.9-9.8 77-55.8 138.8-50.2 3.3 8.8 28.2 66.7 6.3 135 37.1 42.1 56 94.6 56 151.4 0 117-67.5 215.3-228.8 243.7 26.9 26.6 43.6 63.4 43.6 104.2l0 128.8c0.9 10.3 0 20.5 17.2 20.5C878.1 942.4 1024 750.9 1024 525.3c0-282.9-229.3-512-512-512C229.1 13.2 0 242.3 0 525.2L0 525.2z" />
+          <div class="icon">
+<svg fill="#000000" width="24px" height="24px" viewbox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg">
+  <path class="svgpath" data-index="path_0" fill="#272636" d="M0 525.2c0 223.6 143.3 413.7 343 483.5 26.9 6.8 22.8-12.4 22.8-25.4l0-88.7c-155.3 18.2-161.5-84.6-172-101.7-21.1-36-70.8-45.2-56-62.3 35.4-18.2 71.4 4.6 113.1 66.3 30.2 44.7 89.1 37.2 119 29.7 6.5-26.9 20.5-50.9 39.7-69.6C248.8 728.2 181.7 630 181.7 513.2c0-56.6 18.7-108.7 55.3-150.7-23.3-69.3 2.2-128.5 5.6-137.3 66.5-6 135.5 47.6 140.9 51.8 37.8-10.2 80.9-15.6 129.1-15.6 48.5 0 91.8 5.6 129.8 15.9 12.9-9.8 77-55.8 138.8-50.2 3.3 8.8 28.2 66.7 6.3 135 37.1 42.1 56 94.6 56 151.4 0 117-67.5 215.3-228.8 243.7 26.9 26.6 43.6 63.4 43.6 104.2l0 128.8c0.9 10.3 0 20.5 17.2 20.5C878.1 942.4 1024 750.9 1024 525.3c0-282.9-229.3-512-512-512C229.1 13.2 0 242.3 0 525.2L0 525.2z"></path>
 </svg>
 </div>
         </a>
-      </li><li title="Follow me on npm.">
+      </li>
+<li title="Follow me on npm.">
         <a class="button button--circle npm-button" itemprop="sameAs" href="https://www.npmjs.com/~trshant" target="_blank">
-          <div class="icon"><?xml version="1.0" encoding="UTF-8"?>
-<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 48 48" version="1.1" width="24px" height="24px">
+          <div class="icon">
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewbox="0 0 48 48" version="1.1" width="24px" height="24px">
 <g id="surface1">
-<path style=" fill:#D50000;" d="M 0 15 L 48 15 L 48 32 L 24 32 L 24 35 L 13 35 L 13 32 L 0 32 Z "/>
-<path style=" fill:#FFFFFF;" d="M 3 29 L 8 29 L 8 21 L 11 21 L 11 29 L 13 29 L 13 18 L 3 18 Z "/>
-<path style=" fill:#FFFFFF;" d="M 16 18 L 16 32 L 21 32 L 21 29 L 26 29 L 26 18 Z M 24 26 L 21 26 L 21 21 L 24 21 Z "/>
-<path style=" fill:#FFFFFF;" d="M 29 18 L 29 29 L 34 29 L 34 21 L 37 21 L 37 29 L 40 29 L 40 21 L 43 21 L 43 29 L 45 29 L 45 18 Z "/>
+<path style=" fill:#D50000;" d="M 0 15 L 48 15 L 48 32 L 24 32 L 24 35 L 13 35 L 13 32 L 0 32 Z "></path>
+<path style=" fill:#FFFFFF;" d="M 3 29 L 8 29 L 8 21 L 11 21 L 11 29 L 13 29 L 13 18 L 3 18 Z "></path>
+<path style=" fill:#FFFFFF;" d="M 16 18 L 16 32 L 21 32 L 21 29 L 26 29 L 26 18 Z M 24 26 L 21 26 L 21 21 L 24 21 Z "></path>
+<path style=" fill:#FFFFFF;" d="M 29 18 L 29 29 L 34 29 L 34 21 L 37 21 L 37 29 L 40 29 L 40 21 L 43 21 L 43 29 L 45 29 L 45 18 Z "></path>
 </g>
 </svg>
 </div>
         </a>
-      </li></ul>
+      </li>
+</ul>
 </div>
 </div>
-    </div><div class="site-info mt-2">
+    </div>
+<div class="site-info mt-2">
       <div>© Trshant's Ramblings 2019,
-        Powered by <a title="Jekyll is a simple, blog-aware, static site generator." href="http://jekyllrb.com/">Jekyll</a> & <a
-        title="TeXt is a super customizable Jekyll theme." href="https://github.com/kitian616/jekyll-TeXt-theme">TeXt Theme</a>.
+        Powered by <a title="Jekyll is a simple, blog-aware, static site generator." href="http://jekyllrb.com/">Jekyll</a> &amp; <a title="TeXt is a super customizable Jekyll theme." href="https://github.com/kitian616/jekyll-TeXt-theme">TeXt Theme</a>.
       </div>
     </div>
   </div>
-</footer></div></div>
-    </div><script>(function() {
+</footer>
+</div>
+</div>
+    </div>
+<script>(function() {
   var SOURCES = window.TEXT_VARIABLES.sources;
   window.Lazyload.js(SOURCES.jquery, function() {
     var $body = $('body'), $window = $(window);
@@ -562,7 +537,8 @@ eyJoaXN0b3J5IjpbLTM2NjM3MDQyMSwxNTgwNzYzMTQ4XX0=
     $.fn.modal = modal;
   });
 })();
-</script><div class="modal modal--overflow page__search-modal d-print-none js-page-search-modal"><script>
+</script><div class="modal modal--overflow page__search-modal d-print-none js-page-search-modal">
+<script>
 (function () {
   var SOURCES = window.TEXT_VARIABLES.sources;
   window.Lazyload.js(SOURCES.jquery, function() {
@@ -654,7 +630,7 @@ eyJoaXN0b3J5IjpbLTM2NjM3MDQyMSwxNTgwNzYzMTQ4XX0=
     <div class="search-bar">
       <div class="search-box js-search-box">
         <div class="search-box__icon-search"><i class="fas fa-search"></i></div>
-        <input type="text" />
+        <input type="text">
         <div class="search-box__icon-clear js-icon-clear">
           <a><i class="fas fa-times"></i></a>
         </div>
@@ -792,7 +768,9 @@ window.Lazyload.js([SOURCES.jquery, PAHTS.search_js], function() {
     itemIndex >= 0 && (lastActiveIndex = activeIndex, activeIndex = itemIndex, updateResultItems());
   });
 });
-</script></div></div>
+</script>
+</div>
+</div>
 
 
 <script>(function() {

@@ -1,10 +1,10 @@
 <!DOCTYPE html><html lang="en">
   <head><meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"><title>Building a compiler-part1 AST - Trshant's Ramblings</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"><title>Web Assembly and my opinion on it - Trshant's Ramblings</title>
 
-<meta name="description" content="Building blocks of a compiler:Copied from https://www.programcreek.com/2011/02/how-compiler-works/  A compiler is a computer program that transforms source c...">
-<link rel="canonical" href="https://trshant.dev/2019/03/02/Compiler-I-AST.html"><link rel="alternate" type="application/rss+xml" title="Trshant's Ramblings" href="/feed.xml"><!-- start favicons snippet, use https://realfavicongenerator.net/ --><link rel="apple-touch-icon" sizes="180x180" href="/assets/apple-touch-icon.png"><link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32x32.png"><link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon-16x16.png"><link rel="manifest" href="/assets/site.webmanifest"><link rel="mask-icon" href="/assets/safari-pinned-tab.svg" color="#fc4d50"><link rel="shortcut icon" href="/assets/favicon.ico">
+<meta name="description" content="Since I heard about webASsembly, i have been enthralled by it. So i did some investigating on my own as to WA being faster than JavaScript. In short, what i ...">
+<link rel="canonical" href="https://trshant.dev/2019/05/18/opinion-on-web-assembly.html"><link rel="alternate" type="application/rss+xml" title="Trshant's Ramblings" href="/feed.xml"><!-- start favicons snippet, use https://realfavicongenerator.net/ --><link rel="apple-touch-icon" sizes="180x180" href="/assets/apple-touch-icon.png"><link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32x32.png"><link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon-16x16.png"><link rel="manifest" href="/assets/site.webmanifest"><link rel="mask-icon" href="/assets/safari-pinned-tab.svg" color="#fc4d50"><link rel="shortcut icon" href="/assets/favicon.ico">
 
 <meta name="msapplication-TileColor" content="#ffc40d"><meta name="msapplication-config" content="/assets/browserconfig.xml">
 
@@ -278,132 +278,47 @@
 
               <div class="col-main cell cell--auto"><!-- start custom main top snippet -->
 
-<!-- end custom main top snippet --><article itemscope itemtype="http://schema.org/Article"><div class="article__header"><header><h1>Building a compiler-part1 AST</h1></header><span class="split-space">&nbsp;</span>
+<!-- end custom main top snippet --><article itemscope itemtype="http://schema.org/Article"><div class="article__header"><header><h1>Web Assembly and my opinion on it</h1></header><span class="split-space">&nbsp;</span>
           <a class="edit-on-github"
             title="Edit on Github"
-            href="https://github.com/trshant/trshant.github.io/tree/master/_posts/2019-03-03-Compiler-I-AST.md">
-            <i class="far fa-edit"></i></a></div><meta itemprop="headline" content="Building a compiler-part1 AST"><div class="article__info clearfix"><ul class="left-col menu"><li>
+            href="https://github.com/trshant/trshant.github.io/tree/master/_posts/2019-05-19-opinion-on-web-assembly.md">
+            <i class="far fa-edit"></i></a></div><meta itemprop="headline" content="Web Assembly and my opinion on it"><div class="article__info clearfix"><ul class="left-col menu"><li>
               <a class="button button--secondary button--pill button--sm"
-                href="/archive.html?tag=CompSci">CompSci</a>
+                href="/archive.html?tag=programming">programming</a>
             </li><li>
               <a class="button button--secondary button--pill button--sm"
-                href="/archive.html?tag=compilerTheory">compilerTheory</a>
+                href="/archive.html?tag=webDevelopment">webDevelopment</a>
             </li><li>
               <a class="button button--secondary button--pill button--sm"
-                href="/archive.html?tag=AST">AST</a>
-            </li></ul><ul class="right-col menu"><li><i class="far fa-calendar-alt"></i> <span>Mar 02, 2019</span>
-            </li></ul></div><meta itemprop="author" content="Trshant Bhat"/><meta itemprop="datePublished" content="2019-03-02T14:30:00+01:00">
-    <meta itemprop="keywords" content="CompSci,compilerTheory,AST"><div class="js-article-content"><div class="layout--article"><!-- start custom article top snippet -->
+                href="/archive.html?tag=webassembly">webassembly</a>
+            </li></ul><ul class="right-col menu"><li><i class="far fa-calendar-alt"></i> <span>May 18, 2019</span>
+            </li></ul></div><meta itemprop="author" content="Trshant Bhat"/><meta itemprop="datePublished" content="2019-05-18T20:31:43+02:00">
+    <meta itemprop="keywords" content="programming,webDevelopment,webassembly"><div class="js-article-content"><div class="layout--article"><!-- start custom article top snippet -->
 
-<!-- end custom article top snippet --><div class="article__content" itemprop="articleBody"><p><strong>Building blocks of a compiler</strong>:
-Copied from <a href="https://www.programcreek.com/2011/02/how-compiler-works/">https://www.programcreek.com/2011/02/how-compiler-works/</a></p>
-<blockquote>
-  <p>A compiler is a computer program that transforms source code written in a high-level programming language into a lower level language.</p>
-</blockquote>
+<!-- end custom article top snippet --><div class="article__content" itemprop="articleBody"><p>Since I heard about webASsembly, i have been enthralled by it. So i did some investigating on my own as to WA being faster than JavaScript. 
+In short, what i did was follow <a href="https://medium.freecodecamp.org/get-started-with-webassembly-using-only-14-lines-of-javascript-b37b6aaca1e4">Daniel Simmons’s</a> awesome intro tute, but write some JS to benchmark some code.</p>
 
-<p>Here is what happens in a compiler</p>
+<p>First i googled the code to benchmark the code and ended up at a <a href="https://stackoverflow.com/questions/4784745/how-can-i-measure-the-execution-time-of-a-script">stackoverflow</a> post.</p>
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span>  <span class="nx">time_my_script</span><span class="p">(</span><span class="nx">script</span><span class="p">)</span> <span class="p">{</span>
+	<span class="kd">var</span>  <span class="nx">start</span>  <span class="o">=</span>  <span class="k">new</span>  <span class="nb">Date</span><span class="p">();</span>
+	<span class="nx">script</span><span class="p">();</span>
+	<span class="k">return</span>  <span class="k">new</span>  <span class="nb">Date</span><span class="p">()</span> <span class="o">-</span>  <span class="nx">start</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+<p>The native javascript written to check the webassembly version was:</p>
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span>  <span class="nx">js_squarer</span><span class="p">(</span><span class="nx">num</span><span class="p">)</span> <span class="p">{</span>
+	<span class="k">return</span>  <span class="nx">num</span>  <span class="o">*</span>  <span class="nx">num</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+<p>I found that the native javascript version was consistently 3 times faster than the webassembly version. This lack of speed makes it clear to me that WA is not yet matured enough to be considered to replace JS in web development projects. However it can and will play a huge part in porting legacy projects to the web interface. <br />
+I agree with <a href="https://lemire.me/blog/2018/10/23/is-webassembly-faster-than-javascript/">Lemire’s</a> conclusions and think that well written javascript will be faster than webassembly at this moment, May 2019.</p>
 
-<pre><code class="language-mermaid">graph TD
-classDef className fill:#f9f,stroke:#333,stroke-width:4px;
-class I,O className;
-I["Input File"]
-
-I--&gt;A["Lexical Analysis"]
-subgraph Compiler start
-subgraph Arriving at AST
-A--&gt;B["Syntax Analysis"]
-end
-B--&gt;C["Semantic Analysis"]
-C--&gt;D["IR Generation"]
-D--&gt;E["IR Optimization"]
-E--&gt;F["Code Generation"]
-F--&gt;G["Optimization"]
-end
-G--&gt;O["Executable"]
-</code></pre>
-<p>This post covers Lexical Analyser and Syntax analyser.</p>
-
-<p>Below diagram is based on <a href="https://medium.com/basecs/leveling-up-ones-parsing-game-with-asts-d7a6fc2400ff">Vaidehi Joshi’s</a> awesome post on ASTs:
-As she has, we will be using the same example for our input <code class="highlighter-rouge">" 5+(1*12) "</code>. This will form a  continuity if you decide to visit her blogpost.</p>
-
-<p><strong>Lexical Analysis</strong>
-The lexical analyzer breaks the input file or sentence into a series of tokens, by removing or adding any whitespace or comments in the source code. So it should have these stages:</p>
-
-<pre><code class="language-mermaid">sequenceDiagram
-
-participant C  as Code   
-participant S  as Scanner
-participant T  as Tokeniser
-participant SA as Syntax Analyser  
-
-C -&gt;&gt; S  : String
-Note over C: " 5+(1*12) "
-Note over S: Strip text &lt;br/&gt;"5+(1*12)"
-S -&gt;&gt; T  : lexemes  
-Note over T: Convert to Tokens&lt;br/&gt;["5","+","(","1","*","12",")"]
-T -&gt;&gt; SA : Tokenised    
-</code></pre>
-
-<p><strong>Syntax Analysis</strong>
-At its very basic, a Syntax analyser converts tokens to a parse tree by looking at a set of rules. This is a simplification so that we can understand the basic functionlity of this stage of a compiler.
-There are 2 stages to this:</p>
-<ol>
-  <li>Getting a parse tree out.</li>
-  <li>Optimising the parse tree.</li>
-</ol>
-
-<p>Again, do have a look at <a href="https://medium.com/basecs/grammatically-rooting-oneself-with-parse-trees-ec9daeda7dad">Vaidehi Joshi’s</a> fantastic post on parse trees. Its extremely well written.</p>
-
-<pre><code class="language-mermaid">sequenceDiagram
-participant T as Lexical Analyser   
-participant SA1 as CST
-participant SA2 as AST 
-
-T -&gt;&gt; SA1 : Tokenised   
-Note over T:["5","+","(","1","*","12",")"]
-Note over SA1: Create Parse Tree&lt;br/&gt;See CST figure below.
-SA1  -&gt;&gt; SA2 : CST
-Note over SA2: Optimise Parse Tree&lt;br/&gt;See AST figure below.
-SA2  -&gt;&gt; Synaptic Analyser: AST 
-</code></pre>
-
-<ul>
-  <li><strong>CST : Concrete Syntax tree</strong> - So This stage comes up with a parse tree. How does it do that? It looks at the expression and sees which rule it will agree with. This “see which rule it will agree with” bit will depend on which kind of token parsing is being used.
-    <pre><code class="language-mermaid">  graph TD
-      A1["Exp"]
-      A1--&gt;A[5]
-      A1--&gt;B["+"]
-      A1--&gt;A2[Exp]
-      A2--&gt;C["("]
-      A2--&gt;A3["Exp"]
-      A2--&gt;G[")"]
-      A3--&gt;D[1]
-      A3--&gt;E["*"]
-      A3--&gt;F[12]
-</code></pre>
-    <p>We can see that the expression we started out with was divided into parts and further into more parts. This above tree tells us how it was divided.</p>
-  </li>
-  <li><strong>AST : Abstract Syntax tree</strong> As we can see, the parse tree is fabulous and true to the rules of the language. But its too verbose (too many nodes!). We try and solve that problem with Abstract Syntax tree where we throw out what is not needed and keep the core of the program. The main aim of this part is to reduce the cruft and keep the core of the code as below.
-    <pre><code class="language-mermaid">  graph TD
-      B["+"]
-      B--&gt;A[5]
-          B--&gt;E(*)
-          E--&gt;D(1)
-          E--&gt;F(12)
-</code></pre>
-  </li>
-</ul>
-
-<p>To understand and see these in action, Do try out <a href="https://astexplorer.net/">https://astexplorer.net/</a>. This site is amazing and will make you see in action building of an AST with code.  Read <a href="https://blog.buildo.io/a-tour-of-abstract-syntax-trees-906c0574a067">this</a> to figure out the why’s and what’s.</p>
-
-<p>Many thanks to the creators of  <a href="https://mermaidjs.github.io">https://mermaidjs.github.io</a> for the sequence diagram. It is truly a pleasure to work with.</p>
-
-<p>The next post in this series will be the implementation of this in Typescript.</p>
+<p>Please find the complete code i used to check WA on github <a href="https://gist.github.com/Trshant/ad99e7bca9f0dbb83e0d4bd50334fa9d">gist</a>.</p>
 
 <blockquote>
   <p>Written with <a href="https://stackedit.io/">StackEdit</a>.
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTM2NjM3MDQyMSwxNTgwNzYzMTQ4XX0=
+eyJoaXN0b3J5IjpbOTcwODY0OTUyXX0=
 --></p>
 </blockquote>
 </div><section class="article__sharing d-print-none"><!-- AddToAny BEGIN -->
@@ -415,7 +330,7 @@ eyJoaXN0b3J5IjpbLTM2NjM3MDQyMSwxNTgwNzYzMTQ4XX0=
 <a class="a2a_button_linkedin"></a>
 </div>
 <script async src="https://static.addtoany.com/menu/page.js"></script>
-<!-- AddToAny END --></section><div class="d-print-none"><footer class="article__footer"><meta itemprop="dateModified" content="2019-03-02T14:30:00+01:00"><!-- start custom article footer snippet -->
+<!-- AddToAny END --></section><div class="d-print-none"><footer class="article__footer"><meta itemprop="dateModified" content="2019-05-18T20:31:43+02:00"><!-- start custom article footer snippet -->
 
 <!-- end custom article footer snippet --><div class="article__subscribe"><div class="subscribe"><i class="fas fa-rss"></i> <a type="application/rss+xml" href="/feed.xml">Subscribe</a></div></div><div class="article__license"><div class="license">
     <p>This work is licensed under a <a itemprop="license" rel="license" href="https://creativecommons.org/licenses/by-nc/4.0/">Attribution-NonCommercial 4.0 International</a> license.
@@ -423,7 +338,7 @@ eyJoaXN0b3J5IjpbLTM2NjM3MDQyMSwxNTgwNzYzMTQ4XX0=
         <img alt="Attribution-NonCommercial 4.0 International" src="https://i.creativecommons.org/l/by-nc/4.0/88x31.png" />
       </a>
     </p>
-  </div></div></footer><div class="article__section-navigator clearfix"><div class="previous"><span>PREVIOUS</span><a href="/2019/02/05/bloom-filter.html">Implementing A Bloom Filter</a></div><div class="next"><span>NEXT</span><a href="/2019/03/07/prefix-tree.html">Implementing a prefix tree in typescript</a></div></div></div>
+  </div></div></footer><div class="article__section-navigator clearfix"><div class="previous"><span>PREVIOUS</span><a href="/2019/04/24/Docker-setup-LAMP.html">Getting a LAMP dev setup using docker</a></div><div class="next"><span>NEXT</span><a href="/2019/09/01/a-small-note-on-lambda-calculus.html">a small note on &lambda; calculus and Church Encoding</a></div></div></div>
 
 </div>
 

@@ -1,10 +1,10 @@
 <!DOCTYPE html><html lang="en">
   <head><meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"><title>Building a compiler-part1 AST - Trshant's Ramblings</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"><title>a small note on &lambda; calculus and Church Encoding - Trshant's Ramblings</title>
 
-<meta name="description" content="Building blocks of a compiler:Copied from https://www.programcreek.com/2011/02/how-compiler-works/  A compiler is a computer program that transforms source c...">
-<link rel="canonical" href="https://trshant.dev/2019/03/02/Compiler-I-AST.html"><link rel="alternate" type="application/rss+xml" title="Trshant's Ramblings" href="/feed.xml"><!-- start favicons snippet, use https://realfavicongenerator.net/ --><link rel="apple-touch-icon" sizes="180x180" href="/assets/apple-touch-icon.png"><link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32x32.png"><link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon-16x16.png"><link rel="manifest" href="/assets/site.webmanifest"><link rel="mask-icon" href="/assets/safari-pinned-tab.svg" color="#fc4d50"><link rel="shortcut icon" href="/assets/favicon.ico">
+<meta name="description" content="Lambda Calculus ( called λC from now on  ) is something that every programmer reads and wonders about at a point of her career.From Wikipedia  Lambda calculu...">
+<link rel="canonical" href="https://trshant.dev/2019/09/01/a-small-note-on-lambda-calculus.html"><link rel="alternate" type="application/rss+xml" title="Trshant's Ramblings" href="/feed.xml"><!-- start favicons snippet, use https://realfavicongenerator.net/ --><link rel="apple-touch-icon" sizes="180x180" href="/assets/apple-touch-icon.png"><link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32x32.png"><link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon-16x16.png"><link rel="manifest" href="/assets/site.webmanifest"><link rel="mask-icon" href="/assets/safari-pinned-tab.svg" color="#fc4d50"><link rel="shortcut icon" href="/assets/favicon.ico">
 
 <meta name="msapplication-TileColor" content="#ffc40d"><meta name="msapplication-config" content="/assets/browserconfig.xml">
 
@@ -278,132 +278,149 @@
 
               <div class="col-main cell cell--auto"><!-- start custom main top snippet -->
 
-<!-- end custom main top snippet --><article itemscope itemtype="http://schema.org/Article"><div class="article__header"><header><h1>Building a compiler-part1 AST</h1></header><span class="split-space">&nbsp;</span>
+<!-- end custom main top snippet --><article itemscope itemtype="http://schema.org/Article"><div class="article__header"><header><h1>a small note on &lambda; calculus and Church Encoding</h1></header><span class="split-space">&nbsp;</span>
           <a class="edit-on-github"
             title="Edit on Github"
-            href="https://github.com/trshant/trshant.github.io/tree/master/_posts/2019-03-03-Compiler-I-AST.md">
-            <i class="far fa-edit"></i></a></div><meta itemprop="headline" content="Building a compiler-part1 AST"><div class="article__info clearfix"><ul class="left-col menu"><li>
+            href="https://github.com/trshant/trshant.github.io/tree/master/_posts/2019-09-02-a-small-note-on-lambda-calculus.md">
+            <i class="far fa-edit"></i></a></div><meta itemprop="headline" content="a small note on &lambda; calculus and Church Encoding"><div class="article__info clearfix"><ul class="left-col menu"><li>
               <a class="button button--secondary button--pill button--sm"
-                href="/archive.html?tag=CompSci">CompSci</a>
+                href="/archive.html?tag=computation">computation</a>
             </li><li>
               <a class="button button--secondary button--pill button--sm"
-                href="/archive.html?tag=compilerTheory">compilerTheory</a>
+                href="/archive.html?tag=ComputerScienceTheory">ComputerScienceTheory</a>
             </li><li>
               <a class="button button--secondary button--pill button--sm"
-                href="/archive.html?tag=AST">AST</a>
-            </li></ul><ul class="right-col menu"><li><i class="far fa-calendar-alt"></i> <span>Mar 02, 2019</span>
-            </li></ul></div><meta itemprop="author" content="Trshant Bhat"/><meta itemprop="datePublished" content="2019-03-02T14:30:00+01:00">
-    <meta itemprop="keywords" content="CompSci,compilerTheory,AST"><div class="js-article-content"><div class="layout--article"><!-- start custom article top snippet -->
+                href="/archive.html?tag=lambdaCalculus">lambdaCalculus</a>
+            </li></ul><ul class="right-col menu"><li><i class="far fa-calendar-alt"></i> <span>Sep 01, 2019</span>
+            </li></ul></div><meta itemprop="author" content="Trshant Bhat"/><meta itemprop="datePublished" content="2019-09-01T20:31:43+02:00">
+    <meta itemprop="keywords" content="computation,ComputerScienceTheory,lambdaCalculus"><div class="js-article-content"><div class="layout--article"><!-- start custom article top snippet -->
 
-<!-- end custom article top snippet --><div class="article__content" itemprop="articleBody"><p><strong>Building blocks of a compiler</strong>:
-Copied from <a href="https://www.programcreek.com/2011/02/how-compiler-works/">https://www.programcreek.com/2011/02/how-compiler-works/</a></p>
+<!-- end custom article top snippet --><div class="article__content" itemprop="articleBody"><p>Lambda Calculus ( called <strong>λC</strong> from now on  ) is something that every programmer reads and wonders about at a point of her career.</p>
+
+<p>From Wikipedia</p>
 <blockquote>
-  <p>A compiler is a computer program that transforms source code written in a high-level programming language into a lower level language.</p>
+  <p>Lambda calculus (also written as λ-calculus) is a formal system in mathematical logic for expressing computation based on function abstraction and application using variable binding and substitution. It is a universal model of computation that can be used to simulate any Turing machine.</p>
 </blockquote>
 
-<p>Here is what happens in a compiler</p>
-
-<pre><code class="language-mermaid">graph TD
-classDef className fill:#f9f,stroke:#333,stroke-width:4px;
-class I,O className;
-I["Input File"]
-
-I--&gt;A["Lexical Analysis"]
-subgraph Compiler start
-subgraph Arriving at AST
-A--&gt;B["Syntax Analysis"]
-end
-B--&gt;C["Semantic Analysis"]
-C--&gt;D["IR Generation"]
-D--&gt;E["IR Optimization"]
-E--&gt;F["Code Generation"]
-F--&gt;G["Optimization"]
-end
-G--&gt;O["Executable"]
-</code></pre>
-<p>This post covers Lexical Analyser and Syntax analyser.</p>
-
-<p>Below diagram is based on <a href="https://medium.com/basecs/leveling-up-ones-parsing-game-with-asts-d7a6fc2400ff">Vaidehi Joshi’s</a> awesome post on ASTs:
-As she has, we will be using the same example for our input <code class="highlighter-rouge">" 5+(1*12) "</code>. This will form a  continuity if you decide to visit her blogpost.</p>
-
-<p><strong>Lexical Analysis</strong>
-The lexical analyzer breaks the input file or sentence into a series of tokens, by removing or adding any whitespace or comments in the source code. So it should have these stages:</p>
-
-<pre><code class="language-mermaid">sequenceDiagram
-
-participant C  as Code   
-participant S  as Scanner
-participant T  as Tokeniser
-participant SA as Syntax Analyser  
-
-C -&gt;&gt; S  : String
-Note over C: " 5+(1*12) "
-Note over S: Strip text &lt;br/&gt;"5+(1*12)"
-S -&gt;&gt; T  : lexemes  
-Note over T: Convert to Tokens&lt;br/&gt;["5","+","(","1","*","12",")"]
-T -&gt;&gt; SA : Tokenised    
-</code></pre>
-
-<p><strong>Syntax Analysis</strong>
-At its very basic, a Syntax analyser converts tokens to a parse tree by looking at a set of rules. This is a simplification so that we can understand the basic functionlity of this stage of a compiler.
-There are 2 stages to this:</p>
+<p><strong>λC</strong> expresses the process of computation, with just 4 parts:</p>
 <ol>
-  <li>Getting a parse tree out.</li>
-  <li>Optimising the parse tree.</li>
+  <li>single letter variables</li>
+  <li>parantheses ()</li>
+  <li>Lambda λ</li>
+  <li>Dot .</li>
 </ol>
 
-<p>Again, do have a look at <a href="https://medium.com/basecs/grammatically-rooting-oneself-with-parse-trees-ec9daeda7dad">Vaidehi Joshi’s</a> fantastic post on parse trees. Its extremely well written.</p>
+<p>It uses these 4 parts to write expressions. Let me illustrate this with an example:</p>
 
-<pre><code class="language-mermaid">sequenceDiagram
-participant T as Lexical Analyser   
-participant SA1 as CST
-participant SA2 as AST 
+<blockquote>
+  <p>( λy.x(yz) )(ab)</p>
+</blockquote>
 
-T -&gt;&gt; SA1 : Tokenised   
-Note over T:["5","+","(","1","*","12",")"]
-Note over SA1: Create Parse Tree&lt;br/&gt;See CST figure below.
-SA1  -&gt;&gt; SA2 : CST
-Note over SA2: Optimise Parse Tree&lt;br/&gt;See AST figure below.
-SA2  -&gt;&gt; Synaptic Analyser: AST 
-</code></pre>
+<p>In the above function ( which is an expression ), the <code class="highlighter-rouge">λy</code> is the head.<code class="highlighter-rouge">x(yz)</code> is the body ( which is an expression ) and <code class="highlighter-rouge">ab</code> which is an argument ( also an expression ).</p>
 
-<ul>
-  <li><strong>CST : Concrete Syntax tree</strong> - So This stage comes up with a parse tree. How does it do that? It looks at the expression and sees which rule it will agree with. This “see which rule it will agree with” bit will depend on which kind of token parsing is being used.
-    <pre><code class="language-mermaid">  graph TD
-      A1["Exp"]
-      A1--&gt;A[5]
-      A1--&gt;B["+"]
-      A1--&gt;A2[Exp]
-      A2--&gt;C["("]
-      A2--&gt;A3["Exp"]
-      A2--&gt;G[")"]
-      A3--&gt;D[1]
-      A3--&gt;E["*"]
-      A3--&gt;F[12]
-</code></pre>
-    <p>We can see that the expression we started out with was divided into parts and further into more parts. This above tree tells us how it was divided.</p>
-  </li>
-  <li><strong>AST : Abstract Syntax tree</strong> As we can see, the parse tree is fabulous and true to the rules of the language. But its too verbose (too many nodes!). We try and solve that problem with Abstract Syntax tree where we throw out what is not needed and keep the core of the program. The main aim of this part is to reduce the cruft and keep the core of the code as below.
-    <pre><code class="language-mermaid">  graph TD
-      B["+"]
-      B--&gt;A[5]
-          B--&gt;E(*)
-          E--&gt;D(1)
-          E--&gt;F(12)
-</code></pre>
-  </li>
-</ul>
+<p>Lambda calculus resolves each expression using substitution.</p>
 
-<p>To understand and see these in action, Do try out <a href="https://astexplorer.net/">https://astexplorer.net/</a>. This site is amazing and will make you see in action building of an AST with code.  Read <a href="https://blog.buildo.io/a-tour-of-abstract-syntax-trees-906c0574a067">this</a> to figure out the why’s and what’s.</p>
+<p>But before we dive into that, there is something else I should go into. <strong>Church Numerals</strong>: Church numerals are the encoded natural numbers ( encoded using chuch encoding ). We can define a church numeral as a higher-order function which takes a single argument function as an argument and returns another single argument function.</p>
 
-<p>Many thanks to the creators of  <a href="https://mermaidjs.github.io">https://mermaidjs.github.io</a> for the sequence diagram. It is truly a pleasure to work with.</p>
+<p>Let us see the numbers and their lambda expression equivalents:</p>
 
-<p>The next post in this series will be the implementation of this in Typescript.</p>
+<table>
+  <thead>
+    <tr>
+      <th>number</th>
+      <th style="text-align: right">Lambda expression</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>0</td>
+      <td style="text-align: right">λf.λx. x</td>
+    </tr>
+    <tr>
+      <td>1</td>
+      <td style="text-align: right">λf.λx. f x</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td style="text-align: right">λf.λx. f (f x)</td>
+    </tr>
+    <tr>
+      <td>3</td>
+      <td style="text-align: right">λf.λx. f (f (f x))</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>By looking at the above we can conclude that if 1 is (partially) encoded as a function of <code class="highlighter-rouge">x</code>, then 3 is encoded as the same function applied thrice to the same <code class="highlighter-rouge">x</code>. In other words we could say ‘n’ is encoded as a function ‘f’ composed ‘n’ times. So if we were to write a function that would add 1 to a numeral, it would be just be applying the function one more time (or composing it one more time).</p>
+<blockquote>
+  <p>SUCC := λn.λf.λx.f (n f x)</p>
+</blockquote>
+
+<p>Since we have defined it, let us see how we can give the <code class="highlighter-rouge">SUCC</code> function <code class="highlighter-rouge">0</code> as the argument and see if it resolves to <code class="highlighter-rouge">1</code>.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>SUCC := (λn.λf.λx.f (n f x))(λf.λx. x)
+      = λf.λx.f ( (λf.λx. x) f x)
+      = λf.λx.f ( (   λx. x)   x)
+      = λf.λx.f (              x)
+      = λf.λx.f x 
+      = 1
+</code></pre></div></div>
+
+<p>Similarly, we resolve for <code class="highlighter-rouge">2</code></p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>SUCC := (λn.λf.λx.f (n f x))(λf.λx.f x)
+      = λf.λx.f ( (λf.λx.f x) f x)
+      = λf.λx.f ( (   λx.f x)   x)
+      = λf.λx.f ( (      f x)   x)
+      = λf.λx.f (f x) 
+      = 2
+</code></pre></div></div>
+
+<p>Now since we have defined an increment function (<code class="highlighter-rouge">SUCC</code>), we should define a function that adds 2 numbers. Going with the ‘composing’ idea, we can say that adding 2 mumbers <code class="highlighter-rouge">m</code> and <code class="highlighter-rouge">n</code> could be defined as applying a function <code class="highlighter-rouge">f</code>, <code class="highlighter-rouge">n</code> times to the same function <code class="highlighter-rouge">f</code> applied <code class="highlighter-rouge">m</code> times. Writing that down, we get:</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ADD := λm.λf.λn.λx.m f( n f (x))
+</code></pre></div></div>
+
+<p>Multiplication two numbers <code class="highlighter-rouge">a</code> and <code class="highlighter-rouge">b</code> would be defined as applying a function <code class="highlighter-rouge">f</code>, <code class="highlighter-rouge">n</code> times and then doing this <code class="highlighter-rouge">m</code> times over. Defining things in λC, we get:</p>
+<blockquote>
+  <p>MUL :⇔ λa.λb.λc.a(bc)</p>
+</blockquote>
+
+<p>Lets try and resolve this one multiplying 2 and 3
+MUL 2 3 := ( λa.λb.λc.a(bc) ) ( λg.λx. g (g x) ) ( λh.λx. h (h (h x)) )</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>MUL 2 3 := ( λa.λb.λc.a(bc) ) ( λg.λx. g (g x) ) ( λh.λx. h (h (h x)))
+         = ( λc . ( λg.λx. g (g x) )( ( λh.λx. h (h (h x))) c ) )
+         = ( λc . ( λg.λx. g (g x) )(      λx. c (c (c x)))     )
+         = ( λc . (     λx. (λx. c (c (c x))) ((λx. c (c (c x))) x) )     )
+         = ( λc . (     λx. (λx. c (c (c x))) ( c (c (c x))))     )
+         = λc . λx. (c (c (c ( c (c (c x))))))      
+</code></pre></div></div>
+
+<p>So we see how, just by the process of resolving using substitution, we get the final expression where the form is the encoding for 6.</p>
+
+<p>We still have the subtraction to defined, But that will be another post - This one took quite some time to wrap my head around!</p>
+
+<p>Read More:<br />
+<a href="http://vanderwijk.info/blog/pure-lambda-calculus-python/">λ calculus in python code</a>: this <a href="http://matt.might.net/articles/python-church-y-combinator/">link</a>
+will explain all the code better.</p>
+
+<p>Main References:<br />
+<a href="https://en.wikipedia.org/wiki/Church_encoding">Wikipedia: Church Encoding</a><br />
+<a href="https://en.wikipedia.org/wiki/Lambda_calculus">Wikipedia: Lambda Calculus</a></p>
+
+<p>Links I regularly went back to when I needed some gentle explanations ( when Wikipedia got too terse for me! ):<br />
+<a href="http://bach.ai/lambda-calculus-for-absolute-dummies/">λC for dummies</a>: Amazingly well written note on λC.<br />
+<a href="https://math.stackexchange.com/a/595576">Stackoverflow answer for explanation of multiplication in λC</a></p>
+
+<p>Other Interesting Reads:<br />
+<a href="https://cstheory.stackexchange.com/a/36601">To understand λC in poetry</a>    <br />
+<a href="http://pages.cs.wisc.edu/~horwitz/CS704-NOTES/1.LAMBDA-CALCULUS.html">Class notes onλC</a></p>
 
 <blockquote>
   <p>Written with <a href="https://stackedit.io/">StackEdit</a>.
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTM2NjM3MDQyMSwxNTgwNzYzMTQ4XX0=
+eyJoaXN0b3J5IjpbLTgxODMwNjA2MywtMjAxMzU5MzYxMywxNj
+ExNDI4ODE5LDM4NTIzODM0N119
 --></p>
 </blockquote>
 </div><section class="article__sharing d-print-none"><!-- AddToAny BEGIN -->
@@ -415,7 +432,7 @@ eyJoaXN0b3J5IjpbLTM2NjM3MDQyMSwxNTgwNzYzMTQ4XX0=
 <a class="a2a_button_linkedin"></a>
 </div>
 <script async src="https://static.addtoany.com/menu/page.js"></script>
-<!-- AddToAny END --></section><div class="d-print-none"><footer class="article__footer"><meta itemprop="dateModified" content="2019-03-02T14:30:00+01:00"><!-- start custom article footer snippet -->
+<!-- AddToAny END --></section><div class="d-print-none"><footer class="article__footer"><meta itemprop="dateModified" content="2019-09-01T20:31:43+02:00"><!-- start custom article footer snippet -->
 
 <!-- end custom article footer snippet --><div class="article__subscribe"><div class="subscribe"><i class="fas fa-rss"></i> <a type="application/rss+xml" href="/feed.xml">Subscribe</a></div></div><div class="article__license"><div class="license">
     <p>This work is licensed under a <a itemprop="license" rel="license" href="https://creativecommons.org/licenses/by-nc/4.0/">Attribution-NonCommercial 4.0 International</a> license.
@@ -423,7 +440,7 @@ eyJoaXN0b3J5IjpbLTM2NjM3MDQyMSwxNTgwNzYzMTQ4XX0=
         <img alt="Attribution-NonCommercial 4.0 International" src="https://i.creativecommons.org/l/by-nc/4.0/88x31.png" />
       </a>
     </p>
-  </div></div></footer><div class="article__section-navigator clearfix"><div class="previous"><span>PREVIOUS</span><a href="/2019/02/05/bloom-filter.html">Implementing A Bloom Filter</a></div><div class="next"><span>NEXT</span><a href="/2019/03/07/prefix-tree.html">Implementing a prefix tree in typescript</a></div></div></div>
+  </div></div></footer><div class="article__section-navigator clearfix"><div class="previous"><span>PREVIOUS</span><a href="/2019/05/18/opinion-on-web-assembly.html">Web Assembly and my opinion on it</a></div></div></div>
 
 </div>
 
