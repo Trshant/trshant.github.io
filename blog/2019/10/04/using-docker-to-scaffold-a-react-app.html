@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="utf-8">
+  <meta name="generator" content="pandoc">
+  <meta name="viewport" content="width=device-width, initial-scale=0.5">
+  <title>Using docker to scaffold a React App</title>
+  <style type="text/css">code{white-space: pre;}</style>
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+<style>
+  body {
+    margin: auto 0;
+  }
+
+  .button {
+    border-radius: 2em !important;
+  }
+  @media (min-width: 768px) {
+    .container {
+      margin: 0 auto;
+      width: 800px;
+      font-size: 16px;
+      line-height: 130%;
+    }  
+  }
+  
+  .header {
+    width:100%;
+    background-color: black;
+    padding: 15px 5px;
+    color: white;
+  }
+  div.sourceCode {
+    padding-left: 4px;
+    border-left: 2px solid black;
+  }
+  ul.nav {
+    display: inline-flex;
+    list-style-type: none;
+  }
+  ul.nav li {
+    margin-left: 12px;  
+  }
+  ul.nav li a {
+    text-decoration: none;
+    color: white;
+  }
+  code {
+    font-size: 14px;
+    font-weight: 600;
+  }
+  </style>
+</head>
+<body>
+<div class="header">
+  Trshant's Rambling
+  <ul class="nav" >
+    <li><a href="/archive.html">Archives</a></li>
+    <li><a href="/resume.pdf">Resume</a></li>
+    <li><a href="/recipes.html">Recipes</a></li>
+  </ul>
+</div>
+
+<div class="container">
+<header>
+<h1 class="title">Using docker to scaffold a React App</h1>
+
+  <a class="button button-small" href="javascript: void(0)">blog</a>
+  <a class="button button-small" href="javascript: void(0)">docker</a>
+
+
+</header>
+<p>I am relearning react. I also installed docker to stop myself from installing other softwares on my laptop. So here i use docker to build a container which i can use to build a container with scaffolding for developing a react app.</p>
+<p>I have the nessacery files on git gist, so here goes:</p>
+<pre><code>git clone https://gist.github.com/Trshant/2cc6cf99749c979b8a1be5e39b45f757 react_docker</code></pre>
+<p>Think up a nice name for a project. I am going to call it <code>learn-react</code></p>
+<p>Then change directories and set up the directory for the actual code.</p>
+<pre><code>cd react_docker
+mkdir code
+sudo chmod 777 code
+sed -i -- &#39;s/&lt;project-name&gt;/learn-react/g&#39; *</code></pre>
+<p>Now we build the docker container with the create-react-app</p>
+<pre><code>docker-compose build create_env</code></pre>
+<p>Once thats done.</p>
+<pre><code>docker-compose run create_env create-react-app learn-react</code></pre>
+<p>After doing this, we have the scaffolding for a new react app ready in the <code>code</code> folder.</p>
+<p>We can now run the actual docker to run the container with the new react app.</p>
+<pre><code>docker-compose up learn-react --build</code></pre>
+<p>Congratulations! we can now learn react without having installed anything extra into our computer.</p>
+<link rel="stylesheet" href="https://cdn.rawgit.com/knsv/mermaid/6.0.0/dist/mermaid.css">
+<script src="https://cdn.rawgit.com/knsv/mermaid/6.0.0/dist/mermaid.min.js"></script>
+<script>mermaid.initialize({startOnLoad:true});</script>
+</div>
+</body>
+</html>

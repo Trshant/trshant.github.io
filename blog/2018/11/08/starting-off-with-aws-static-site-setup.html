@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="utf-8">
+  <meta name="generator" content="pandoc">
+  <meta name="viewport" content="width=device-width, initial-scale=0.5">
+  <title>Starting off with AWS - static site setup</title>
+  <style type="text/css">code{white-space: pre;}</style>
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+<style>
+  body {
+    margin: auto 0;
+  }
+
+  .button {
+    border-radius: 2em !important;
+  }
+  @media (min-width: 768px) {
+    .container {
+      margin: 0 auto;
+      width: 800px;
+      font-size: 16px;
+      line-height: 130%;
+    }  
+  }
+  
+  .header {
+    width:100%;
+    background-color: black;
+    padding: 15px 5px;
+    color: white;
+  }
+  div.sourceCode {
+    padding-left: 4px;
+    border-left: 2px solid black;
+  }
+  ul.nav {
+    display: inline-flex;
+    list-style-type: none;
+  }
+  ul.nav li {
+    margin-left: 12px;  
+  }
+  ul.nav li a {
+    text-decoration: none;
+    color: white;
+  }
+  code {
+    font-size: 14px;
+    font-weight: 600;
+  }
+  </style>
+</head>
+<body>
+<div class="header">
+  Trshant's Rambling
+  <ul class="nav" >
+    <li><a href="/archive.html">Archives</a></li>
+    <li><a href="/resume.pdf">Resume</a></li>
+    <li><a href="/recipes.html">Recipes</a></li>
+  </ul>
+</div>
+
+<div class="container">
+<header>
+<h1 class="title">Starting off with AWS - static site setup</h1>
+
+  <a class="button button-small" href="javascript: void(0)">AWS</a>
+  <a class="button button-small" href="javascript: void(0)">blog</a>
+  <a class="button button-small" href="javascript: void(0)">development</a>
+  <a class="button button-small" href="javascript: void(0)">starting</a>
+
+
+</header>
+<p>Do read through AWS in simple english<a href="#fn1" class="footnoteRef" id="fnref1"><sup>1</sup></a> to figure out what we are going to do here. What we are trying to accomplish is simply to host a static site. This involves us: 1. Setting up the server (called EC2 in AWS language). 1. Making sure that the outer world has access to our server (setting up the group permisions). 1. Ensuring FTP access is enabled (so that we can upload files to the server)( changing the group permissions to ensure everything is allowed inside ).</p>
+<p>So first we log in to the AWS console<a href="#fn2" class="footnoteRef" id="fnref2"><sup>2</sup></a>. Do put in your card details to complete the registration process.</p>
+<p>Move to the EC2 page<a href="#fn3" class="footnoteRef" id="fnref3"><sup>3</sup></a> . Click on the <code>Launch Instance</code> under the 'Create Instance'. Then follow the steps below:</p>
+<ul>
+<li>Select a suitable instance ( the first one listed, Amazon AMI, is perfect for all our needs ), click on the next button.</li>
+<li>Select the correct instance type (t2 micro is perfect for this).</li>
+<li>The other 3 panels, Configure instance, Add Storage and Add Tags, can be skipped, but I suggest reading everything once, just in case you need it further when you are on your own.</li>
+<li>The Configure Security Group step is needed to enable traffic to the server. The default is add a new group. keep that selected. When adding the rules, select the type as 'All', source as '0.0.0.0/0' and go to the next step.</li>
+<li>'Review and Launch'. This gives you a summary of the selected options over the last 6 steps. and then...</li>
+<li>Launch it!</li>
+</ul>
+<p>Now the server is up and running. We need to SSH into it to install the packages and then start the server.</p>
+<p>Get a key pair<a href="#fn4" class="footnoteRef" id="fnref4"><sup>4</sup></a>. Save the resulting .pem file safely. Use this to log into your server by SSH: <code>bash  ssh -i linkToPEMFile ec2-user@PublicDnsIp</code></p>
+<p>Once in, Follow the instructions on this page<a href="#fn5" class="footnoteRef" id="fnref5"><sup>5</sup></a> to install the important packages for a LAMP server.</p>
+<p>Then, type in <code>sudo service httpd start</code> This should result in an <code>OK</code>. Then we can see the page using the Public DNS (IPv4) address. Now your server is online and ready to display pages.</p>
+<p>Next up, we will use FTP to upload files to the server. This page will tell you exactly how to go about it<a href="#fn6" class="footnoteRef" id="fnref6"><sup>6</sup></a>. However the key thing here is the PEM file, this called the key pair, read up on this here<a href="#fn7" class="footnoteRef" id="fnref7"><sup>7</sup></a>. Also, remember that adding additional users is as simple<a href="#fn8" class="footnoteRef" id="fnref8"><sup>8</sup></a> as on a normal linux box.</p>
+<blockquote>
+<p>Written with <a href="https://stackedit.io/">StackEdit</a>. <!--stackedit_data:
+eyJoaXN0b3J5IjpbLTExNDUzNDc5MTksMTkwOTMwOTM0NSwzND
+Q5MzA2NzQsMTMyMjAwMTU2OCwtNTIxNzM1OCwtNzc2NTAxMzY1
+LDExNTA0MTI5NjksMTU5MTcwMzczMiwtMTY3NzQ5NjEwOCwtMz
+I0MjE5OTk4LDQ0NDQ1NzM0Myw1MTA5NDQwMTAsMTg4NDU1NTk2
+MCw3MzA5OTgxMTZdfQ==
+--></p>
+</blockquote>
+<section class="footnotes">
+<hr />
+<ol>
+<li id="fn1"><p><a href="https://www.expeditedssl.com/aws-in-plain-english/?" class="uri">https://www.expeditedssl.com/aws-in-plain-english/?</a><a href="#fnref1">↩</a></p></li>
+<li id="fn2"><p><a href="https://console.aws.amazon.com" class="uri">https://console.aws.amazon.com</a><a href="#fnref2">↩</a></p></li>
+<li id="fn3"><p><a href="https://console.aws.amazon.com/ec2" class="uri">https://console.aws.amazon.com/ec2</a><a href="#fnref3">↩</a></p></li>
+<li id="fn4"><p><a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-key-pairs.html#having-ec2-create-your-key-pair" class="uri">https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-key-pairs.html#having-ec2-create-your-key-pair</a><a href="#fnref4">↩</a></p></li>
+<li id="fn5"><p><a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/install-LAMP.html" class="uri">https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/install-LAMP.html</a><a href="#fnref5">↩</a></p></li>
+<li id="fn6"><p><a href="https://stackoverflow.com/a/49053891" class="uri">https://stackoverflow.com/a/49053891</a><a href="#fnref6">↩</a></p></li>
+<li id="fn7"><p><a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-key-pairs.html#having-ec2-create-your-key-pair" class="uri">https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-key-pairs.html#having-ec2-create-your-key-pair</a><a href="#fnref7">↩</a></p></li>
+<li id="fn8"><p><a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/managing-users.html" class="uri">https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/managing-users.html</a><a href="#fnref8">↩</a></p></li>
+</ol>
+</section>
+<link rel="stylesheet" href="https://cdn.rawgit.com/knsv/mermaid/6.0.0/dist/mermaid.css">
+<script src="https://cdn.rawgit.com/knsv/mermaid/6.0.0/dist/mermaid.min.js"></script>
+<script>mermaid.initialize({startOnLoad:true});</script>
+</div>
+</body>
+</html>

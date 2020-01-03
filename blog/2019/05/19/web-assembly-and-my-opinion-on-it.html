@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="utf-8">
+  <meta name="generator" content="pandoc">
+  <meta name="viewport" content="width=device-width, initial-scale=0.5">
+  <title>Web Assembly and my opinion on it</title>
+  <style type="text/css">code{white-space: pre;}</style>
+  <style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+  </style>
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+<style>
+  body {
+    margin: auto 0;
+  }
+
+  .button {
+    border-radius: 2em !important;
+  }
+  @media (min-width: 768px) {
+    .container {
+      margin: 0 auto;
+      width: 800px;
+      font-size: 16px;
+      line-height: 130%;
+    }  
+  }
+  
+  .header {
+    width:100%;
+    background-color: black;
+    padding: 15px 5px;
+    color: white;
+  }
+  div.sourceCode {
+    padding-left: 4px;
+    border-left: 2px solid black;
+  }
+  ul.nav {
+    display: inline-flex;
+    list-style-type: none;
+  }
+  ul.nav li {
+    margin-left: 12px;  
+  }
+  ul.nav li a {
+    text-decoration: none;
+    color: white;
+  }
+  code {
+    font-size: 14px;
+    font-weight: 600;
+  }
+  </style>
+</head>
+<body>
+<div class="header">
+  Trshant's Rambling
+  <ul class="nav" >
+    <li><a href="/archive.html">Archives</a></li>
+    <li><a href="/resume.pdf">Resume</a></li>
+    <li><a href="/recipes.html">Recipes</a></li>
+  </ul>
+</div>
+
+<div class="container">
+<header>
+<h1 class="title">Web Assembly and my opinion on it</h1>
+
+  <a class="button button-small" href="javascript: void(0)">blog</a>
+  <a class="button button-small" href="javascript: void(0)">programming</a>
+  <a class="button button-small" href="javascript: void(0)">webassembly</a>
+  <a class="button button-small" href="javascript: void(0)">webDevelopment</a>
+
+
+</header>
+<p>Since I heard about webASsembly, i have been enthralled by it. So i did some investigating on my own as to WA being faster than JavaScript. In short, what i did was follow <a href="https://medium.freecodecamp.org/get-started-with-webassembly-using-only-14-lines-of-javascript-b37b6aaca1e4">Daniel Simmons's</a> awesome intro tute, but write some JS to benchmark some code.</p>
+<p>First i googled the code to benchmark the code and ended up at a <a href="https://stackoverflow.com/questions/4784745/how-can-i-measure-the-execution-time-of-a-script">stackoverflow</a> post.</p>
+<div class="sourceCode"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="kw">function</span>  <span class="at">time_my_script</span>(script) <span class="op">{</span>
+    <span class="kw">var</span>  start  <span class="op">=</span>  <span class="kw">new</span>  <span class="at">Date</span>()<span class="op">;</span>
+    <span class="at">script</span>()<span class="op">;</span>
+    <span class="cf">return</span>  <span class="kw">new</span>  <span class="at">Date</span>() <span class="op">-</span>  start<span class="op">;</span>
+<span class="op">}</span></code></pre></div>
+<p>The native javascript written to check the webassembly version was:</p>
+<div class="sourceCode"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="kw">function</span>  <span class="at">js_squarer</span>(num) <span class="op">{</span>
+    <span class="cf">return</span>  num  <span class="op">*</span>  num<span class="op">;</span>
+<span class="op">}</span></code></pre></div>
+<p>I found that the native javascript version was consistently 3 times faster than the webassembly version. This lack of speed makes it clear to me that WA is not yet matured enough to be considered to replace JS in web development projects. However it can and will play a huge part in porting legacy projects to the web interface.<br />
+I agree with <a href="https://lemire.me/blog/2018/10/23/is-webassembly-faster-than-javascript/">Lemire's</a> conclusions and think that well written javascript will be faster than webassembly at this moment, May 2019.</p>
+<p>Please find the complete code i used to check WA on github <a href="https://gist.github.com/Trshant/ad99e7bca9f0dbb83e0d4bd50334fa9d">gist</a>.</p>
+<blockquote>
+<p>Written with <a href="https://stackedit.io/">StackEdit</a>. <!--stackedit_data:
+eyJoaXN0b3J5IjpbOTcwODY0OTUyXX0=
+--></p>
+</blockquote>
+<link rel="stylesheet" href="https://cdn.rawgit.com/knsv/mermaid/6.0.0/dist/mermaid.css">
+<script src="https://cdn.rawgit.com/knsv/mermaid/6.0.0/dist/mermaid.min.js"></script>
+<script>mermaid.initialize({startOnLoad:true});</script>
+</div>
+</body>
+</html>
