@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="generator" content="pandoc">
   <meta name="viewport" content="width=device-width, initial-scale=0.5">
-  <title>Upma</title>
+  <title>Using docker to scaffold a React App</title>
   <style type="text/css">code{white-space: pre;}</style>
   <!--[if lt IE 9]>
     <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
@@ -65,21 +65,30 @@
 
 <div class="container">
 <header>
-<h1 class="title">Upma</h1>
+<h1 class="title">Using docker to scaffold a React App</h1>
 
-  <a class="button button-small" href="javascript: void(0)">Notebooks</a>
-  <a class="button button-small" href="javascript: void(0)">Recipes</a>
+  <a class="button button-small" href="javascript: void(0)">blog</a>
+  <a class="button button-small" href="javascript: void(0)">docker</a>
 
 
 </header>
-<h1 id="upma">Upma</h1>
-<p>roast a cup of sooji in a pan till some of it shows sign of browning empty roasted sooji into a dish</p>
-<p>Put 2 spoonfuls of any odorless oil and 2 spoonfulls of ghee into the empty pan. Put in a heaped spoonful of mustard seeds. Put this on a high flame.</p>
-<p>As soon as the mustard starts splutterring, put in the grated ginger. stir for 30 seconds. Put in 2 tablespoons of Blackgram seeds(Udad) and Chana Daal. Take off the flame so as to avoid burning the items. Add 2 chopped chilllies ( if not very hot! ). As soon the Blackgram seeds show browning, put in the curry leaves (2 leaves fresh or 3-4 leaves dried).</p>
-<p>Once the curry leaves is fried, then we add a single chopped tomato and any other chopped vegetable(s). Put it back on the flame and stir it, till the tomatoes are mushy.</p>
-<p>Put in 2 cups of hot water and bring it to boil. In the meantime, taste the water. it should be a little more than a little salty and chilly hot.</p>
-<p>Once the water is adequetly hot temperature-wise and taste-wise, mix the Sooji slowly to the water, stirring it all continuously. move it to a low flame, cover with a top, and cook for 15-20 minutes.</p>
-<p>Upma is ready.</p>
+<p>I am relearning react. I also installed docker to stop myself from installing other softwares on my laptop. So here i use docker to build a container which i can use to build a container with scaffolding for developing a react app.</p>
+<p>I have the nessacery files on git gist, so here goes:</p>
+<pre><code>git clone https://gist.github.com/Trshant/2cc6cf99749c979b8a1be5e39b45f757 react_docker</code></pre>
+<p>Think up a nice name for a project. I am going to call it <code>learn-react</code></p>
+<p>Then change directories and set up the directory for the actual code.</p>
+<pre><code>cd react_docker
+mkdir code
+sudo chmod 777 code
+sed -i -- &#39;s/&lt;project-name&gt;/learn-react/g&#39; *</code></pre>
+<p>Now we build the docker container with the create-react-app</p>
+<pre><code>docker-compose build create_env</code></pre>
+<p>Once thats done.</p>
+<pre><code>docker-compose run create_env create-react-app learn-react</code></pre>
+<p>After doing this, we have the scaffolding for a new react app ready in the <code>code</code> folder.</p>
+<p>We can now run the actual docker to run the container with the new react app.</p>
+<pre><code>docker-compose up learn-react --build</code></pre>
+<p>Congratulations! we can now learn react without having installed anything extra into our computer.</p>
 <link rel="stylesheet" href="https://cdn.rawgit.com/knsv/mermaid/6.0.0/dist/mermaid.css">
 <script src="https://cdn.rawgit.com/knsv/mermaid/6.0.0/dist/mermaid.min.js"></script>
 <script>mermaid.initialize({startOnLoad:true});</script>

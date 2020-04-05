@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="utf-8">
+  <meta name="generator" content="pandoc">
+  <meta name="viewport" content="width=device-width, initial-scale=0.5">
+  <title>Code snippets for ML using Scikit-Learn - Part 1</title>
+  <style type="text/css">code{white-space: pre;}</style>
+  <style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+  </style>
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+<style>
+  body {
+    margin: auto 0;
+  }
+
+  .button {
+    border-radius: 2em !important;
+  }
+  @media (min-width: 768px) {
+    .container {
+      margin: 0 auto;
+      width: 800px;
+      font-size: 16px;
+      line-height: 130%;
+    }  
+  }
+  
+  .header {
+    width:100%;
+    background-color: black;
+    padding: 15px 5px;
+    color: white;
+  }
+  div.sourceCode {
+    padding-left: 4px;
+    border-left: 2px solid black;
+  }
+  ul.nav {
+    display: inline-flex;
+    list-style-type: none;
+  }
+  ul.nav li {
+    margin-left: 12px;  
+  }
+  ul.nav li a {
+    text-decoration: none;
+    color: white;
+  }
+  code {
+    font-size: 14px;
+    font-weight: 600;
+  }
+  </style>
+</head>
+<body>
+<div class="header">
+  Trshant's Rambling
+  <ul class="nav" >
+    <li><a href="/archive.html">Archives</a></li>
+    <li><a href="/resume.pdf">Resume</a></li>
+    <li><a href="/recipes.html">Recipes</a></li>
+  </ul>
+</div>
+
+<div class="container">
+<header>
+<h1 class="title">Code snippets for ML using Scikit-Learn - Part 1</h1>
+
+  <a class="button button-small" href="javascript: void(0)">AI</a>
+  <a class="button button-small" href="javascript: void(0)">blog</a>
+  <a class="button button-small" href="javascript: void(0)">CodeSnippets</a>
+  <a class="button button-small" href="javascript: void(0)">MachineLearning</a>
+  <a class="button button-small" href="javascript: void(0)">ML</a>
+
+
+</header>
+<p>This is a page where i will be putting in things i learned while starting off again in ML.<br />
+I am using scikit-learn to do my ml this time and am trying to go through ML in as small a timeframe as possible. I have been learning about linear and logistic regression. The correct ones to use in both the cases are <code>from sklearn.linear_model    import LinearRegression</code> and <code>from sklearn.linear_model import LogisticRegression</code> which is intiutive. This is the bit of code that matters</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">linreg <span class="op">=</span> LinearRegression().fit( X_train , y_train )
+linreg.score( X_test , y_test )</code></pre></div>
+<p>and</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">logreg <span class="op">=</span> LogisticRegression( solver<span class="op">=</span><span class="st">&#39;liblinear&#39;</span>,multi_class<span class="op">=</span><span class="st">&#39;ovr&#39;</span>,n_jobs<span class="op">=</span><span class="dv">1</span> )
+logreg.fit(X_train, y_train)</code></pre></div>
+<p>Post this, we can do a predict and see how the model behaves.</p>
+<p>Have a look at this repo's 2 pages to see what i did using the above code. &gt; Written with <a href="https://stackedit.io/">StackEdit</a>. <!--stackedit_data:
+eyJoaXN0b3J5IjpbLTE0NjU4ODU5NjIsMTA2NTY5Mjk4NF19
+--></p>
+<link rel="stylesheet" href="https://cdn.rawgit.com/knsv/mermaid/6.0.0/dist/mermaid.css">
+<script src="https://cdn.rawgit.com/knsv/mermaid/6.0.0/dist/mermaid.min.js"></script>
+<script>mermaid.initialize({startOnLoad:true});</script>
+</div>
+</body>
+</html>

@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="utf-8">
+  <meta name="generator" content="pandoc">
+  <meta name="viewport" content="width=device-width, initial-scale=0.5">
+  <title>Building a compiler-part1 AST</title>
+  <style type="text/css">code{white-space: pre;}</style>
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+<style>
+  body {
+    margin: auto 0;
+  }
+
+  .button {
+    border-radius: 2em !important;
+  }
+  @media (min-width: 768px) {
+    .container {
+      margin: 0 auto;
+      width: 800px;
+      font-size: 16px;
+      line-height: 130%;
+    }  
+  }
+  
+  .header {
+    width:100%;
+    background-color: black;
+    padding: 15px 5px;
+    color: white;
+  }
+  div.sourceCode {
+    padding-left: 4px;
+    border-left: 2px solid black;
+  }
+  ul.nav {
+    display: inline-flex;
+    list-style-type: none;
+  }
+  ul.nav li {
+    margin-left: 12px;  
+  }
+  ul.nav li a {
+    text-decoration: none;
+    color: white;
+  }
+  code {
+    font-size: 14px;
+    font-weight: 600;
+  }
+  </style>
+</head>
+<body>
+<div class="header">
+  Trshant's Rambling
+  <ul class="nav" >
+    <li><a href="/archive.html">Archives</a></li>
+    <li><a href="/resume.pdf">Resume</a></li>
+    <li><a href="/recipes.html">Recipes</a></li>
+  </ul>
+</div>
+
+<div class="container">
+<header>
+<h1 class="title">Building a compiler-part1 AST</h1>
+
+  <a class="button button-small" href="javascript: void(0)">AST</a>
+  <a class="button button-small" href="javascript: void(0)">blog</a>
+  <a class="button button-small" href="javascript: void(0)">compilerTheory</a>
+  <a class="button button-small" href="javascript: void(0)">CompSci</a>
+
+
+</header>
+<p><strong>Building blocks of a compiler</strong>: Copied from <a href="https://www.programcreek.com/2011/02/how-compiler-works/" class="uri">https://www.programcreek.com/2011/02/how-compiler-works/</a> &gt;A compiler is a computer program that transforms source code written in a high-level programming language into a lower level language.</p>
+<p>Here is what happens in a compiler</p>
+<div>
+<!-- htmlmin:ignore -->
+<div class="mermaid">
+graph TD
+classDef className fill:#f9f,stroke:#333,stroke-width:4px;
+class I,O className;
+I[&quot;Input File&quot;]
+
+I--&gt;A[&quot;Lexical Analysis&quot;]
+subgraph Compiler start
+subgraph Arriving at AST
+A--&gt;B[&quot;Syntax Analysis&quot;]
+end
+B--&gt;C[&quot;Semantic Analysis&quot;]
+C--&gt;D[&quot;IR Generation&quot;]
+D--&gt;E[&quot;IR Optimization&quot;]
+E--&gt;F[&quot;Code Generation&quot;]
+F--&gt;G[&quot;Optimization&quot;]
+end
+G--&gt;O[&quot;Executable&quot;]
+</div>
+<!-- htmlmin:ignore -->
+</div>
+<p>This post covers Lexical Analyser and Syntax analyser.</p>
+<p>Below diagram is based on <a href="https://medium.com/basecs/leveling-up-ones-parsing-game-with-asts-d7a6fc2400ff">Vaidehi Joshi's</a> awesome post on ASTs: As she has, we will be using the same example for our input <code>&quot; 5+(1*12) &quot;</code>. This will form a continuity if you decide to visit her blogpost.</p>
+<p><strong>Lexical Analysis</strong> The lexical analyzer breaks the input file or sentence into a series of tokens, by removing or adding any whitespace or comments in the source code. So it should have these stages:</p>
+<div>
+<!-- htmlmin:ignore -->
+<div class="mermaid">
+sequenceDiagram
+
+participant C  as Code   
+participant S  as Scanner
+participant T  as Tokeniser
+participant SA as Syntax Analyser  
+
+C -&gt;&gt; S  : String
+Note over C: &quot; 5+(1*12) &quot;
+Note over S: Strip text &lt;br/&gt;&quot;5+(1*12)&quot;
+S -&gt;&gt; T  : lexemes  
+Note over T: Convert to Tokens&lt;br/&gt;[&quot;5&quot;,&quot;+&quot;,&quot;(&quot;,&quot;1&quot;,&quot;*&quot;,&quot;12&quot;,&quot;)&quot;]
+T -&gt;&gt; SA : Tokenised    
+</div>
+<!-- htmlmin:ignore -->
+</div>
+<p><strong>Syntax Analysis</strong> At its very basic, a Syntax analyser converts tokens to a parse tree by looking at a set of rules. This is a simplification so that we can understand the basic functionlity of this stage of a compiler. There are 2 stages to this: 1. Getting a parse tree out. 2. Optimising the parse tree.</p>
+<p>Again, do have a look at <a href="https://medium.com/basecs/grammatically-rooting-oneself-with-parse-trees-ec9daeda7dad">Vaidehi Joshi's</a> fantastic post on parse trees. Its extremely well written.</p>
+<div>
+<!-- htmlmin:ignore -->
+<div class="mermaid">
+sequenceDiagram
+participant T as Lexical Analyser   
+participant SA1 as CST
+participant SA2 as AST 
+
+T -&gt;&gt; SA1 : Tokenised   
+Note over T:[&quot;5&quot;,&quot;+&quot;,&quot;(&quot;,&quot;1&quot;,&quot;*&quot;,&quot;12&quot;,&quot;)&quot;]
+Note over SA1: Create Parse Tree&lt;br/&gt;See CST figure below.
+SA1  -&gt;&gt; SA2 : CST
+Note over SA2: Optimise Parse Tree&lt;br/&gt;See AST figure below.
+SA2  -&gt;&gt; Synaptic Analyser: AST 
+</div>
+<!-- htmlmin:ignore -->
+</div>
+<ul>
+<li><p><strong>CST : Concrete Syntax tree</strong> - So This stage comes up with a parse tree. How does it do that? It looks at the expression and sees which rule it will agree with. This &quot;see which rule it will agree with&quot; bit will depend on which kind of token parsing is being used.</p>
+<div>
+<!-- htmlmin:ignore -->
+<div class="mermaid">
+graph TD
+    A1[&quot;Exp&quot;]
+    A1--&gt;A[5]
+    A1--&gt;B[&quot;+&quot;]
+    A1--&gt;A2[Exp]
+    A2--&gt;C[&quot;(&quot;]
+    A2--&gt;A3[&quot;Exp&quot;]
+    A2--&gt;G[&quot;)&quot;]
+    A3--&gt;D[1]
+    A3--&gt;E[&quot;*&quot;]
+    A3--&gt;F[12]
+</div>
+<!-- htmlmin:ignore -->
+</div>
+<p>We can see that the expression we started out with was divided into parts and further into more parts. This above tree tells us how it was divided.</p></li>
+<li><p><strong>AST : Abstract Syntax tree</strong> As we can see, the parse tree is fabulous and true to the rules of the language. But its too verbose (too many nodes!). We try and solve that problem with Abstract Syntax tree where we throw out what is not needed and keep the core of the program. The main aim of this part is to reduce the cruft and keep the core of the code as below.</p>
+<div>
+<!-- htmlmin:ignore -->
+<div class="mermaid">
+graph TD
+    B[&quot;+&quot;]
+    B--&gt;A[5]
+        B--&gt;E(*)
+        E--&gt;D(1)
+        E--&gt;F(12)
+</div>
+<!-- htmlmin:ignore -->
+</div></li>
+</ul>
+<p>To understand and see these in action, Do try out <a href="https://astexplorer.net/" class="uri">https://astexplorer.net/</a>. This site is amazing and will make you see in action building of an AST with code. Read <a href="https://blog.buildo.io/a-tour-of-abstract-syntax-trees-906c0574a067">this</a> to figure out the why's and what's.</p>
+<p>Many thanks to the creators of <a href="https://mermaidjs.github.io" class="uri">https://mermaidjs.github.io</a> for the sequence diagram. It is truly a pleasure to work with.</p>
+<p>The next post in this series will be the implementation of this in Typescript.</p>
+<blockquote>
+<p>Written with <a href="https://stackedit.io/">StackEdit</a>. <!--stackedit_data:
+eyJoaXN0b3J5IjpbLTM2NjM3MDQyMSwxNTgwNzYzMTQ4XX0=
+--></p>
+</blockquote>
+<link rel="stylesheet" href="https://cdn.rawgit.com/knsv/mermaid/6.0.0/dist/mermaid.css">
+<script src="https://cdn.rawgit.com/knsv/mermaid/6.0.0/dist/mermaid.min.js"></script>
+<script>mermaid.initialize({startOnLoad:true});</script>
+</div>
+</body>
+</html>

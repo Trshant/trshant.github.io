@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="utf-8">
+  <meta name="generator" content="pandoc">
+  <meta name="viewport" content="width=device-width, initial-scale=0.5">
+  <title>Scope and Context in JavaScript</title>
+  <style type="text/css">code{white-space: pre;}</style>
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+<style>
+  body {
+    margin: auto 0;
+  }
+
+  .button {
+    border-radius: 2em !important;
+  }
+  @media (min-width: 768px) {
+    .container {
+      margin: 0 auto;
+      width: 800px;
+      font-size: 16px;
+      line-height: 130%;
+    }  
+  }
+  
+  .header {
+    width:100%;
+    background-color: black;
+    padding: 15px 5px;
+    color: white;
+  }
+  div.sourceCode {
+    padding-left: 4px;
+    border-left: 2px solid black;
+  }
+  ul.nav {
+    display: inline-flex;
+    list-style-type: none;
+  }
+  ul.nav li {
+    margin-left: 12px;  
+  }
+  ul.nav li a {
+    text-decoration: none;
+    color: white;
+  }
+  code {
+    font-size: 14px;
+    font-weight: 600;
+  }
+  </style>
+</head>
+<body>
+<div class="header">
+  Trshant's Rambling
+  <ul class="nav" >
+    <li><a href="/archive.html">Archives</a></li>
+    <li><a href="/resume.pdf">Resume</a></li>
+    <li><a href="/recipes.html">Recipes</a></li>
+  </ul>
+</div>
+
+<div class="container">
+<header>
+<h1 class="title">Scope and Context in JavaScript</h1>
+
+  <a class="button button-small" href="javascript: void(0)">blog</a>
+  <a class="button button-small" href="javascript: void(0)">JavaScript</a>
+
+
+</header>
+<p>While there are many, many articles on the topic online <a href="#fn1" class="footnoteRef" id="fnref1"><sup>1</sup></a>, I just wanted to add my $0.02 to it.<br />
+<strong>scope</strong> is the visibility of the variable. Think of it being in the &quot;line of sight&quot;, where line of sight is on the same level or below.<br />
+<strong>context</strong> means the dependence of the variable on being in an environment. This is used for methods in objects mainly, since the context can change for every instance of the object.</p>
+<p>However, we can change the context for any method by using the call or apply function. Do go through <a href="#fn2" class="footnoteRef" id="fnref2"><sup>2</sup></a> - its fun and will give you intuition as to scope and contexts .</p>
+<p>Also, i would like to mention that <a href="#fn3" class="footnoteRef" id="fnref3"><sup>3</sup></a> and <a href="#fn4" class="footnoteRef" id="fnref4"><sup>4</sup></a> helped a lot in making this post look kind of academic.</p>
+<!--stackedit_data:
+eyJoaXN0b3J5IjpbLTE2ODMxNjcyNTEsLTIwMzYwMDc0NzksLT
+IwMjAyMjU4MDBdfQ==
+-->
+<section class="footnotes">
+<hr />
+<ol>
+<li id="fn1"><p>just one of the many! <a href="https://blog.kevinchisholm.com/javascript/difference-between-scope-and-context/">What is the Difference Between Scope and Context in JavaScript?</a><a href="#fnref1">↩</a></p></li>
+<li id="fn2"><p><a href="https://johnresig.com/apps/learn/">John Resig's Learning Advanced JavaScript</a><a href="#fnref2">↩</a></p></li>
+<li id="fn3"><p><a href="https://www.chriskrycho.com/2015/academic-markdown-and-citations.html">Academic markdown and citations</a>.<a href="#fnref3">↩</a></p></li>
+<li id="fn4"><p><a href="https://www.markdownguide.org/cheat-sheet/">Markdown cheatsheet</a><a href="#fnref4">↩</a></p></li>
+</ol>
+</section>
+<link rel="stylesheet" href="https://cdn.rawgit.com/knsv/mermaid/6.0.0/dist/mermaid.css">
+<script src="https://cdn.rawgit.com/knsv/mermaid/6.0.0/dist/mermaid.min.js"></script>
+<script>mermaid.initialize({startOnLoad:true});</script>
+</div>
+</body>
+</html>

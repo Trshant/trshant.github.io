@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="utf-8">
+  <meta name="generator" content="pandoc">
+  <meta name="viewport" content="width=device-width, initial-scale=0.5">
+  <title>A small note on λ calculus and Church Encoding</title>
+  <style type="text/css">code{white-space: pre;}</style>
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+<style>
+  body {
+    margin: auto 0;
+  }
+
+  .button {
+    border-radius: 2em !important;
+  }
+  @media (min-width: 768px) {
+    .container {
+      margin: 0 auto;
+      width: 800px;
+      font-size: 16px;
+      line-height: 130%;
+    }  
+  }
+  
+  .header {
+    width:100%;
+    background-color: black;
+    padding: 15px 5px;
+    color: white;
+  }
+  div.sourceCode {
+    padding-left: 4px;
+    border-left: 2px solid black;
+  }
+  ul.nav {
+    display: inline-flex;
+    list-style-type: none;
+  }
+  ul.nav li {
+    margin-left: 12px;  
+  }
+  ul.nav li a {
+    text-decoration: none;
+    color: white;
+  }
+  code {
+    font-size: 14px;
+    font-weight: 600;
+  }
+  </style>
+</head>
+<body>
+<div class="header">
+  Trshant's Rambling
+  <ul class="nav" >
+    <li><a href="/archive.html">Archives</a></li>
+    <li><a href="/resume.pdf">Resume</a></li>
+    <li><a href="/recipes.html">Recipes</a></li>
+  </ul>
+</div>
+
+<div class="container">
+<header>
+<h1 class="title">A small note on λ calculus and Church Encoding</h1>
+
+  <a class="button button-small" href="javascript: void(0)">blog</a>
+  <a class="button button-small" href="javascript: void(0)">computation</a>
+  <a class="button button-small" href="javascript: void(0)">ComputerScienceTheory</a>
+  <a class="button button-small" href="javascript: void(0)">lambdaCalculus</a>
+
+
+</header>
+<p>Lambda Calculus ( called <strong>λC</strong> from now on ) is something that every programmer reads and wonders about at a point of her career.</p>
+<p>From Wikipedia &gt; Lambda calculus (also written as λ-calculus) is a formal system in mathematical logic for expressing computation based on function abstraction and application using variable binding and substitution. It is a universal model of computation that can be used to simulate any Turing machine.</p>
+<p><strong>λC</strong> expresses the process of computation, with just 4 parts: 1. single letter variables 2. parantheses () 3. Lambda λ 4. Dot .</p>
+<p>It uses these 4 parts to write expressions. Let me illustrate this with an example:</p>
+<blockquote>
+<p>( λy.x(yz) )(ab)</p>
+</blockquote>
+<p>In the above function ( which is an expression ), the <code>λy</code> is the head.<code>x(yz)</code> is the body ( which is an expression ) and <code>ab</code> which is an argument ( also an expression ).</p>
+<p>Lambda calculus resolves each expression using substitution, starting from the rightmost ( and innermost ) expression.</p>
+<p>But before we dive into that, there is something else I should go into. <strong>Church Numerals</strong>: Church numerals are the encoded natural numbers ( encoded using chuch encoding ). We can define a church numeral as a higher-order function which takes a single argument function as an argument and returns another single argument function.</p>
+<p>Let us see the numbers and their lambda expression equivalents:</p>
+<table>
+<thead>
+<tr class="header">
+<th>number</th>
+<th style="text-align: right;">Lambda expression</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>0</td>
+<td style="text-align: right;">λf.λx. x</td>
+</tr>
+<tr class="even">
+<td>1</td>
+<td style="text-align: right;">λf.λx. f x</td>
+</tr>
+<tr class="odd">
+<td>2</td>
+<td style="text-align: right;">λf.λx. f (f x)</td>
+</tr>
+<tr class="even">
+<td>3</td>
+<td style="text-align: right;">λf.λx. f (f (f x))</td>
+</tr>
+</tbody>
+</table>
+<p>By looking at the above we can conclude that if 1 is (partially) encoded as a function of <code>x</code>, then 3 is encoded as the same function applied thrice to the same <code>x</code>. In other words we could say 'n' is encoded as a function 'f' composed 'n' times. So if we were to write a function that would add 1 to a numeral, it would be just be applying the function one more time (or composing it one more time).<br />
+&gt; SUCC := λn.λf.λx.f (n f x)</p>
+<p>Since we have defined it, let us see how we can give the <code>SUCC</code> function <code>0</code> as the argument and see if it resolves to <code>1</code>.</p>
+<pre><code>SUCC := (λn.λf.λx.f (n f x))(λf.λx. x)
+      = λf.λx.f ( (λf.λx. x) f x)
+      = λf.λx.f ( (   λx. x)   x)
+      = λf.λx.f (              x)
+      = λf.λx.f x 
+      = 1</code></pre>
+<p>Similarly, we resolve for <code>2</code></p>
+<pre><code>SUCC := (λn.λf.λx.f (n f x))(λf.λx.f x)
+      = λf.λx.f ( (λf.λx.f x) f x)
+      = λf.λx.f ( (   λx.f x)   x)
+      = λf.λx.f ( (      f x)   x)
+      = λf.λx.f (f x) 
+      = 2</code></pre>
+<p>Now since we have defined an increment function (<code>SUCC</code>), we should define a function that adds 2 numbers. Going with the 'composing' idea, we can say that adding 2 mumbers <code>m</code> and <code>n</code> could be defined as applying a function <code>f</code>, <code>n</code> times to the same function <code>f</code> applied <code>m</code> times. Writing that down, we get:</p>
+<pre><code>ADD := λm.λf.λn.λx.m f( n f (x))</code></pre>
+<p>Multiplication two numbers <code>a</code> and <code>b</code> would be defined as applying a function <code>f</code>, <code>n</code> times and then doing this <code>m</code> times over. Defining things in λC, we get: &gt; MUL :⇔ λa.λb.λc.a(bc)</p>
+<p>Lets try and resolve this one multiplying 2 and 3 MUL 2 3 := ( λa.λb.λc.a(bc) ) ( λg.λx. g (g x) ) ( λh.λx. h (h (h x)) )</p>
+<pre><code>MUL 2 3 := ( λa.λb.λc.a(bc) ) ( λg.λx. g (g x) ) ( λh.λx. h (h (h x)))
+         = ( λc . ( λg.λx. g (g x) )( ( λh.λx. h (h (h x))) c ) )
+         = ( λc . ( λg.λx. g (g x) )(      λx. c (c (c x)))     )
+         = ( λc . (     λx. (λx. c (c (c x))) ((λx. c (c (c x))) x) )     )
+         = ( λc . (     λx. (λx. c (c (c x))) ( c (c (c x))))     )
+         = λc . λx. (c (c (c ( c (c (c x))))))      </code></pre>
+<p>So we see how, just by the process of resolving using substitution, we get the final expression where the form is the encoding for 6.</p>
+<p>We still have the subtraction to defined, But that will be another post - This one took quite some time to wrap my head around!</p>
+<p>Read More:<br />
+<a href="http://vanderwijk.info/blog/pure-lambda-calculus-python/">λ calculus in python code</a>: this <a href="http://matt.might.net/articles/python-church-y-combinator/">link</a> will explain all the code better.</p>
+<p>Main References:<br />
+<a href="https://en.wikipedia.org/wiki/Church_encoding">Wikipedia: Church Encoding</a><br />
+<a href="https://en.wikipedia.org/wiki/Lambda_calculus">Wikipedia: Lambda Calculus</a></p>
+<p>Links I regularly went back to when I needed some gentle explanations ( when Wikipedia got too terse for me! ):<br />
+<a href="http://bach.ai/lambda-calculus-for-absolute-dummies/">λC for dummies</a>: Amazingly well written note on λC.<br />
+<a href="https://math.stackexchange.com/a/595576">Stackoverflow answer for explanation of multiplication in λC</a></p>
+<p>Other Interesting Reads:<br />
+<a href="https://cstheory.stackexchange.com/a/36601">To understand λC in poetry</a><br />
+<a href="http://pages.cs.wisc.edu/~horwitz/CS704-NOTES/1.LAMBDA-CALCULUS.html">Class notes onλC</a></p>
+<blockquote>
+<p>Written with <a href="https://stackedit.io/">StackEdit</a> and Notable and Vim. <!--stackedit_data:
+eyJoaXN0b3J5IjpbMTkzODkxNTgzMSwtNzc2MTYwNzQ1LC04MT
+gzMDYwNjMsLTIwMTM1OTM2MTMsMTYxMTQyODgxOSwzODUyMzgz
+NDddfQ==
+--></p>
+</blockquote>
+<link rel="stylesheet" href="https://cdn.rawgit.com/knsv/mermaid/6.0.0/dist/mermaid.css">
+<script src="https://cdn.rawgit.com/knsv/mermaid/6.0.0/dist/mermaid.min.js"></script>
+<script>mermaid.initialize({startOnLoad:true});</script>
+</div>
+</body>
+</html>
