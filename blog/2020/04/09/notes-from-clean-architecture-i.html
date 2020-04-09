@@ -75,7 +75,11 @@
 
 </header>
 <h1 id="notes-from-clean-architecture---i">Notes from Clean Architecture - I</h1>
-<p>These are my takeways from the book &quot;Clean Architecture&quot; by Robert Martin. Like all other &quot;clean&quot; books, this one too is super clear while being sufficiently verbose and shows the experience of all the years that Robert has worked crafting software. ## The goal of software architecture &gt; Minimize the human resources required to build and maintain the required system.</p>
+<p>These are my takeways from the book &quot;Clean Architecture&quot; by Robert Martin. Like all other &quot;clean&quot; books, this one too is super clear while being sufficiently verbose and shows the experience of all the years that Robert has worked crafting software.</p>
+<h2 id="the-goal-of-software-architecture">The goal of software architecture</h2>
+<blockquote>
+<p>Minimize the human resources required to build and maintain the required system.</p>
+</blockquote>
 <p>Software done right should need minimal number of people to get things to work, and then to keep it working while the software changes to accomodate changes.</p>
 <p>We developers buy into a familiar lie: “We can clean it up later; we just have to get to market first!” Of course, things never do get cleaned up later, because market pressures never abate. Getting to market first simply means that you’ve now got a horde of competitors on your tail, and you have to stay ahead of them by running as fast as you can.</p>
 <p>but this actually makes you a lot less productive since every additional new aditional functionality would need you to make a lot more changes in the existing system. Good architecture helps avoid this.</p>
@@ -105,14 +109,16 @@
 <h3 id="polymorphism">Polymorphism</h3>
 <p>The use of one interface to deal with multiple types. <a href="https://en.wikipedia.org/wiki/Polymorphism_(computer_science)" class="uri">https://en.wikipedia.org/wiki/Polymorphism_(computer_science)</a></p>
 <h2 id="functional-programming">Functional Programming</h2>
-<p>This is strongly based on the λ-calculus by Alonzo Church in the 1930s. The most important (and some would say only) objective is that a function will do one and only one thing, without changing anything else in the system. Everything else is to justify this objective. <a href="https://mostly-adequate.gitbooks.io/mostly-adequate-guide/" class="uri">https://mostly-adequate.gitbooks.io/mostly-adequate-guide/</a> - this book is awesome and one read will change your programming style completely!</p>
+<p>This is strongly based on the λ-calculus by Alonzo Church in the 1930s. The most important (and some would say only) objective is that a function will do one and only one thing, without changing anything else in the system. Everything else is to justify this objective.</p>
+<p><a href="https://mostly-adequate.gitbooks.io/mostly-adequate-guide/" class="uri">https://mostly-adequate.gitbooks.io/mostly-adequate-guide/</a> - this book is awesome and one read will change your programming style completely!</p>
 <h3 id="immutability">Immutability</h3>
 <p>Why would an architect be concerned with the mutability of variables? The answer is absurdly simple: All race conditions, deadlock conditions, and concurrent update problems are due to mutable variables. You cannot have a race condition or a concurrent update problem if no variable is ever updated. You cannot have deadlocks without mutable locks. However this paradign also asumes that we have infinite processing speed and infiite storage. Since this cannot be true, we have to make certian compromises to achieve immutability.</p>
 <h4 id="compromise-i---segregation-of-mutability">Compromise I - Segregation of mutability</h4>
 <p>Here almost the entire system follows the concept of immutability, but data flows from and to a few components that mutate the data. These are likely segregated for maintainence reasons.</p>
 <h4 id="compromise-ii---event-sourcing">Compromise II - Event Sourcing</h4>
-<p>This is when we store the events and not the data that is changed. In this, we have the original state of the data and if we need to reach the final state, we just apply the events that occured to it in the order it happened and calculate the final state, practicing immmutability. <a href="https://martinfowler.com/eaaDev/EventSourcing.html" class="uri">https://martinfowler.com/eaaDev/EventSourcing.html</a></p>
-<h3 id="the-next-part-of-this-post-will-be-dealing-with-design-parameters.">The next part of this post will be dealing with design parameters.</h3>
+<p>This is when we store the events and not the data that is changed. In this, we have the original state of the data and if we need to reach the final state, we just apply the events that occured to it in the order it happened and calculate the final state, practicing immmutability.</p>
+<p><a href="https://martinfowler.com/eaaDev/EventSourcing.html" class="uri">https://martinfowler.com/eaaDev/EventSourcing.html</a></p>
+<h3 id="the-next-part-of-this-post-will-be-dealing-with-design-principles.">The next part of this post will be dealing with design principles.</h3>
 <link rel="stylesheet" href="https://cdn.rawgit.com/knsv/mermaid/6.0.0/dist/mermaid.css">
 <script src="https://cdn.rawgit.com/knsv/mermaid/6.0.0/dist/mermaid.min.js"></script>
 <script>mermaid.initialize({startOnLoad:true});</script>
