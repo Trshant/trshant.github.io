@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="utf-8">
+  <meta name="generator" content="pandoc">
+  <meta name="viewport" content="width=device-width, initial-scale=0.5">
+  <title>Notes from Clean Architecture - I</title>
+  <style type="text/css">code{white-space: pre;}</style>
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+<style>
+  body {
+    margin: auto 0;
+  }
+
+  .button {
+    border-radius: 2em !important;
+  }
+  @media (min-width: 768px) {
+    .container {
+      margin: 0 auto;
+      width: 800px;
+      font-size: 16px;
+      line-height: 130%;
+    }  
+  }
+  
+  .header {
+    width:100%;
+    background-color: black;
+    padding: 15px 5px;
+    color: white;
+  }
+  div.sourceCode {
+    padding-left: 4px;
+    border-left: 2px solid black;
+  }
+  ul.nav {
+    display: inline-flex;
+    list-style-type: none;
+  }
+  ul.nav li {
+    margin-left: 12px;  
+  }
+  ul.nav li a {
+    text-decoration: none;
+    color: white;
+  }
+  code {
+    font-size: 14px;
+    font-weight: 600;
+  }
+  </style>
+</head>
+<body>
+<div class="header">
+  Trshant's Rambling
+  <ul class="nav" >
+    <li><a href="/archive.html">Archives</a></li>
+    <li><a href="/resume.pdf">Resume</a></li>
+    <li><a href="/recipes.html">Recipes</a></li>
+  </ul>
+</div>
+
+<div class="container">
+<header>
+<h1 class="title">Notes from Clean Architecture - I</h1>
+
+  <a class="button button-small" href="javascript: void(0)">blog</a>
+  <a class="button button-small" href="javascript: void(0)">Notes</a>
+  <a class="button button-small" href="javascript: void(0)">softwareArchitecture</a>
+  <a class="button button-small" href="javascript: void(0)">softwareEngineering</a>
+
+
+</header>
+<h1 id="notes-from-clean-architecture---i">Notes from Clean Architecture - I</h1>
+<p>These are my takeways from the book &quot;Clean Architecture&quot; by Robert Martin. Like all other &quot;clean&quot; books, this one too is super clear while being sufficiently verbose and shows the experience of all the years that Robert has worked crafting software. ## The goal of software architecture &gt; Minimize the human resources required to build and maintain the required system.</p>
+<p>Software done right should need minimal number of people to get things to work, and then to keep it working while the software changes to accomodate changes.</p>
+<p>We developers buy into a familiar lie: “We can clean it up later; we just have to get to market first!” Of course, things never do get cleaned up later, because market pressures never abate. Getting to market first simply means that you’ve now got a horde of competitors on your tail, and you have to stay ahead of them by running as fast as you can.</p>
+<p>but this actually makes you a lot less productive since every additional new aditional functionality would need you to make a lot more changes in the existing system. Good architecture helps avoid this.</p>
+<p>It should minimize effort and maximise productivity.</p>
+<p>Software is supposed to be &quot;soft&quot; - it should be easily changable.</p>
+<table>
+<thead>
+<tr class="header">
+<th><strong>IMPORTANT AND URGENT</strong></th>
+<th><strong>IMPORTANT NOT URGENT</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>URGENT AND NOT IMPORTANT</strong></td>
+<td><strong>NOT IMPORTANT AND NOT URGENT</strong></td>
+</tr>
+</tbody>
+</table>
+<p>Architecture need not be urgent, but it is very very important. If you had to choose between fucntionality and architecture, choose architecture. This will make adding functionality much easier after you get the architecture right.</p>
+<h2 id="object-oriented-programming">Object-oriented programming</h2>
+<p>This is a mix of encapslation, inheritance and polymorphism.</p>
+<h3 id="encapsulation">Encapsulation</h3>
+<p>There are 2 distinct notions of what comprises encapsulation : - A language mechanism for restricting direct access to some of the object's components. - A language construct that facilitates the bundling of data with the methods (or other functions) operating on that data. <a href="https://en.wikipedia.org/wiki/Encapsulation_(computer_programming)" class="uri">https://en.wikipedia.org/wiki/Encapsulation_(computer_programming)</a></p>
+<h3 id="inheritance">Inheritance</h3>
+<p>In object-oriented programming, inheritance is the mechanism of basing an object or class upon another object (prototype-based inheritance) or class (class-based inheritance), retaining similar implementation <a href="https://en.wikipedia.org/wiki/Inheritance_(object-oriented_programming)" class="uri">https://en.wikipedia.org/wiki/Inheritance_(object-oriented_programming)</a></p>
+<h3 id="polymorphism">Polymorphism</h3>
+<p>The use of one interface to deal with multiple types. <a href="https://en.wikipedia.org/wiki/Polymorphism_(computer_science)" class="uri">https://en.wikipedia.org/wiki/Polymorphism_(computer_science)</a></p>
+<h2 id="functional-programming">Functional Programming</h2>
+<p>This is strongly based on the λ-calculus by Alonzo Church in the 1930s. The most important (and some would say only) objective is that a function will do one and only one thing, without changing anything else in the system. Everything else is to justify this objective. <a href="https://mostly-adequate.gitbooks.io/mostly-adequate-guide/" class="uri">https://mostly-adequate.gitbooks.io/mostly-adequate-guide/</a> - this book is awesome and one read will change your programming style completely!</p>
+<h3 id="immutability">Immutability</h3>
+<p>Why would an architect be concerned with the mutability of variables? The answer is absurdly simple: All race conditions, deadlock conditions, and concurrent update problems are due to mutable variables. You cannot have a race condition or a concurrent update problem if no variable is ever updated. You cannot have deadlocks without mutable locks. However this paradign also asumes that we have infinite processing speed and infiite storage. Since this cannot be true, we have to make certian compromises to achieve immutability.</p>
+<h4 id="compromise-i---segregation-of-mutability">Compromise I - Segregation of mutability</h4>
+<p>Here almost the entire system follows the concept of immutability, but data flows from and to a few components that mutate the data. These are likely segregated for maintainence reasons.</p>
+<h4 id="compromise-ii---event-sourcing">Compromise II - Event Sourcing</h4>
+<p>This is when we store the events and not the data that is changed. In this, we have the original state of the data and if we need to reach the final state, we just apply the events that occured to it in the order it happened and calculate the final state, practicing immmutability. <a href="https://martinfowler.com/eaaDev/EventSourcing.html" class="uri">https://martinfowler.com/eaaDev/EventSourcing.html</a></p>
+<h3 id="the-next-part-of-this-post-will-be-dealing-with-design-parameters.">The next part of this post will be dealing with design parameters.</h3>
+<link rel="stylesheet" href="https://cdn.rawgit.com/knsv/mermaid/6.0.0/dist/mermaid.css">
+<script src="https://cdn.rawgit.com/knsv/mermaid/6.0.0/dist/mermaid.min.js"></script>
+<script>mermaid.initialize({startOnLoad:true});</script>
+</div>
+</body>
+</html>
