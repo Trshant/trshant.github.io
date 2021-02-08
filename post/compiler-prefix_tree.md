@@ -1,3 +1,5 @@
+## Implementing a prefix tree in typescript
+#### 2019-12-31
 This post covers the implementation of a prefix tree in typescript.  I am avoiding the write up on the datastructure as wikipedia has a real nice [one](https://en.wikipedia.org/wiki/Trie) on it. I'll be using the terms "prefix tree" and "trie" interchangeably. 
 
 I will start by creating a node. At the least, this node should have (a) the value of the element, (b) a list of child nodes and (c) a way to add to the child node list.  
